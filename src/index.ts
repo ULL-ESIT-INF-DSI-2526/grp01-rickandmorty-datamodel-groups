@@ -4,7 +4,7 @@
  * @param b - ds
  * @returns s
  */
-export function suma(a:number,b:any):number{
+export function suma(a:number,b:number):number{
 const resultado = a+b;
 return resultado
 }

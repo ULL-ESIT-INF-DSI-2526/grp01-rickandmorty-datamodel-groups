@@ -6,16 +6,14 @@
   "scripts": {
     "start": "tsc-watch --onSuccess \"node dist/index.js\"",
     "test": "vitest",
-    "doc": "typedoc",
-    "coverage": "vitest run --coverage"
+    "doc": "typedoc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "@eslint/js": "^9.39.2",
-    "@vitest/coverage-v8": "^4.0.18",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-tsdoc": "^0.5.0",
