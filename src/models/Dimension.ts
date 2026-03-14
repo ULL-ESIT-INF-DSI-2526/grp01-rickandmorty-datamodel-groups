@@ -1,11 +1,12 @@
 import { IDimension } from "../interfaces/IDimension.js";
-import { DimensionStatus } from "../types/dimansion.types.js";
+import { DimensionStatus } from "../types/Dimension.types.js";
+import { IValidarNivel } from "../interfaces/IValidarNivel.js";
 
 /**
  * Clase que representa una instancia física de una Dimensión.
  * Contiene validaciones de integridad de datos
  */
-export class Dimension implements IDimension {
+export class Dimension implements IDimension, IValidarNivel {
   /** 
    * Regex para validar la nomenclatura del Consejo de Ricks
    * Soporta formatos como C-137, J19ζ7, C-500A
@@ -30,7 +31,7 @@ export class Dimension implements IDimension {
     public descripcion: string
   ) {
     this.validarID(_id);
-    this.validarNivelTecnologico(_nivelTecnologico);
+    this.validarNivel(_nivelTecnologico);
   }
 
   /** Permite acceder al atributo privado ID */
@@ -62,7 +63,7 @@ export class Dimension implements IDimension {
    * @param nuevo - Nuevo nivel tecnológico
    */
   set nivelTecnologico(nuevo: number) {
-    this.validarNivelTecnologico(nuevo);
+    this.validarNivel(nuevo);
     this._nivelTecnologico = nuevo;
   }
 
@@ -80,7 +81,7 @@ export class Dimension implements IDimension {
    * Valida que el nivel tecnológico esté dentro del rango permitido
    * @param nivel - Valor numérico a evaluar
    */
-  private validarNivelTecnologico(nivel: number) {
+  validarNivel(nivel: number) {
     if(!Number.isInteger(nivel) || nivel < 1 || nivel > 10) {
       throw new Error(`Nivel tecnológico inválido: "${nivel}" debe ser un número entero entre 1 y 10.`)
     }

@@ -1,4 +1,4 @@
-import { DimensionStatus } from "../types/dimansion.types.js";
+import { DimensionStatus } from "../types/Dimension.types.js";
 
 /** Representa la estructura básica de una dimensión del multiverso */
 export interface IDimension {
