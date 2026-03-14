@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Dimension } from '../src/models/Dimension';
-import { DimensionStatus } from '../src/types/dimansion.types';
+import { DimensionStatus } from '../src/types/Dimension.types';
 
 describe("Dimension Model tests", () => {
   const validId = 'C-137';
