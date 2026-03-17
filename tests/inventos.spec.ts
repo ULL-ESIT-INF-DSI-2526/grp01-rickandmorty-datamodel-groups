@@ -20,7 +20,6 @@ describe("Invento Model tests", () => {
   let inventoBase: Invento;
 
   beforeEach(() => {
-    // Inicializamos dependencias necesarias para el inventor
     dimensionBase = new Dimension(
       "C-137",
       "Tierra",
@@ -30,7 +29,6 @@ describe("Invento Model tests", () => {
     );
     especieBase = new Especie("E1", "Humano", "Mamífero", "Omnívoro", "Tierra");
 
-    // Creamos el inventor (Personaje)
     inventorBase = new Personaje(
       1,
       "Rick Sanchez",
@@ -42,7 +40,6 @@ describe("Invento Model tests", () => {
       "Genio",
     );
 
-    // Inicializamos el invento base
     inventoBase = new Invento(
       validId,
       validNombre,
@@ -123,16 +120,13 @@ describe("Invento Model tests", () => {
     });
 
     it("Debe validar el nivel de peligrosidad al usar el setter", () => {
-      // 1. Caso que funciona
       inventoBase.nivelPeligrosidad = 5;
       expect(inventoBase.nivelPeligrosidad).toBe(5);
 
-      // 2. Caso que DEBE fallar
       expect(() => {
         inventoBase.nivelPeligrosidad = 13;
       }).toThrow("[Invento Error]");
 
-      // 3. Verificamos integridad (mantiene el valor anterior)
       expect(inventoBase.nivelPeligrosidad).toBe(5);
     });
 

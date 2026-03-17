@@ -130,17 +130,13 @@ describe("Personaje Model tests", () => {
     });
 
     it("Debe validar el nivel de inteligencia al usar el setter", () => {
-      // 1. Caso que funciona:
       personajeBase.nivelInteligencia = 5;
       expect(personajeBase.nivelInteligencia).toBe(5);
 
-      // 2. Caso que DEBE fallar (Aquí es donde estaba el error):
-      // Usamos una función flecha () => { ... } para que Vitest "vigile" el error
       expect(() => {
         personajeBase.nivelInteligencia = 13;
       }).toThrow("[Personaje Error]");
 
-      // 3. Verificamos que el valor no cambió y sigue siendo 5
       expect(personajeBase.nivelInteligencia).toBe(5);
     });
 
