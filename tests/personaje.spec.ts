@@ -27,7 +27,7 @@ describe("Personaje Model tests", () => {
       5,
       "Dimensión original",
     );
-    //especieBase = new Especie("E1", "Humano", "Mamífero", "Omnívoro", "Tierra");
+    especieBase = new Especie("E1", "Humano", "Mamífero", "Omnívoro", "Tierra");
 
     // Inicializamos el personaje base
     personajeBase = new Personaje(
