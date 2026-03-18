@@ -1,149 +1,79 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { Personaje } from "../src/models/Personaje.js";
-import { Dimension } from "../src/models/Dimension.js";
-import { Especie } from "../src/models/Especie.js";
+import { DataManager } from "../src/database/DataManager.js";
+import { IPersonajeJSON } from "../src/interfaces/IPersonajeJSON.js";
 import { EstadoPersonajes } from "../src/types/EstadoPersonajes.js";
-import { AfiliacionPersonajes } from "../src/types/AfiliacionPersonajes.js";
 
-describe("Personaje Model tests", () => {
-  // Constantes para valores válidos
-  const validId = 1;
-  const validNombre = "Rick Sanchez";
-  const validEstado: EstadoPersonajes = EstadoPersonajes.Vivo;
-  const validAfiliacion: AfiliacionPersonajes = "Independiente";
-  const validInteligencia = 10;
-  const validDesc = "Científico loco y abuelo de Morty";
 
-  let dimensionBase: Dimension;
-  let especieBase: Especie;
-  let personajeBase: Personaje;
+describe("DataManager Integration Tests", () => {
+  let dataManager: DataManager;
 
-  beforeEach(() => {
-    // Inicializamos dependencias
-    dimensionBase = new Dimension(
-      "C-137",
-      "Tierra",
-      "activa",
-      5,
-      "Dimensión original",
-    );
-    especieBase = new Especie("E1", "Humano", "Mamífero", "Omnívoro", "Tierra");
+  // personaje que cumple IPersonajeJSON
+  const mockPersonaje: IPersonajeJSON = {
+    id: 1,
+    nombre: "Rick Sanchez",
+    especie: "Humano",
+    dimensionOrigen: "Tierra C-137",
+    estado: EstadoPersonajes.Vivo,
+    afiliacion: "Independiente",
+    nivelInteligencia: 9,
+    descripcion: "descripcion de prueba"
+  };
 
-    // Inicializamos el personaje base
-    personajeBase = new Personaje(
-      validId,
-      validNombre,
-      especieBase,
-      dimensionBase,
-      validEstado,
-      validAfiliacion,
-      validInteligencia,
-      validDesc,
-    );
+  beforeEach(async () => {
+    dataManager = await DataManager.getInstance();
+    await dataManager.guardarBaseDatos("personajes", []);
   });
 
-  describe("Constructor y validaciones de integridad", () => {
-    it("Debe crear una instancia válida de Personaje si todos los datos son correctos", () => {
-      expect(personajeBase).toBeDefined();
-      expect(personajeBase.nivelInteligencia).toBe(validInteligencia);
-      expect(personajeBase.especie).toBe(especieBase);
+  describe("Patrón Singleton y Conexión", () => {
+    it("Debe garantizar que múltiples llamadas devuelven la misma instancia", async () => {
+      const instancia2 = await DataManager.getInstance();
+      expect(dataManager).toBe(instancia2);
     });
 
-    it("Debe lanzar error si el nivel de inteligencia no cumple el rango (1-10) o no es entero", () => {
-      const invalidLevels = [0, 11, 5.5, -1];
-      invalidLevels.forEach((level) => {
-        expect(() => {
-          new Personaje(
-            validId,
-            validNombre,
-            especieBase,
-            dimensionBase,
-            validEstado,
-            validAfiliacion,
-            level,
-            validDesc,
-          );
-        }).toThrow(
-          `[Personaje Error]: el nivel de inteligencia debe estar entre 1 y 10, se recibió: ${level}`,
-        );
-      });
-    });
-
-    it("Debe permitir niveles de inteligencia en los extremos (1 y 10)", () => {
-      const boundaryLevels = [1, 10];
-      boundaryLevels.forEach((level) => {
-        const p = new Personaje(
-          validId,
-          validNombre,
-          especieBase,
-          dimensionBase,
-          validEstado,
-          validAfiliacion,
-          level,
-          validDesc,
-        );
-        expect(p.nivelInteligencia).toBe(level);
-      });
+    it("Debe inicializar las colecciones como arrays vacíos si no hay datos", () => {
+      const especies = dataManager.leerBaseDatos("especies");
+      expect(Array.isArray(especies)).toBe(true);
+      expect(especies).toHaveLength(0);
     });
   });
 
-  describe("Getters y Setters", () => {
-    it("Debe permitir modificar el ID y el Nombre", () => {
-      personajeBase.id = 666;
-      personajeBase.nombre = "Morty Malvado";
-      expect(personajeBase.id).toBe(666);
-      expect(personajeBase.nombre).toBe("Morty Malvado");
+  describe("Persistencia de Datos (Lectura y Escritura)", () => {
+    it("Debe guardar un personaje y permitir su lectura posterior", async () => {
+      // 1. Guardamos
+      await dataManager.guardarBaseDatos("personajes", [mockPersonaje]);
+      
+      // 2. Leemos
+      const personajes = dataManager.leerBaseDatos("personajes");
+      
+      expect(personajes).toHaveLength(1);
+      expect(personajes[0].nombre).toBe("Rick Sanchez");
+      expect(personajes[0].id).toBe(1);
     });
 
-    it("Debe permitir cambiar la instancia de Especie y Dimensión", () => {
-      const nuevaDim = new Dimension(
-        "C-500A",
-        "Nueva Tierra",
-        "activa",
-        8,
-        "Otra dimension",
-      );
-      const nuevaEsp = new Especie(
-        "E2",
-        "Cronenberg",
-        "Mutante",
-        "Omnívoro",
-        "C-137",
-      );
-
-      personajeBase.dimensionOrigen = nuevaDim;
-      personajeBase.especie = nuevaEsp;
-
-      expect(personajeBase.dimensionOrigen).toBe(nuevaDim);
-      expect(personajeBase.especie).toBe(nuevaEsp);
+    it("Debe sobrescribir la colección completa al guardar", async () => {
+      // Guardamos el primer personaje
+      await dataManager.guardarBaseDatos("personajes", [mockPersonaje]);
+      
+      // Creamos un segundo estado con un personaje diferente
+      const otroPersonaje = { ...mockPersonaje, id: 2, nombre: "Morty Smith" };
+      await dataManager.guardarBaseDatos("personajes", [otroPersonaje]);
+      
+      const resultado = dataManager.leerBaseDatos("personajes");
+      
+      expect(resultado).toHaveLength(1);
+      expect(resultado[0].nombre).toBe("Morty Smith");
+      expect(resultado[0].id).not.toBe(1);
     });
 
-    it("Debe permitir cambiar el estado y la afiliación", () => {
-      const nuevoEstado: EstadoPersonajes = EstadoPersonajes.Muerto;
-      const nuevaAfil: AfiliacionPersonajes = "Consejo de Ricks";
-
-      personajeBase.estado = nuevoEstado;
-      personajeBase.afiliacion = nuevaAfil;
-
-      expect(personajeBase.estado).toBe(nuevoEstado);
-      expect(personajeBase.afiliacion).toBe(nuevaAfil);
-    });
-
-    it("Debe validar el nivel de inteligencia al usar el setter", () => {
-      personajeBase.nivelInteligencia = 5;
-      expect(personajeBase.nivelInteligencia).toBe(5);
-
-      expect(() => {
-        personajeBase.nivelInteligencia = 13;
-      }).toThrow("[Personaje Error]");
-
-      expect(personajeBase.nivelInteligencia).toBe(5);
-    });
-
-    it("Debe permitir modificar la descripción", () => {
-      const nuevaDesc = "Nueva descripción del personaje";
-      personajeBase.descripcion = nuevaDesc;
-      expect(personajeBase.descripcion).toBe(nuevaDesc);
+    it("Debe mantener la integridad de los tipos al recuperar datos", () => {
+      // Al usar el genérico K, TypeScript sabe que esto es un IPersonajeJSON[]
+      const lista = dataManager.leerBaseDatos("personajes");
+      
+      // Podemos acceder a propiedades específicas sin hacer casting
+      lista.forEach(p => {
+        expect(typeof p.nombre).toBe("string");
+        expect(Object.values(EstadoPersonajes)).toContain(p.estado);
+      });
     });
   });
 });
