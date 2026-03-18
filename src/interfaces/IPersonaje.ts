@@ -1,3 +1,5 @@
+import { Dimension } from "../models/Dimension.js"
+import { Especie } from "../models/Especie.js"
 import { AfiliacionPersonajes } from "../types/AfiliacionPersonajes.js"
 import { EstadoPersonajes } from "../types/EstadoPersonajes.js"
 
@@ -7,8 +9,8 @@ import { EstadoPersonajes } from "../types/EstadoPersonajes.js"
 export interface IPersonaje {
   id: number,
   nombre: string,
-  especie: string           // --> Cambiar a tipo Especie 
-  dimensionOrigen: string   // --> Cambiar a tipo Dimension 
+  especie: Especie           // --> Cambiar a tipo Especie 
+  dimensionOrigen: Dimension   // --> Cambiar a tipo Dimension 
   estado: EstadoPersonajes
   afiliacion: AfiliacionPersonajes
   nivelInteligencia: number

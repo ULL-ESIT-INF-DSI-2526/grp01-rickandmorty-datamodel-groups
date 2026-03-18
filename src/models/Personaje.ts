@@ -75,7 +75,7 @@ export class Personaje implements IPersonaje, IValidarNivel {
   }
 
   /** getter del atributo privado dimension de origen */
-  get dimensionOrigen(): string {
+  get dimensionOrigen(): Dimension {
     return this._dimensionOrigen;
   }
 
