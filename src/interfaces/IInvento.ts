@@ -2,7 +2,7 @@ import { Personaje } from "../models/Personaje.js";
 import { TipoInvento } from "../types/TipoInventos.js";
 
 /** Representa la estructura basica de un invento o artefacto */
-export interface IInventos {
+export interface IInvento {
   /** Identificador único alfanumérico */
   id: number;
   /** Nombre del invento o artefacto */

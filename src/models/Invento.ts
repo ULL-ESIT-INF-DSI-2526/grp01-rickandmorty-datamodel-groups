@@ -1,9 +1,9 @@
 import { Personaje } from "./Personaje.js";
 import { TipoInvento } from "../types/TipoInventos.js";
-import { IInventos } from "../interfaces/IInventos.js";
+import { IInvento } from "../interfaces/IInvento.js";
 import { IValidarNivel } from "../interfaces/IValidarNivel.js";
 
-export class Invento implements IInventos, IValidarNivel {
+export class Invento implements IInvento, IValidarNivel {
   
   /**
    * 
