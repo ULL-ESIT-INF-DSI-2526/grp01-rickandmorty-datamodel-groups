@@ -1,5 +1,4 @@
 import { IDimension } from "./IDimension.js";
-import { IEntity } from "./IEntity.js";
 import { IEspecie } from "./IEspecie.js";
 import { IInventoJSON } from "./IInventoJSON.js";
 import { IPersonajeJSON } from "./IPersonajeJSON.js";
