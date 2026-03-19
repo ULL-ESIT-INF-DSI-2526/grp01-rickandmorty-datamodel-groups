@@ -10,10 +10,8 @@ export interface IPersonajeJSON {
   
   // Referencia a Especie
   especieId: string | number; 
-  especieNombre: string; 
   // Referencia a Dimension
   dimensionId: string | number;
-  dimensionNombre: string;
 
   estado: EstadoPersonajes;
   afiliacion: AfiliacionPersonajes;

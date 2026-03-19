@@ -7,7 +7,6 @@ export interface IInventoJSON {
   
   /** Referencia a Inventor */
   inventorId: number;
-  inventorNombre: string;
   
   tipo: TipoInvento;
   nivelPeligrosidad: number;
