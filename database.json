@@ -3,14 +3,5 @@
   "dimensiones": [],
   "especies": [],
   "inventos": [],
-  "planetas": [
-    {
-      "id": "P137",
-      "nombre": "Tierra C-137",
-      "tipo": "Planeta",
-      "dimension": "Dimensión C-137",
-      "poblacion": 1000,
-      "descripcion": "Hogar original de los protagonistas"
-    }
-  ]
+  "planetas": []
 }

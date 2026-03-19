@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { InventoManager } from '../src/managers/InventoManager.js';
 import { Invento } from '../src/models/Invento.js';
 import { Personaje } from '../src/models/Personaje.js';
@@ -48,15 +48,13 @@ describe('InventoManager', () => {
       descripcion: 'Crea portales'
     }];
 
-    // 1. Creamos el objeto que simula la instancia de DataManager
+    // objeto que simula la instancia de DataManager
     const mockDMInstance = {
       leerBaseDatos: vi.fn().mockReturnValue(mockDatosJSON),
-      // Añadimos lo mínimo para que el casting sea creíble
       guardarBaseDatos: vi.fn(),
     } as unknown as DataManager;
 
-    // 2. SOLUCIÓN FINAL: Sobrescribimos la implementación directamente
-    // Esto evita el error ".mockResolvedValue is not a function"
+    // sobrescribimos la implementación directamente
     DataManager.getInstance = vi.fn().mockResolvedValue(mockDMInstance);
 
     await manager.cargar([mockPersonaje]);
@@ -77,10 +75,10 @@ describe('InventoManager', () => {
       descripcion: 'Genera ayudantes'
     } as unknown as Invento;
 
-    // Llamamos al método a través de nuestra subclase de test
+    // se llama al método a través de nuestra subclase de test
     const jsonProcesado = manager.exponerMapearAJSON(inventoReal);
 
     expect(jsonProcesado.id).toBe(50);
-    expect(jsonProcesado.inventorId).toBe(1); // El ID de nuestro mockPersonaje
+    expect(jsonProcesado.inventorId).toBe(1);
   });
 });

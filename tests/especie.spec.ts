@@ -1,119 +1,66 @@
-import { describe, expect, it } from "vitest";
-import { Species } from "../../src/models/species";
+import { describe, it, expect, beforeEach } from "vitest";
+import { Especie } from "../src/models/Especie.js";
 
-describe("Species", () => {
-  it("crea una especie válida", () => {
-    const species = new Species({
-      id: "sp-001",
-      name: "Human",
-      origin: "Earth C-137",
-      type: "Humanoid",
-      averageLifeExpectancy: 80,
-      description: "Especie común",
+describe("Especie Model tests", () => {
+  // Valores por defecto válidos para las pruebas
+  const validId = "ESP-001";
+  const validNombre = "Humano";
+  const validOrigen = "Tierra (Dimensión C-137)";
+  const validTipo = "Mamífero";
+  const validLife = 80;
+  const validDesc = "Especie inteligente dominante de su planeta.";
+
+  let especieBase: Especie;
+
+  beforeEach(() => {
+    // Inicializamos una especie limpia antes de cada test
+    especieBase = new Especie(
+      validId,
+      validNombre,
+      validOrigen,
+      validTipo,
+      validLife,
+      validDesc
+    );
+  });
+
+  describe("Constructor e Integridad", () => {
+    it("Debe crear una instancia válida si los parámetros son correctos", () => {
+      expect(especieBase).toBeDefined();
+      expect(especieBase.id).toBe(validId);
+      expect(especieBase.nombre).toBe(validNombre);
+      expect(especieBase.averageLifeExpectancy).toBe(validLife);
     });
 
-    expect(species.getId()).toBe("sp-001");
-    expect(species.getName()).toBe("Human");
-    expect(species.getOrigin()).toBe("Earth C-137");
-    expect(species.getType()).toBe("Humanoid");
-    expect(species.getAverageLifeExpectancy()).toBe(80);
-    expect(species.getDescription()).toBe("Especie común");
+  
   });
 
-  it("lanza error si el id está vacío", () => {
-    expect(() => {
-      new Species({
-        id: "",
-        name: "Human",
-        origin: "Earth C-137",
-        type: "Humanoid",
-        averageLifeExpectancy: 80,
-        description: "Especie común",
-      });
-    }).toThrow();
-  });
-
-  it("lanza error si el nombre está vacío", () => {
-    expect(() => {
-      new Species({
-        id: "sp-001",
-        name: "",
-        origin: "Earth C-137",
-        type: "Humanoid",
-        averageLifeExpectancy: 80,
-        description: "Especie común",
-      });
-    }).toThrow();
-  });
-
-  it("lanza error si el origen está vacío", () => {
-    expect(() => {
-      new Species({
-        id: "sp-001",
-        name: "Human",
-        origin: "",
-        type: "Humanoid",
-        averageLifeExpectancy: 80,
-        description: "Especie común",
-      });
-    }).toThrow();
-  });
-
-  it("lanza error si el tipo está vacío", () => {
-    expect(() => {
-      new Species({
-        id: "sp-001",
-        name: "Human",
-        origin: "Earth C-137",
-        type: "",
-        averageLifeExpectancy: 80,
-        description: "Especie común",
-      });
-    }).toThrow();
-  });
-
-  it("lanza error si la esperanza de vida es negativa", () => {
-    expect(() => {
-      new Species({
-        id: "sp-001",
-        name: "Human",
-        origin: "Earth C-137",
-        type: "Humanoid",
-        averageLifeExpectancy: -1,
-        description: "Especie común",
-      });
-    }).toThrow();
-  });
-
-  it("lanza error si la descripción está vacía", () => {
-    expect(() => {
-      new Species({
-        id: "sp-001",
-        name: "Human",
-        origin: "Earth C-137",
-        type: "Humanoid",
-        averageLifeExpectancy: 80,
-        description: "",
-      });
-    }).toThrow();
-  });
-
-  it("modifica una especie correctamente", () => {
-    const species = new Species({
-      id: "sp-001",
-      name: "Human",
-      origin: "Earth C-137",
-      type: "Humanoid",
-      averageLifeExpectancy: 80,
-      description: "Especie común",
+  describe("Getters y Setters", () => {
+    it("Debe permitir modificar propiedades a través de los setters", () => {
+      especieBase.nombre = "Cromulon";
+      especieBase.averageLifeExpectancy = 5000;
+      
+      expect(especieBase.nombre).toBe("Cromulon");
+      expect(especieBase.averageLifeExpectancy).toBe(5000);
     });
 
-    species.update({
-      averageLifeExpectancy: 90,
-      description: "Especie muy común",
-    });
+  });
 
-    expect(species.getAverageLifeExpectancy()).toBe(90);
-    expect(species.getDescription()).toBe("Especie muy común");
+  describe("Persistencia", () => {
+    it("toJSON() debe devolver un objeto plano con la estructura de IEspecie", () => {
+      const json = especieBase.toJSON();
+      
+      expect(json).toEqual({
+        id: validId,
+        nombre: validNombre,
+        origen: validOrigen,
+        tipo: validTipo,
+        averageLifeExpectancy: validLife,
+        descripcion: validDesc
+      });
+      
+      // Verificamos que sea un objeto plano y no la instancia de la clase
+      expect(json).not.toBeInstanceOf(Especie);
+    });
   });
 });

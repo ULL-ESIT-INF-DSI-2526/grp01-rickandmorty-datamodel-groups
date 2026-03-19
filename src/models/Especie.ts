@@ -1,114 +1,65 @@
 import { IEspecie } from "../interfaces/IEspecie.js";
 
 /**
- * Clase de especie.
+ * Clase Especie con constructor de parámetros sueltos
+ * Mantiene la coherencia con Personaje e Invento
  */
-export class Especie {
+export class Especie implements IEspecie {
+  constructor(
+    private _id: string,
+    private _nombre: string,
+    private _origen: string,
+    private _tipo: string,
+    private _averageLifeExpectancy: number,
+    private _descripcion: string
+  ) {
+    // Validamos al instanciar
+    this.validate();
+  }
+
+  // Getters y Setters para que el test acceda a .id, .nombre, etc.
+  get id(): string { return this._id; }
+  set id(value: string) { this._id = value; this.validate(); }
+
+  get nombre(): string { return this._nombre; }
+  set nombre(value: string) { this._nombre = value; this.validate(); }
+
+  get origen(): string { return this._origen; }
+  set origen(value: string) { this._origen = value; this.validate(); }
+
+  get tipo(): string { return this._tipo; }
+  set tipo(value: string) { this._tipo = value; this.validate(); }
+
+  get averageLifeExpectancy(): number { return this._averageLifeExpectancy; }
+  set averageLifeExpectancy(value: number) { this._averageLifeExpectancy = value; this.validate(); }
+
+  get descripcion(): string { return this._descripcion; }
+  set descripcion(value: string) { this._descripcion = value; this.validate(); }
+
   /**
-   * Crea una especie.
-   * @param data - Datos de la especie.
+   * Método de validación interna
+   * Lanza errores con los mensajes que esperan los tests
    */
-  constructor(private data: IEspecie) {
-    this.validate(data);
+  private validate(): void {
+    if (!this._id || this._id.trim() === "") throw new Error("El id no puede estar vacío");
+    if (!this._nombre || this._nombre.trim() === "") throw new Error("El nombre no puede estar vacío");
+    if (!this._origen || this._origen.trim() === "") throw new Error("El origen no puede estar vacío");
+    if (!this._tipo || this._tipo.trim() === "") throw new Error("El tipo no puede estar vacío");
+    if (this._averageLifeExpectancy < 0) throw new Error("La esperanza de vida no puede ser negativa");
+    if (!this._descripcion || this._descripcion.trim() === "") throw new Error("La descripción no puede estar vacía");
   }
 
   /**
-   * Devuelve el id.
-   * @returns ID.
-   */
-  getId(): string {
-    return this.data.id;
-  }
-
-  /**
-   * Devuelve el nombre.
-   * @returns Nombre.
-   */
-  getName(): string {
-    return this.data.nombre;
-  }
-
-  /**
-   * Devuelve el origen.
-   * @returns Origen.
-   */
-  getOrigin(): string {
-    return this.data.origen;
-  }
-
-  /**
-   * Devuelve el tipo.
-   * @returns Tipo.
-   */
-  getType(): string {
-    return this.data.tipo;
-  }
-
-  /**
-   * Devuelve la esperanza de vida.
-   * @returns Esperanza de vida.
-   */
-  getAverageLifeExpectancy(): number {
-    return this.data.averageLifeExpectancy;
-  }
-
-  /**
-   * Devuelve la descripción.
-   * @returns Descripción.
-   */
-  getDescription(): string {
-    return this.data.descripcion;
-  }
-
-  /**
-   * Modifica la especie.
-   * @param updates - Cambios.
-   */
-  update(updates: Partial<IEspecie>): void {
-    const updatedData: IEspecie = {
-      ...this.data,
-      ...updates,
-    };
-
-    this.validate(updatedData);
-    this.data = updatedData;
-  }
-
-  /**
-   * Devuelve los datos.
-   * @returns Datos de la especie.
+   * Para compatibilidad con el DataManager al guardar
    */
   toJSON(): IEspecie {
-    return { ...this.data };
-  }
-
-  /**
-   * Valida los datos.
-   * @param data - Datos a validar.
-   */
-  private validate(data: IEspecie): void {
-    if (data.id.trim() === "") {
-      throw new Error("El id no puede estar vacío");
-    }
-
-    if (data.nombre.trim() === "") {
-      throw new Error("El nombre no puede estar vacío");
-    }
-
-    if (data.origen.trim() === "") {
-      throw new Error("El origen no puede estar vacío");
-    }
-
-    if (data.tipo.trim() === "") {
-      throw new Error("El tipo no puede estar vacío");
-    }
-
-    if (data.averageLifeExpectancy < 0) {
-      throw new Error("La esperanza de vida no puede ser negativa");
-    }
-
-    if (data.descripcion.trim() === "") {
-      throw new Error("La descripción no puede estar vacía");
-    }
+    return {
+      id: this._id,
+      nombre: this._nombre,
+      origen: this._origen,
+      tipo: this._tipo,
+      averageLifeExpectancy: this._averageLifeExpectancy,
+      descripcion: this._descripcion
+    };
   }
 }

@@ -11,8 +11,8 @@ describe("DataManager Integration Tests", () => {
   const mockPersonaje: IPersonajeJSON = {
     id: 1,
     nombre: "Rick Sanchez",
-    especie: "Humano",
-    dimensionOrigen: "Tierra C-137",
+    especieId: "Humano",
+    dimensionId: "Tierra C-137",
     estado: EstadoPersonajes.Vivo,
     afiliacion: "Independiente",
     nivelInteligencia: 9,
