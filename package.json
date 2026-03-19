@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc-watch --onSuccess \"node dist/index.js\"",
-    "test": "vitest",
-    "doc": "typedoc"
+    "test": "vitest run",
+    "doc": "typedoc",
+    "coverage": "vitest run --coverage --coverage.include '**/src/*'"
   },
   "keywords": [],
   "author": "",
@@ -25,5 +26,8 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.55.0",
     "vitest": "^4.0.18"
+  },
+  "dependencies": {
+    "lowdb": "^7.0.1"
   }
 }
