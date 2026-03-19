@@ -3,24 +3,24 @@
  */
 export interface IEspecie {
   /**
-   * ID de la especie.
+   * ID.
    */
   id: string;
 
   /**
-   * Nombre de la especie.
+   * Nombre.
    */
-  nombre: string;
+  name: string;
 
   /**
-   * Origen de la especie.
+   * Origen.
    */
-  origen: string;
+  origin: string;
 
   /**
-   * Tipo de especie.
+   * Tipo.
    */
-  tipo: string;
+  type: string;
 
   /**
    * Esperanza de vida media.
@@ -28,7 +28,7 @@ export interface IEspecie {
   averageLifeExpectancy: number;
 
   /**
-   * Descripción de la especie.
+   * Descripción.
    */
-  descripcion: string;
+  description: string;
 }

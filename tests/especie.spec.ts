@@ -1,66 +1,208 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, expect, it } from "vitest";
 import { Especie } from "../src/models/Especie.js";
 
-describe("Especie Model tests", () => {
-  // Valores por defecto válidos para las pruebas
-  const validId = "ESP-001";
-  const validNombre = "Humano";
-  const validOrigen = "Tierra (Dimensión C-137)";
-  const validTipo = "Mamífero";
-  const validLife = 80;
-  const validDesc = "Especie inteligente dominante de su planeta.";
-
-  let especieBase: Especie;
-
-  beforeEach(() => {
-    // Inicializamos una especie limpia antes de cada test
-    especieBase = new Especie(
-      validId,
-      validNombre,
-      validOrigen,
-      validTipo,
-      validLife,
-      validDesc
+describe("Specie", function () {
+  it("crea una especie válida", function () {
+    const specie = new Especie(
+      "sp-001",
+      "Human",
+      "Earth C-137",
+      "Humanoid",
+      80,
+      "Especie común",
     );
+
+    expect(specie.id).toBe("sp-001");
+    expect(specie.name).toBe("Human");
+    expect(specie.origin).toBe("Earth C-137");
+    expect(specie.type).toBe("Humanoid");
+    expect(specie.averageLifeExpectancy).toBe(80);
+    expect(specie.description).toBe("Especie común");
   });
 
-  describe("Constructor e Integridad", () => {
-    it("Debe crear una instancia válida si los parámetros son correctos", () => {
-      expect(especieBase).toBeDefined();
-      expect(especieBase.id).toBe(validId);
-      expect(especieBase.nombre).toBe(validNombre);
-      expect(especieBase.averageLifeExpectancy).toBe(validLife);
-    });
-
-  
+  it("lanza error si el id está vacío", function () {
+    expect(function () {
+      new Especie("", "Human", "Earth C-137", "Humanoid", 80, "Especie común");
+    }).toThrow();
   });
 
-  describe("Getters y Setters", () => {
-    it("Debe permitir modificar propiedades a través de los setters", () => {
-      especieBase.nombre = "Cromulon";
-      especieBase.averageLifeExpectancy = 5000;
-      
-      expect(especieBase.nombre).toBe("Cromulon");
-      expect(especieBase.averageLifeExpectancy).toBe(5000);
-    });
-
+  it("lanza error si el nombre está vacío", function () {
+    expect(function () {
+      new Especie("sp-001", "", "Earth C-137", "Humanoid", 80, "Especie común");
+    }).toThrow();
   });
 
-  describe("Persistencia", () => {
-    it("toJSON() debe devolver un objeto plano con la estructura de IEspecie", () => {
-      const json = especieBase.toJSON();
-      
-      expect(json).toEqual({
-        id: validId,
-        nombre: validNombre,
-        origen: validOrigen,
-        tipo: validTipo,
-        averageLifeExpectancy: validLife,
-        descripcion: validDesc
-      });
-      
-      // Verificamos que sea un objeto plano y no la instancia de la clase
-      expect(json).not.toBeInstanceOf(Especie);
-    });
+  it("lanza error si el origen está vacío", function () {
+    expect(function () {
+      new Especie("sp-001", "Human", "", "Humanoid", 80, "Especie común");
+    }).toThrow();
+  });
+
+  it("lanza error si el tipo está vacío", function () {
+    expect(function () {
+      new Especie("sp-001", "Human", "Earth C-137", "", 80, "Especie común");
+    }).toThrow();
+  });
+
+  it("lanza error si la esperanza de vida es negativa", function () {
+    expect(function () {
+      new Especie("sp-001", "Human", "Earth C-137", "Humanoid", -1, "Especie común");
+    }).toThrow();
+  });
+
+  it("lanza error si la descripción está vacía", function () {
+    expect(function () {
+      new Especie("sp-001", "Human", "Earth C-137", "Humanoid", 80, "");
+    }).toThrow();
+  });
+
+  it("modifica el nombre", function () {
+    const specie = new Especie(
+      "sp-001",
+      "Human",
+      "Earth C-137",
+      "Humanoid",
+      80,
+      "Especie común",
+    );
+
+    specie.name = "Cronenberg Human";
+
+    expect(specie.name).toBe("Cronenberg Human");
+  });
+
+  it("modifica el origen", function () {
+    const specie = new Especie(
+      "sp-001",
+      "Human",
+      "Earth C-137",
+      "Humanoid",
+      80,
+      "Especie común",
+    );
+
+    specie.origin = "Gazorpazorp";
+
+    expect(specie.origin).toBe("Gazorpazorp");
+  });
+
+  it("modifica el tipo", function () {
+    const specie = new Especie(
+      "sp-001",
+      "Human",
+      "Earth C-137",
+      "Humanoid",
+      80,
+      "Especie común",
+    );
+
+    specie.type = "Alien";
+
+    expect(specie.type).toBe("Alien");
+  });
+
+  it("modifica la esperanza de vida", function () {
+    const specie = new Especie(
+      "sp-001",
+      "Human",
+      "Earth C-137",
+      "Humanoid",
+      80,
+      "Especie común",
+    );
+
+    specie.averageLifeExpectancy = 90;
+
+    expect(specie.averageLifeExpectancy).toBe(90);
+  });
+
+  it("modifica la descripción", function () {
+    const specie = new Especie(
+      "sp-001",
+      "Human",
+      "Earth C-137",
+      "Humanoid",
+      80,
+      "Especie común",
+    );
+
+    specie.description = "Nueva descripción";
+
+    expect(specie.description).toBe("Nueva descripción");
+  });
+
+  it("lanza error si modifica el nombre con cadena vacía", function () {
+    const specie = new Especie(
+      "sp-001",
+      "Human",
+      "Earth C-137",
+      "Humanoid",
+      80,
+      "Especie común",
+    );
+
+    expect(function () {
+      specie.name = "";
+    }).toThrow();
+  });
+
+  it("lanza error si modifica el origen con cadena vacía", function () {
+    const specie = new Especie(
+      "sp-001",
+      "Human",
+      "Earth C-137",
+      "Humanoid",
+      80,
+      "Especie común",
+    );
+
+    expect(function () {
+      specie.origin = "";
+    }).toThrow();
+  });
+
+  it("lanza error si modifica el tipo con cadena vacía", function () {
+    const specie = new Especie(
+      "sp-001",
+      "Human",
+      "Earth C-137",
+      "Humanoid",
+      80,
+      "Especie común",
+    );
+
+    expect(function () {
+      specie.type = "";
+    }).toThrow();
+  });
+
+  it("lanza error si modifica la esperanza de vida con valor negativo", function () {
+    const specie = new Especie(
+      "sp-001",
+      "Human",
+      "Earth C-137",
+      "Humanoid",
+      80,
+      "Especie común",
+    );
+
+    expect(function () {
+      specie.averageLifeExpectancy = -10;
+    }).toThrow();
+  });
+
+  it("lanza error si modifica la descripción con cadena vacía", function () {
+    const specie = new Especie(
+      "sp-001",
+      "Human",
+      "Earth C-137",
+      "Humanoid",
+      80,
+      "Especie común",
+    );
+
+    expect(function () {
+      specie.description = "";
+    }).toThrow();
   });
 });
