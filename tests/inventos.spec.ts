@@ -27,7 +27,7 @@ describe("Invento Model tests", () => {
       5,
       "Dimensión original",
     );
-    especieBase = new Especie("E1", "Humano", "Mamífero", "Omnívoro", "Tierra");
+    especieBase = new Especie("E1", "Humano", "Mamífero", "Omnívoro", 10 , "Tierra");
 
     inventorBase = new Personaje(
       1,
