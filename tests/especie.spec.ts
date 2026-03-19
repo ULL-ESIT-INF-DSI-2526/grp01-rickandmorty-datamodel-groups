@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { Specie } from "../src/models/Especie";
+import { Especie } from "../src/models/Especie.js";
 
 describe("Specie", function () {
   it("crea una especie válida", function () {
-    const specie = new Specie(
+    const specie = new Especie(
       "sp-001",
       "Human",
       "Earth C-137",
@@ -22,42 +22,42 @@ describe("Specie", function () {
 
   it("lanza error si el id está vacío", function () {
     expect(function () {
-      new Specie("", "Human", "Earth C-137", "Humanoid", 80, "Especie común");
+      new Especie("", "Human", "Earth C-137", "Humanoid", 80, "Especie común");
     }).toThrow();
   });
 
   it("lanza error si el nombre está vacío", function () {
     expect(function () {
-      new Specie("sp-001", "", "Earth C-137", "Humanoid", 80, "Especie común");
+      new Especie("sp-001", "", "Earth C-137", "Humanoid", 80, "Especie común");
     }).toThrow();
   });
 
   it("lanza error si el origen está vacío", function () {
     expect(function () {
-      new Specie("sp-001", "Human", "", "Humanoid", 80, "Especie común");
+      new Especie("sp-001", "Human", "", "Humanoid", 80, "Especie común");
     }).toThrow();
   });
 
   it("lanza error si el tipo está vacío", function () {
     expect(function () {
-      new Specie("sp-001", "Human", "Earth C-137", "", 80, "Especie común");
+      new Especie("sp-001", "Human", "Earth C-137", "", 80, "Especie común");
     }).toThrow();
   });
 
   it("lanza error si la esperanza de vida es negativa", function () {
     expect(function () {
-      new Specie("sp-001", "Human", "Earth C-137", "Humanoid", -1, "Especie común");
+      new Especie("sp-001", "Human", "Earth C-137", "Humanoid", -1, "Especie común");
     }).toThrow();
   });
 
   it("lanza error si la descripción está vacía", function () {
     expect(function () {
-      new Specie("sp-001", "Human", "Earth C-137", "Humanoid", 80, "");
+      new Especie("sp-001", "Human", "Earth C-137", "Humanoid", 80, "");
     }).toThrow();
   });
 
   it("modifica el nombre", function () {
-    const specie = new Specie(
+    const specie = new Especie(
       "sp-001",
       "Human",
       "Earth C-137",
@@ -72,7 +72,7 @@ describe("Specie", function () {
   });
 
   it("modifica el origen", function () {
-    const specie = new Specie(
+    const specie = new Especie(
       "sp-001",
       "Human",
       "Earth C-137",
@@ -87,7 +87,7 @@ describe("Specie", function () {
   });
 
   it("modifica el tipo", function () {
-    const specie = new Specie(
+    const specie = new Especie(
       "sp-001",
       "Human",
       "Earth C-137",
@@ -102,7 +102,7 @@ describe("Specie", function () {
   });
 
   it("modifica la esperanza de vida", function () {
-    const specie = new Specie(
+    const specie = new Especie(
       "sp-001",
       "Human",
       "Earth C-137",
@@ -117,7 +117,7 @@ describe("Specie", function () {
   });
 
   it("modifica la descripción", function () {
-    const specie = new Specie(
+    const specie = new Especie(
       "sp-001",
       "Human",
       "Earth C-137",
@@ -132,7 +132,7 @@ describe("Specie", function () {
   });
 
   it("lanza error si modifica el nombre con cadena vacía", function () {
-    const specie = new Specie(
+    const specie = new Especie(
       "sp-001",
       "Human",
       "Earth C-137",
@@ -147,7 +147,7 @@ describe("Specie", function () {
   });
 
   it("lanza error si modifica el origen con cadena vacía", function () {
-    const specie = new Specie(
+    const specie = new Especie(
       "sp-001",
       "Human",
       "Earth C-137",
@@ -162,7 +162,7 @@ describe("Specie", function () {
   });
 
   it("lanza error si modifica el tipo con cadena vacía", function () {
-    const specie = new Specie(
+    const specie = new Especie(
       "sp-001",
       "Human",
       "Earth C-137",
@@ -177,7 +177,7 @@ describe("Specie", function () {
   });
 
   it("lanza error si modifica la esperanza de vida con valor negativo", function () {
-    const specie = new Specie(
+    const specie = new Especie(
       "sp-001",
       "Human",
       "Earth C-137",
@@ -192,7 +192,7 @@ describe("Specie", function () {
   });
 
   it("lanza error si modifica la descripción con cadena vacía", function () {
-    const specie = new Specie(
+    const specie = new Especie(
       "sp-001",
       "Human",
       "Earth C-137",

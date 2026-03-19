@@ -3,7 +3,7 @@ import { SpecieData } from "../interfaces/IEspecie.js";
 /**
  * Clase de especie.
  */
-export class Specie implements SpecieData {
+export class Especie implements SpecieData {
   /**
    * Crea una especie.
    * @param id ID.
