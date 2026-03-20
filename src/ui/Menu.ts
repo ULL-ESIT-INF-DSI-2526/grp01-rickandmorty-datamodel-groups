@@ -46,9 +46,9 @@ export class Menu {
 
     switch (respuesta.accion) {
       case 'crud': await this.menuCRUD(); break;
-      case 'c_per': await this.consultaPersonajes(); break;
-      case 'c_loc': await this.consultaLocalizaciones(); break;
-      case 'c_inv': await this.consultaInventos(); break;
+      case 'c_personaje': await this.consultaPersonajes(); break;
+      case 'c_localizacion': await this.consultaLocalizaciones(); break;
+      case 'c_inventos': await this.consultaInventos(); break;
       case 'versiones': await this.localizarVersiones(); break;
     }
     await this.menuPrincipal()
