@@ -1,7 +1,7 @@
 /**
- * Interfaz de una especie.
+ * Interfaz JSON de una especie.
  */
-export interface SpecieData {
+export interface IEspecieJSON {
   /**
    * ID.
    */
@@ -10,25 +10,25 @@ export interface SpecieData {
   /**
    * Nombre.
    */
-  name: string;
+  nombre: string;
 
   /**
    * Origen.
    */
-  origin: string;
+  origen: string;
 
   /**
    * Tipo.
    */
-  type: string;
+  tipo: string;
 
   /**
    * Esperanza de vida media.
    */
-  averageLifeExpectancy: number;
+  esperanzaVidaMedia: number;
 
   /**
    * Descripción.
    */
-  description: string;
+  descripcion: string;
 }

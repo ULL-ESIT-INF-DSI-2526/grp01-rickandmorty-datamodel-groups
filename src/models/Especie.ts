@@ -1,18 +1,18 @@
-import { IEspecie } from "../interfaces/IEspecie.js";
+import { SpecieData } from "../interfaces/IEspecie.js";
 
 /**
  * Clase de especie.
  */
-export class Especie implements IEspecie {
+export class Especie implements SpecieData {
   /**
    * Crea una especie.
-   * @param id - ID.
-   * @param name - Nombre.
-   * @param origin - Origen.
-   * @param type - Tipo.
-   * @param averageLifeExpectancy - Esperanza de vida media.
-   * @param description - Descripción.
-   */ 
+   * @param id ID.
+   * @param name Nombre.
+   * @param origin Origen.
+   * @param type Tipo.
+   * @param averageLifeExpectancy Esperanza de vida media.
+   * @param description Descripción.
+   */
   constructor(
     private readonly _id: string,
     private _name: string,
@@ -68,7 +68,7 @@ export class Especie implements IEspecie {
 
   /**
    * Modifica el nombre.
-   * @param name - Nombre.
+   * @param name Nombre.
    */
   set name(name: string) {
     if (name.trim() === "") {
@@ -80,7 +80,7 @@ export class Especie implements IEspecie {
 
   /**
    * Modifica el origen.
-   * @param origin - Origen.
+   * @param origin Origen.
    */
   set origin(origin: string) {
     if (origin.trim() === "") {
@@ -92,7 +92,7 @@ export class Especie implements IEspecie {
 
   /**
    * Modifica el tipo.
-   * @param type - Tipo.
+   * @param type Tipo.
    */
   set type(type: string) {
     if (type.trim() === "") {
@@ -104,7 +104,7 @@ export class Especie implements IEspecie {
 
   /**
    * Modifica la esperanza de vida.
-   * @param averageLifeExpectancy - Esperanza de vida.
+   * @param averageLifeExpectancy Esperanza de vida.
    */
   set averageLifeExpectancy(averageLifeExpectancy: number) {
     if (averageLifeExpectancy < 0) {
@@ -116,7 +116,7 @@ export class Especie implements IEspecie {
 
   /**
    * Modifica la descripción.
-   * @param description - Descripción.
+   * @param description Descripción.
    */
   set description(description: string) {
     if (description.trim() === "") {
