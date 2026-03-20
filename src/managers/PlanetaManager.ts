@@ -38,7 +38,7 @@ export class PlanetaManager extends GestionManager<Planetas, "planetas", IPlanet
       id: planeta.id as string,
       nombre: planeta.nombre,
       tipo: planeta.tipo,
-      dimension: planeta.dimension.nombre,
+      dimension: planeta.dimension.id, 
       poblacion: planeta.poblacion,
       descripcion: planeta.descripcion
     };
