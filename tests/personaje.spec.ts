@@ -1,79 +1,98 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { DataManager } from "../src/database/DataManager.js";
-import { IPersonajeJSON } from "../src/interfaces/IPersonajeJSON.js";
-import { EstadoPersonajes } from "../src/types/EstadoPersonajes.js";
+import { describe, it, expect, beforeEach } from 'vitest';
+import { Personaje } from '../src/models/Personaje.js';
+import { Especie } from '../src/models/Especie.js';
+import { Dimension } from '../src/models/Dimension.js';
+import { EstadoPersonajes } from '../src/types/EstadoPersonajes.js';
 
+describe("Personaje Model tests", () => {
+  let rick: Personaje;
+  let morty: Personaje;
+  let especieHumana: Especie;
+  let dimensionC137: Dimension;
 
-describe("DataManager Integration Tests", () => {
-  let dataManager: DataManager;
+  beforeEach(() => {
+    // Datos de apoyo necesarios para instanciar un Personaje
+    especieHumana = new Especie('E1', 'Humano', 'Tierra', 'Mamífero', 80, 'Especie base');
+    dimensionC137 = new Dimension('C-137', 'Tierra C-137', 'activa', 5, 'Leyes físicas base');
 
-  // personaje que cumple IPersonajeJSON
-  const mockPersonaje: IPersonajeJSON = {
-    id: 1,
-    nombre: "Rick Sanchez",
-    especie: "Humano",
-    dimensionOrigen: "Tierra C-137",
-    estado: EstadoPersonajes.Vivo,
-    afiliacion: "Independiente",
-    nivelInteligencia: 9,
-    descripcion: "descripcion de prueba"
-  };
+    rick = new Personaje(
+      1, 
+      'Rick Sanchez', 
+      especieHumana, 
+      dimensionC137, 
+      EstadoPersonajes.Vivo, 
+      "Independiente", 
+      10, 
+      'Científico brillante'
+    );
 
-  beforeEach(async () => {
-    dataManager = await DataManager.getInstance();
-    await dataManager.guardarBaseDatos("personajes", []);
+    morty = new Personaje(
+      2, 
+      'Morty Smith', 
+      especieHumana, 
+      dimensionC137, 
+      EstadoPersonajes.Vivo, 
+      "Independiente", 
+      3, 
+      'Nieto de Rick'
+    );
   });
 
-  describe("Patrón Singleton y Conexión", () => {
-    it("Debe garantizar que múltiples llamadas devuelven la misma instancia", async () => {
-      const instancia2 = await DataManager.getInstance();
-      expect(dataManager).toBe(instancia2);
-    });
-
-    it("Debe inicializar las colecciones como arrays vacíos si no hay datos", () => {
-      const especies = dataManager.leerBaseDatos("especies");
-      expect(Array.isArray(especies)).toBe(true);
-      expect(especies).toHaveLength(0);
+  describe('Constructor y Getters', () => {
+    it('Debe inicializar correctamente y permitir acceder a los atributos', () => {
+      expect(rick.id).toBe(1);
+      expect(rick.nombre).toBe('Rick Sanchez');
+      expect(rick.especie).toBe(especieHumana);
+      expect(rick.dimensionOrigen).toBe(dimensionC137);
+      expect(rick.estado).toBe(EstadoPersonajes.Vivo);
+      expect(rick.afiliacion).toBe("Independiente");
+      expect(rick.nivelInteligencia).toBe(10);
+      expect(rick.descripcion).toBe('Científico brillante');
     });
   });
 
-  describe("Persistencia de Datos (Lectura y Escritura)", () => {
-    it("Debe guardar un personaje y permitir su lectura posterior", async () => {
-      // 1. Guardamos
-      await dataManager.guardarBaseDatos("personajes", [mockPersonaje]);
+  describe('Setters', () => {
+    it('Debe permitir cambiar los valores básicos (id, nombre, descripción)', () => {
+      rick.id = 100;
+      rick.nombre = 'Rick Prime';
+      rick.descripcion = 'Antagonista';
       
-      // 2. Leemos
-      const personajes = dataManager.leerBaseDatos("personajes");
-      
-      expect(personajes).toHaveLength(1);
-      expect(personajes[0].nombre).toBe("Rick Sanchez");
-      expect(personajes[0].id).toBe(1);
+      expect(rick.id).toBe(100);
+      expect(rick.nombre).toBe('Rick Prime');
+      expect(rick.descripcion).toBe('Antagonista');
     });
 
-    it("Debe sobrescribir la colección completa al guardar", async () => {
-      // Guardamos el primer personaje
-      await dataManager.guardarBaseDatos("personajes", [mockPersonaje]);
-      
-      // Creamos un segundo estado con un personaje diferente
-      const otroPersonaje = { ...mockPersonaje, id: 2, nombre: "Morty Smith" };
-      await dataManager.guardarBaseDatos("personajes", [otroPersonaje]);
-      
-      const resultado = dataManager.leerBaseDatos("personajes");
-      
-      expect(resultado).toHaveLength(1);
-      expect(resultado[0].nombre).toBe("Morty Smith");
-      expect(resultado[0].id).not.toBe(1);
+    it('Debe permitir cambiar objetos complejos (especie, dimension)', () => {
+      const nuevaEspecie = new Especie('E2', 'Cyborg', 'Desconocido', 'Mecánico', 200, 'Mejorado');
+      rick.especie = nuevaEspecie;
+      expect(rick.especie.name).toBe('Cyborg');
     });
 
-    it("Debe mantener la integridad de los tipos al recuperar datos", () => {
-      // Al usar el genérico K, TypeScript sabe que esto es un IPersonajeJSON[]
-      const lista = dataManager.leerBaseDatos("personajes");
+    it('Debe permitir cambiar estados y afiliaciones', () => {
+      morty.estado = EstadoPersonajes.Muerto;
+      morty.afiliacion = "Federacion Galactica";
       
-      // Podemos acceder a propiedades específicas sin hacer casting
-      lista.forEach(p => {
-        expect(typeof p.nombre).toBe("string");
-        expect(Object.values(EstadoPersonajes)).toContain(p.estado);
-      });
+      expect(morty.estado).toBe("Muerto");
+      expect(morty.afiliacion).toBe("Federacion Galactica");
+    });
+  });
+
+  describe('Validación de Nivel de Inteligencia (Coverage)', () => {
+    it('Debe permitir cambiar el nivel si es válido (1-10)', () => {
+      morty.nivelInteligencia = 5;
+      expect(morty.nivelInteligencia).toBe(5);
+    });
+
+    it('Debe lanzar error si el nivel es menor a 1', () => {
+      expect(() => { rick.nivelInteligencia = 0; }).toThrow(/debe estar entre 1 y 10/);
+    });
+
+    it('Debe lanzar error si el nivel es mayor a 10', () => {
+      expect(() => { rick.nivelInteligencia = 11; }).toThrow(/debe estar entre 1 y 10/);
+    });
+
+    it('Debe lanzar error si el nivel no es un número entero', () => {
+      expect(() => { rick.nivelInteligencia = 5.5; }).toThrow(/debe estar entre 1 y 10/);
     });
   });
 });

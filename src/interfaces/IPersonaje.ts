@@ -9,8 +9,8 @@ import { EstadoPersonajes } from "../types/EstadoPersonajes.js"
 export interface IPersonaje {
   id: number,
   nombre: string,
-  especie: Especie           // --> Cambiar a tipo Especie 
-  dimensionOrigen: Dimension   // --> Cambiar a tipo Dimension 
+  especie: Especie          
+  dimensionOrigen: Dimension   
   estado: EstadoPersonajes
   afiliacion: AfiliacionPersonajes
   nivelInteligencia: number

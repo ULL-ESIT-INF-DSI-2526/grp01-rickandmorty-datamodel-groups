@@ -39,19 +39,17 @@ export abstract class GestionManager<T extends IEntity, K extends keyof IEsquema
    * @param item - Instancia del objeto a añadir
    * @throws Error si el ID ya existe en la colección
    */
-  async add(item: T): Promise<void> {
+  add(item: T): void {
     if (this.getById(item.id)) throw new Error("ID ya existente");
     this._lista.push(item);
-    await this.guardar();
   }
 
   /**
    * Elimina un elemento de la colección
    * @param id - ID del elemento a eliminar
    */
-  async delete(id: string): Promise<void> {
-    this._lista = this._lista.filter(item => item.id !== id);
-    await this.guardar();
+  delete(id: string): void {
+    this._lista = this._lista.filter(item => String(item.id) !== String(id));
   }
 
   /**
@@ -59,11 +57,10 @@ export abstract class GestionManager<T extends IEntity, K extends keyof IEsquema
    * @param item - Instancia del elemento con los datos actualizados
    * @throws Error si el elemento no existe en la colección
    */
-  async update(item: T): Promise<void> {
-    const index = this._lista.findIndex(i => i.id === item.id);
+  update(item: T): void {
+    const index = this._lista.findIndex(i => String(i.id) === String(item.id));
     if (index === -1) throw new Error("Elemento no encontrado");
     this._lista[index] = item;
-    await this.guardar();
   }
 
   /**

@@ -1,113 +1,156 @@
-import { IEspecie } from "../interfaces/IEspecie.js";
+import { SpecieData } from "../interfaces/IEspecie.js";
 
 /**
  * Clase de especie.
  */
-export class Especie {
+export class Especie implements SpecieData {
   /**
    * Crea una especie.
-   * @param data - Datos de la especie.
+   * @param id ID.
+   * @param name Nombre.
+   * @param origin Origen.
+   * @param type Tipo.
+   * @param averageLifeExpectancy Esperanza de vida media.
+   * @param description Descripción.
    */
-  constructor(private data: IEspecie) {
-    this.validate(data);
+  constructor(
+    private readonly _id: string,
+    private _name: string,
+    private _origin: string,
+    private _type: string,
+    private _averageLifeExpectancy: number,
+    private _description: string,
+  ) {
+    this.validate();
   }
 
   /**
    * Devuelve el id.
-   * @returns ID.
    */
-  getId(): string {
-    return this.data.id;
+  get id(): string {
+    return this._id;
   }
 
   /**
    * Devuelve el nombre.
-   * @returns Nombre.
    */
-  getName(): string {
-    return this.data.nombre;
+  get name(): string {
+    return this._name;
   }
 
   /**
    * Devuelve el origen.
-   * @returns Origen.
    */
-  getOrigin(): string {
-    return this.data.origen;
+  get origin(): string {
+    return this._origin;
   }
 
   /**
    * Devuelve el tipo.
-   * @returns Tipo.
    */
-  getType(): string {
-    return this.data.tipo;
+  get type(): string {
+    return this._type;
   }
 
   /**
    * Devuelve la esperanza de vida.
-   * @returns Esperanza de vida.
    */
-  getAverageLifeExpectancy(): number {
-    return this.data.averageLifeExpectancy;
+  get averageLifeExpectancy(): number {
+    return this._averageLifeExpectancy;
   }
 
   /**
    * Devuelve la descripción.
-   * @returns Descripción.
    */
-  getDescription(): string {
-    return this.data.descripcion;
+  get description(): string {
+    return this._description;
   }
 
   /**
-   * Modifica la especie.
-   * @param updates - Cambios.
+   * Modifica el nombre.
+   * @param name Nombre.
    */
-  update(updates: Partial<IEspecie>): void {
-    const updatedData: IEspecie = {
-      ...this.data,
-      ...updates,
-    };
-
-    this.validate(updatedData);
-    this.data = updatedData;
-  }
-
-  /**
-   * Devuelve los datos.
-   * @returns Datos de la especie.
-   */
-  toJSON(): IEspecie {
-    return { ...this.data };
-  }
-
-  /**
-   * Valida los datos.
-   * @param data - Datos a validar.
-   */
-  private validate(data: IEspecie): void {
-    if (data.id.trim() === "") {
-      throw new Error("El id no puede estar vacío");
-    }
-
-    if (data.nombre.trim() === "") {
+  set name(name: string) {
+    if (name.trim() === "") {
       throw new Error("El nombre no puede estar vacío");
     }
 
-    if (data.origen.trim() === "") {
+    this._name = name;
+  }
+
+  /**
+   * Modifica el origen.
+   * @param origin Origen.
+   */
+  set origin(origin: string) {
+    if (origin.trim() === "") {
       throw new Error("El origen no puede estar vacío");
     }
 
-    if (data.tipo.trim() === "") {
+    this._origin = origin;
+  }
+
+  /**
+   * Modifica el tipo.
+   * @param type Tipo.
+   */
+  set type(type: string) {
+    if (type.trim() === "") {
       throw new Error("El tipo no puede estar vacío");
     }
 
-    if (data.averageLifeExpectancy < 0) {
+    this._type = type;
+  }
+
+  /**
+   * Modifica la esperanza de vida.
+   * @param averageLifeExpectancy Esperanza de vida.
+   */
+  set averageLifeExpectancy(averageLifeExpectancy: number) {
+    if (averageLifeExpectancy < 0) {
       throw new Error("La esperanza de vida no puede ser negativa");
     }
 
-    if (data.descripcion.trim() === "") {
+    this._averageLifeExpectancy = averageLifeExpectancy;
+  }
+
+  /**
+   * Modifica la descripción.
+   * @param description Descripción.
+   */
+  set description(description: string) {
+    if (description.trim() === "") {
+      throw new Error("La descripción no puede estar vacía");
+    }
+
+    this._description = description;
+  }
+
+  /**
+   * Valida la especie.
+   */
+  private validate(): void {
+    if (this._id.trim() === "") {
+      throw new Error("El id no puede estar vacío");
+    }
+
+    if (this._name.trim() === "") {
+      throw new Error("El nombre no puede estar vacío");
+    }
+
+    if (this._origin.trim() === "") {
+      throw new Error("El origen no puede estar vacío");
+    }
+
+    if (this._type.trim() === "") {
+      throw new Error("El tipo no puede estar vacío");
+    }
+
+    if (this._averageLifeExpectancy < 0) {
+      throw new Error("La esperanza de vida no puede ser negativa");
+    }
+
+    if (this._description.trim() === "") {
       throw new Error("La descripción no puede estar vacía");
     }
   }

@@ -27,15 +27,7 @@ describe("Invento Model tests", () => {
       5,
       "Dimensión original",
     );
-
-    especieBase = new Especie({
-      id: "sp-001",
-      nombre: "Human",
-      origen: "Earth C-137",
-      tipo: "Humanoid",
-      averageLifeExpectancy: 80,
-      descripcion: "Especie común",
-    });;
+    especieBase = new Especie("E1", "Humano", "Mamífero", "Omnívoro", 10, "Tierra");
 
     inventorBase = new Personaje(
       1,
