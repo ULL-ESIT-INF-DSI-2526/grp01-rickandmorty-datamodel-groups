@@ -33,7 +33,7 @@ describe('PersonajeManager', () => {
     manager = new PersonajeManagerTest();
     
     // Mocks de las dependencias de Personaje
-    mockEspecie = { id: 'ESP-1', nombre: 'Humano' } as unknown as Especie;
+    mockEspecie = { id: 'E-1', nombre: 'Humano' } as unknown as Especie;
     mockDimension = { id: 'DIM-1', nombre: 'Tierra C-137' } as unknown as Dimension;
   });
 
@@ -42,7 +42,7 @@ describe('PersonajeManager', () => {
       const mockDatosJSON: IPersonajeJSON[] = [{
         id: 1,
         nombre: 'Rick Sanchez',
-        especieId: 'ESP-1',
+        especieId: 'E-1',
         dimensionId: 'DIM-1',
         estado: EstadoPersonajes.Vivo,
         afiliacion: "Independiente",
@@ -119,7 +119,7 @@ describe('PersonajeManager', () => {
 
       // Verificamos que el JSON tiene los IDs
       expect(resultadoJSON.id).toBe(10);
-      expect(resultadoJSON.especieId).toBe('ESP-1');
+      expect(resultadoJSON.especieId).toBe('E-1');
       expect(resultadoJSON.dimensionId).toBe('DIM-1');
       expect(resultadoJSON.nombre).toBe('Morty');
     });
