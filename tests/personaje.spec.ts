@@ -51,6 +51,8 @@ describe("Personaje Model tests", () => {
     });
   });
 
+  
+
   describe('Setters', () => {
     it('Debe permitir cambiar los valores básicos (id, nombre, descripción)', () => {
       rick.id = 100;

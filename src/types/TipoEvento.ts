@@ -4,4 +4,5 @@
 export type TipoEvento =
   | "viaje interdimensional"
   | "cambio estado de dimension"
-  | "cambio estado artefacto";
+  | "despliegue artefacto"
+  | "neutralizacion artefacto";

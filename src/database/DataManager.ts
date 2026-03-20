@@ -40,6 +40,7 @@ export class DataManager {
       especies: [],
       inventos: [],
       planetas: [],
+      eventos: []
     };
 
     this._dataBase = new Low(conector, datosIniciales);
