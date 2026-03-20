@@ -1,5 +1,6 @@
 import { IDimension } from "./IDimension.js";
-import { IEspecie } from "./IEspecie.js";
+import { SpecieData } from "./IEspecie.js";
+import { IEvento } from "./IEvento.js";
 import { IInventoJSON } from "./IInventoJSON.js";
 import { IPersonajeJSON } from "./IPersonajeJSON.js";
 import { IPlanetaJSON } from "./IPlanetaJSON.js";
@@ -10,7 +11,8 @@ import { IPlanetaJSON } from "./IPlanetaJSON.js";
 export interface IEsquema {
   personajes: IPersonajeJSON[];
   dimensiones: IDimension[];
-  especies: IEspecie[];
+  especies: SpecieData[];
   inventos: IInventoJSON[];
   planetas: IPlanetaJSON[];
+  eventos: IEvento[]
 }
