@@ -10,7 +10,6 @@ vi.mock('prompts');
 describe('Menu CRUD Tests', () => {
   let menu: Menu;
 
-  // Mock completo del manager para interceptar las llamadas del Menu
   const mockManager = {
     inicializar: vi.fn(),
     persistirMultiverso: vi.fn(),
@@ -37,7 +36,6 @@ describe('Menu CRUD Tests', () => {
   it('Debe listar los elementos de una entidad', async () => {
     const mockedPrompts = vi.mocked(prompts);
     
-    // 1. Entrar en CRUD -> 2. Elegir Dimensiones -> 3. Listar -> 4. Salir
     mockedPrompts
       .mockResolvedValueOnce({ accion: 'crud' })
       .mockResolvedValueOnce({ entidad: 'dimensiones', operacion: 'listar' })
@@ -52,7 +50,6 @@ describe('Menu CRUD Tests', () => {
   it('Debe eliminar un elemento por ID correctamente', async () => {
     const mockedPrompts = vi.mocked(prompts);
     
-    // Flujo: CRUD -> Especies -> Borrar -> Introducir ID "ESP-01" -> Salir
     mockedPrompts
       .mockResolvedValueOnce({ accion: 'crud' })
       .mockResolvedValueOnce({ entidad: 'especies', operacion: 'borrar' })
@@ -68,22 +65,20 @@ describe('Menu CRUD Tests', () => {
   it('Debe añadir una nueva dimensión correctamente', async () => {
     const mockedPrompts = vi.mocked(prompts);
     
-    // Mock de respuestas para el formulario de Dimensiones
     mockedPrompts
-      .mockResolvedValueOnce({ accion: 'crud' }) // Menú Principal
-      .mockResolvedValueOnce({ entidad: 'dimensiones', operacion: 'anadir' }) // Menú CRUD
-      .mockResolvedValueOnce({ // Formulario procesarFormulario
+      .mockResolvedValueOnce({ accion: 'crud' }) 
+      .mockResolvedValueOnce({ entidad: 'dimensiones', operacion: 'anadir' }) 
+      .mockResolvedValueOnce({ 
         id: 'D-100',
         nombre: 'Dimensión de Prueba',
         estado: 'activa',
         tec: 5,
         tipo: 'Experimental'
       })
-      .mockResolvedValueOnce({ accion: 'salir_sin_guardar' }); // Volver al principal y salir
+      .mockResolvedValueOnce({ accion: 'salir_sin_guardar' }); 
 
     await menu.iniciar();
 
-    // Verificamos que se haya llamado al método add del manager de dimensiones
     expect(mockManager.dimensiones.add).toHaveBeenCalled();
     const llamada = vi.mocked(mockManager.dimensiones.add).mock.calls[0][0];
     expect(llamada.id).toBe('D-100');
@@ -94,7 +89,6 @@ describe('Menu CRUD Tests', () => {
     const mockedPrompts = vi.mocked(prompts);
     vi.spyOn(console, 'error').mockImplementation(() => {});
     
-    // Simulamos que getById devuelve null (no existe)
     vi.mocked(mockManager.inventos.getById).mockReturnValue(undefined);
 
     mockedPrompts
@@ -112,7 +106,6 @@ describe('Menu CRUD Tests', () => {
   it('Debe validar el rango de IQ en Personajes (simulación de validación)', async () => {
     const mockedPrompts = vi.mocked(prompts);
     
-    // Para testear la lógica de Personajes necesitamos mocks de las otras entidades
     vi.mocked(mockManager.especies.getAll).mockReturnValue([{ name: 'Humano' }] as unknown as Especie[]);
     vi.mocked(mockManager.dimensiones.getAll).mockReturnValue([{ nombre: 'Tierra' }] as unknown as Dimension[]);
 

@@ -154,7 +154,6 @@ describe('Menu Tests', () => {
       vi.mocked(mockManager.especies.getById).mockReturnValue(undefined);
 
       await menu.iniciar();
-      // Corregido: Texto exacto con emoji y punto
       expect(console.error).toHaveBeenCalledWith('❌ El ID no existe.');
     });
   });
