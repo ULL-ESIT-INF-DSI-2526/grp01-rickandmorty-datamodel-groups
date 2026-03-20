@@ -35,6 +35,21 @@ export class MultiverseManager {
     this._eventosMultiverso = new EventoManager();
   }
 
+  /** Permite acceder al atributo privado _personajes */
+  get personajes(): PersonajeManager { return this._personajes};
+
+  /** Permite acceder al atributo privado _dimensiones */
+  get dimensiones(): DimensionManager { return this._dimensiones};
+
+  /** Permite acceder al atributo privado _planetas */
+  get planetas(): PlanetaManager { return this._planetas};
+
+  /** Permite acceder al atributo privado _especies */
+  get especies(): EspecieManager { return this._especies};
+
+  /** Permite acceder al atributo privado _inventos */
+  get inventos(): InventoManager { return this._inventos};
+
   /**
    * metodo para obtener instancia, y si no existe la crea
    */

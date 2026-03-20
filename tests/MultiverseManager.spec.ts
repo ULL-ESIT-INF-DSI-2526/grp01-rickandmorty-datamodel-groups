@@ -6,6 +6,11 @@ import { Invento } from "../src/models/Invento";
 import { IEvento } from "../src/interfaces/IEvento";
 import { EstadoPersonajes } from "../src/types/EstadoPersonajes";
 import { Especie } from "../src/models/Especie";
+import { PersonajeManager } from "../src/managers/PersonajeManager";
+import { DimensionManager } from "../src/managers/DimensionManager";
+import { PlanetaManager } from "../src/managers/PlanetaManager";
+import { EspecieManager } from "../src/managers/EspecieManager";
+import { InventoManager } from "../src/managers/InventoManager";
 
 describe("Pruebas de Integración: MultiverseManager", () => {
   let manager: MultiverseManager;
@@ -79,6 +84,38 @@ describe("Pruebas de Integración: MultiverseManager", () => {
     vi.spyOn(manager["_inventos"], "getAll").mockReturnValue(
       mockInventos as unknown as Invento[],
     );
+  });
+
+  describe('Getters', () => {
+    it('Debería retornar una instancia de PersonajeManager', () => {
+      const personajes = manager.personajes;
+      expect(personajes).toBeDefined();
+      expect(personajes).toBeInstanceOf(PersonajeManager);
+    });
+
+    it('Debería retornar una instancia de DimensionManager', () => {
+      const dimensiones = manager.dimensiones;
+      expect(dimensiones).toBeDefined();
+      expect(dimensiones).toBeInstanceOf(DimensionManager);
+    });
+
+    it('Debería retornar una instancia de PlanetaManager', () => {
+      const planetas = manager.planetas;
+      expect(planetas).toBeDefined();
+      expect(planetas).toBeInstanceOf(PlanetaManager);
+    });
+
+    it('Debería retornar una instancia de EspecieManager', () => {
+      const especies = manager.especies;
+      expect(especies).toBeDefined();
+      expect(especies).toBeInstanceOf(EspecieManager);
+    });
+
+    it('Debería retornar una instancia de InventoManager', () => {
+      const inventos = manager.inventos;
+      expect(inventos).toBeDefined();
+      expect(inventos).toBeInstanceOf(InventoManager);
+    });
   });
 
   it("debería detectar las 2 anomalías", () => {
