@@ -1,7 +1,131 @@
 {
-  "personajes": [],
-  "dimensiones": [],
-  "especies": [],
-  "inventos": [],
-  "planetas": []
+  "personajes": [
+    {
+      "id": 1,
+      "nombre": "Rick Sanchez",
+      "especieId": "E-001",
+      "dimensionId": "C-137",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 10,
+      "descripcion": "Científico brillante e inestable"
+    },
+    {
+      "id": 2,
+      "nombre": "Morty Smith",
+      "especieId": "E-001",
+      "dimensionId": "C-137",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 5,
+      "descripcion": "Nieto de Rick"
+    },
+    {
+      "id": 3,
+      "nombre": "Rick Sanchez",
+      "especieId": "E-001",
+      "dimensionId": "C-500A",
+      "estado": "Vivo",
+      "afiliacion": "Citadel",
+      "nivelInteligencia": 9,
+      "descripcion": "Versión alternativa de Rick"
+    }
+  ],
+  "dimensiones": [
+    {
+      "id": "C-137",
+      "nombre": "Dimensión C-137",
+      "estado": "activa",
+      "nivelTecnologico": 10,
+      "descripcion": "Dimensión principal de Rick y Morty"
+    },
+    {
+      "id": "C-500A",
+      "nombre": "Dimensión Cronenberg",
+      "estado": "cuarentena",
+      "nivelTecnologico": 8,
+      "descripcion": "Dimensión alterada por un experimento fallido"
+    },
+    {
+      "id": "J19ζ7",
+      "nombre": "Dimensión J19ζ7",
+      "estado": "activa",
+      "nivelTecnologico": 7,
+      "descripcion": "Dimensión con desarrollo medio"
+    }
+  ],
+  "especies": [
+    {
+      "id": "E-001",
+      "nombre": "Humano",
+      "origenId": "P-001",
+      "origenTipo": "planeta",
+      "tipo": "Humanoide",
+      "esperanzaVidaMedia": 80,
+      "descripcion": "Especie inteligente extendida por múltiples dimensiones"
+    },
+    {
+      "id": "E-002",
+      "nombre": "Cronenberg",
+      "origenId": "C-500A",
+      "origenTipo": "dimension",
+      "tipo": "Amorfo",
+      "esperanzaVidaMedia": 40,
+      "descripcion": "Mutación biológica derivada de un accidente"
+    },
+    {
+      "id": "E-003",
+      "nombre": "Meeseeks",
+      "origenId": "P-002",
+      "origenTipo": "planeta",
+      "tipo": "Artificial",
+      "esperanzaVidaMedia": 1,
+      "descripcion": "Entidades creadas para cumplir tareas"
+    }
+  ],
+  "inventos": [
+    {
+      "id": 1,
+      "nombre": "Portal Gun",
+      "inventorId": 1,
+      "tipo": "Dispositivo de viaje",
+      "nivelPeligrosidad": 10,
+      "descripcion": "Permite viajar entre dimensiones"
+    },
+    {
+      "id": 2,
+      "nombre": "Caja Meeseeks",
+      "inventorId": 1,
+      "tipo": "Objeto cotidiano absurdo",
+      "nivelPeligrosidad": 6,
+      "descripcion": "Genera seres Meeseeks para realizar tareas"
+    }
+  ],
+  "planetas": [
+    {
+      "id": "P-001",
+      "nombre": "Tierra C-137",
+      "tipo": "Planeta",
+      "dimension": "C-137",
+      "poblacion": 8000000000,
+      "descripcion": "Planeta de origen humano en la dimensión C-137"
+    },
+    {
+      "id": "P-002",
+      "nombre": "Planeta Meeseeks",
+      "tipo": "Planeta",
+      "dimension": "J19ζ7",
+      "poblacion": 1000000,
+      "descripcion": "Lugar relacionado con la existencia de los Meeseeks"
+    },
+    {
+      "id": "P-003",
+      "nombre": "Tierra Cronenberg",
+      "tipo": "Planeta",
+      "dimension": "C-500A",
+      "poblacion": 1200000,
+      "descripcion": "Versión mutada de la Tierra"
+    }
+  ],
+  "eventos": []
 }

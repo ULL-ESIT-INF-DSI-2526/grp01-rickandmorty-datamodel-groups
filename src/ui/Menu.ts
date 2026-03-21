@@ -261,7 +261,63 @@ export class Menu {
     const manager = this.multiverseManager[entidad as ManagerData];
 
     if (operacion === "listar") {
-      console.table(manager.getAll());
+      if (entidad === "personajes") {
+        console.table(
+          this.multiverseManager.personajes.getAll().map((p) => ({
+            ID: p.id,
+            Nombre: p.nombre,
+            Especie: p.especie.name,
+            Dimensión: p.dimensionOrigen.nombre,
+            Estado: p.estado,
+            Afiliación: p.afiliacion,
+            Inteligencia: p.nivelInteligencia,
+            Descripción: p.descripcion,
+          })),
+        );
+      } else if (entidad === "dimensiones") {
+        console.table(
+          this.multiverseManager.dimensiones.getAll().map((d) => ({
+            ID: d.id,
+            Nombre: d.nombre,
+            Estado: d.estado,
+            NivelTecnológico: d.nivelTecnologico,
+            Descripción: d.descripcion,
+          })),
+        );
+      } else if (entidad === "especies") {
+        console.table(
+          this.multiverseManager.especies.getAll().map((e) => ({
+            ID: e.id,
+            Nombre: e.name,
+            Origen: e.origin.nombre,
+            Tipo: e.type,
+            EsperanzaVida: e.averageLifeExpectancy,
+            Descripción: e.description,
+          })),
+        );
+      } else if (entidad === "planetas") {
+        console.table(
+          this.multiverseManager.planetas.getAll().map((p) => ({
+            ID: p.id,
+            Nombre: p.nombre,
+            Tipo: p.tipo,
+            Dimensión: p.dimension.nombre,
+            Población: p.poblacion,
+            Descripción: p.descripcion,
+          })),
+        );
+      } else if (entidad === "inventos") {
+        console.table(
+          this.multiverseManager.inventos.getAll().map((i) => ({
+            ID: i.id,
+            Nombre: i.nombre,
+            Inventor: i.inventor.nombre,
+            Tipo: i.tipo,
+            Peligrosidad: i.nivelPeligrosidad,
+            Descripción: i.descripcion,
+          })),
+        );
+      }
     } else if (operacion === "borrar") {
       const { id } = await prompts({
         type: "text",
