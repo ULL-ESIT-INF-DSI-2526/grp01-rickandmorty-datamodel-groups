@@ -1,3 +1,6 @@
+import { Dimension } from "../models/Dimension.js";
+import { Planetas } from "../models/Planetas.js";
+
 /**
  * Interfaz de una especie.
  */
@@ -15,7 +18,7 @@ export interface SpecieData {
   /**
    * Origen.
    */
-  origin: string;
+  origin: Dimension | Planetas;
 
   /**
    * Tipo.

@@ -1,21 +1,51 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { Especie } from "../src/models/Especie.js";
-import { EspecieManager } from "../src/managers/EspecieManager.js";
 import { DataManager } from "../src/database/DataManager.js";
+import { EspecieManager } from "../src/managers/EspecieManager.js";
+import { Dimension } from "../src/models/Dimension.js";
+import { Especie } from "../src/models/Especie.js";
+import { Planetas } from "../src/models/Planetas.js";
 
 describe("EspecieManager", function () {
   let manager: EspecieManager;
+  let dimension: Dimension;
+  let otraDimension: Dimension;
+  let planeta: Planetas;
 
   beforeEach(function () {
     manager = new EspecieManager();
     vi.restoreAllMocks();
+
+    dimension = new Dimension(
+      "C-137",
+      "Dimensión C-137",
+      "activa",
+      10,
+      "Dimensión principal",
+    );
+
+    otraDimension = new Dimension(
+      "C-500A",
+      "Dimensión alternativa",
+      "activa",
+      8,
+      "Otra dimensión",
+    );
+
+    planeta = new Planetas(
+      "p-001",
+      "Tierra C-137",
+      "Planeta",
+      dimension,
+      8000000000,
+      "Planeta de origen",
+    );
   });
 
   it("añade una especie", function () {
     const especie = new Especie(
       "sp-001",
       "Human",
-      "Earth C-137",
+      dimension,
       "Humanoid",
       80,
       "Especie común",
@@ -31,7 +61,7 @@ describe("EspecieManager", function () {
     const especie1 = new Especie(
       "sp-001",
       "Human",
-      "Earth C-137",
+      dimension,
       "Humanoid",
       80,
       "Especie común",
@@ -40,7 +70,7 @@ describe("EspecieManager", function () {
     const especie2 = new Especie(
       "sp-001",
       "Cronenberg",
-      "Cronenberg World",
+      planeta,
       "Mutated",
       40,
       "Especie mutada",
@@ -61,7 +91,7 @@ describe("EspecieManager", function () {
     const especie = new Especie(
       "sp-001",
       "Human",
-      "Earth C-137",
+      dimension,
       "Humanoid",
       80,
       "Especie común",
@@ -78,7 +108,7 @@ describe("EspecieManager", function () {
     const especie1 = new Especie(
       "sp-001",
       "Human",
-      "Earth C-137",
+      dimension,
       "Humanoid",
       80,
       "Especie común",
@@ -87,7 +117,7 @@ describe("EspecieManager", function () {
     const especie2 = new Especie(
       "sp-001",
       "Advanced Human",
-      "Earth Prime",
+      otraDimension,
       "Humanoid",
       90,
       "Especie mejorada",
@@ -98,7 +128,7 @@ describe("EspecieManager", function () {
 
     const resultado = manager.getById("sp-001");
     expect(resultado?.name).toBe("Advanced Human");
-    expect(resultado?.origin).toBe("Earth Prime");
+    expect(resultado?.origin).toBe(otraDimension);
     expect(resultado?.averageLifeExpectancy).toBe(90);
   });
 
@@ -106,7 +136,7 @@ describe("EspecieManager", function () {
     const especie = new Especie(
       "sp-001",
       "Human",
-      "Earth C-137",
+      dimension,
       "Humanoid",
       80,
       "Especie común",
@@ -123,7 +153,8 @@ describe("EspecieManager", function () {
         {
           id: "sp-001",
           nombre: "Human",
-          origen: "Earth C-137",
+          origenId: "C-137",
+          origenTipo: "dimension",
           tipo: "Humanoid",
           esperanzaVidaMedia: 80,
           descripcion: "Especie común",
@@ -131,7 +162,8 @@ describe("EspecieManager", function () {
         {
           id: "sp-002",
           nombre: "Meeseeks",
-          origen: "Mr. Meeseeks Box",
+          origenId: "p-001",
+          origenTipo: "planeta",
           tipo: "Artificial",
           esperanzaVidaMedia: 1,
           descripcion: "Cumplen tareas",
@@ -144,11 +176,36 @@ describe("EspecieManager", function () {
       mockDataManager as unknown as DataManager,
     );
 
-    await manager.cargar();
+    await manager.cargar([dimension, otraDimension], [planeta]);
 
     expect(manager.getAll()).toHaveLength(2);
     expect(manager.getById("sp-001")?.name).toBe("Human");
+    expect(manager.getById("sp-001")?.origin).toBe(dimension);
     expect(manager.getById("sp-002")?.name).toBe("Meeseeks");
+    expect(manager.getById("sp-002")?.origin).toBe(planeta);
+  });
+
+  it("lanza error si carga una especie con origen inexistente", async function () {
+    const mockDataManager = {
+      leerBaseDatos: vi.fn().mockReturnValue([
+        {
+          id: "sp-001",
+          nombre: "Human",
+          origenId: "NO-EXISTE",
+          origenTipo: "dimension",
+          tipo: "Humanoid",
+          esperanzaVidaMedia: 80,
+          descripcion: "Especie común",
+        },
+      ]),
+      guardarBaseDatos: vi.fn(),
+    };
+
+    vi.spyOn(DataManager, "getInstance").mockResolvedValue(
+      mockDataManager as unknown as DataManager,
+    );
+
+    await expect(manager.cargar([dimension], [planeta])).rejects.toThrow();
   });
 
   it("guarda las especies en DataManager", async function () {
@@ -165,7 +222,7 @@ describe("EspecieManager", function () {
       new Especie(
         "sp-001",
         "Human",
-        "Earth C-137",
+        dimension,
         "Humanoid",
         80,
         "Especie común",
@@ -176,7 +233,7 @@ describe("EspecieManager", function () {
       new Especie(
         "sp-002",
         "Meeseeks",
-        "Mr. Meeseeks Box",
+        planeta,
         "Artificial",
         1,
         "Cumplen tareas",
@@ -190,7 +247,8 @@ describe("EspecieManager", function () {
       {
         id: "sp-001",
         nombre: "Human",
-        origen: "Earth C-137",
+        origenId: "C-137",
+        origenTipo: "dimension",
         tipo: "Humanoid",
         esperanzaVidaMedia: 80,
         descripcion: "Especie común",
@@ -198,7 +256,8 @@ describe("EspecieManager", function () {
       {
         id: "sp-002",
         nombre: "Meeseeks",
-        origen: "Mr. Meeseeks Box",
+        origenId: "p-001",
+        origenTipo: "planeta",
         tipo: "Artificial",
         esperanzaVidaMedia: 1,
         descripcion: "Cumplen tareas",

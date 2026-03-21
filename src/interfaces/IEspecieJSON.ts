@@ -13,9 +13,14 @@ export interface IEspecieJSON {
   nombre: string;
 
   /**
-   * Origen.
+   * ID del origen.
    */
-  origen: string;
+  origenId: string;
+
+  /**
+   * Tipo del origen.
+   */
+  origenTipo: "dimension" | "planeta";
 
   /**
    * Tipo.
