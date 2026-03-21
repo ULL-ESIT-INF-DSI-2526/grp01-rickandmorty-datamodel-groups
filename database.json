@@ -8,7 +8,7 @@
       "estado": "Vivo",
       "afiliacion": "Independiente",
       "nivelInteligencia": 10,
-      "descripcion": "Científico brillante e inestable"
+      "descripcion": "Científico brillante e inestable de la dimensión principal."
     },
     {
       "id": 2,
@@ -18,7 +18,7 @@
       "estado": "Vivo",
       "afiliacion": "Independiente",
       "nivelInteligencia": 5,
-      "descripcion": "Nieto de Rick"
+      "descripcion": "Nieto de Rick, torpe pero valiente."
     },
     {
       "id": 3,
@@ -28,7 +28,277 @@
       "estado": "Vivo",
       "afiliacion": "Citadel",
       "nivelInteligencia": 9,
-      "descripcion": "Versión alternativa de Rick"
+      "descripcion": "Versión alternativa de Rick procedente de una dimensión en cuarentena."
+    },
+    {
+      "id": 4,
+      "nombre": "Morty Smith",
+      "especieId": "E-001",
+      "dimensionId": "C-500A",
+      "estado": "Desconocido",
+      "afiliacion": "Citadel",
+      "nivelInteligencia": 4,
+      "descripcion": "Morty alternativo afectado por un desastre biológico."
+    },
+    {
+      "id": 5,
+      "nombre": "Evil Morty",
+      "especieId": "E-001",
+      "dimensionId": "J19ζ7",
+      "estado": "Vivo",
+      "afiliacion": "Rebellion",
+      "nivelInteligencia": 10,
+      "descripcion": "Morty extremadamente inteligente y manipulador."
+    },
+    {
+      "id": 6,
+      "nombre": "Summer Smith",
+      "especieId": "E-001",
+      "dimensionId": "C-137",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 6,
+      "descripcion": "Hermana mayor de Morty."
+    },
+    {
+      "id": 7,
+      "nombre": "Beth Smith",
+      "especieId": "E-001",
+      "dimensionId": "C-137",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 7,
+      "descripcion": "Hija de Rick y madre de Summer y Morty."
+    },
+    {
+      "id": 8,
+      "nombre": "Jerry Smith",
+      "especieId": "E-001",
+      "dimensionId": "C-137",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 3,
+      "descripcion": "Padre de Morty, generalmente inseguro."
+    },
+    {
+      "id": 9,
+      "nombre": "Birdperson",
+      "especieId": "E-004",
+      "dimensionId": "A-001",
+      "estado": "Vivo",
+      "afiliacion": "Rebellion",
+      "nivelInteligencia": 8,
+      "descripcion": "Guerrero aliado histórico de Rick."
+    },
+    {
+      "id": 10,
+      "nombre": "Mr. Meeseeks",
+      "especieId": "E-003",
+      "dimensionId": "J19ζ7",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 6,
+      "descripcion": "Entidad creada para cumplir tareas concretas."
+    },
+    {
+      "id": 11,
+      "nombre": "Squanchy",
+      "especieId": "E-005",
+      "dimensionId": "B-212",
+      "estado": "Vivo",
+      "afiliacion": "Rebellion",
+      "nivelInteligencia": 7,
+      "descripcion": "Amigo felino de Rick."
+    },
+    {
+      "id": 12,
+      "nombre": "Tammy Guetermann",
+      "especieId": "E-001",
+      "dimensionId": "A-001",
+      "estado": "Muerto",
+      "afiliacion": "Citadel",
+      "nivelInteligencia": 7,
+      "descripcion": "Agente infiltrada con vínculos galácticos."
+    },
+    {
+      "id": 13,
+      "nombre": "Abradolf Lincler",
+      "especieId": "E-006",
+      "dimensionId": "D-404",
+      "estado": "Muerto",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 6,
+      "descripcion": "Experimento híbrido fallido de Rick."
+    },
+    {
+      "id": 14,
+      "nombre": "Krombopulos Michael",
+      "especieId": "E-007",
+      "dimensionId": "E-313",
+      "estado": "Muerto",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 6,
+      "descripcion": "Asesino profesional amante de su trabajo."
+    },
+    {
+      "id": 15,
+      "nombre": "Noob-Noob",
+      "especieId": "E-008",
+      "dimensionId": "F-909",
+      "estado": "Vivo",
+      "afiliacion": "Rebellion",
+      "nivelInteligencia": 5,
+      "descripcion": "Miembro infraestimado del equipo de superhéroes."
+    },
+    {
+      "id": 16,
+      "nombre": "Unity",
+      "especieId": "E-009",
+      "dimensionId": "G-777",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 9,
+      "descripcion": "Conciencia colectiva de gran escala."
+    },
+    {
+      "id": 17,
+      "nombre": "Zeep Xanflorp",
+      "especieId": "E-010",
+      "dimensionId": "H-808",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 10,
+      "descripcion": "Científico que vive en una batería-microverso."
+    },
+    {
+      "id": 18,
+      "nombre": "Rick Sanchez",
+      "especieId": "E-001",
+      "dimensionId": "A-001",
+      "estado": "Vivo",
+      "afiliacion": "Citadel",
+      "nivelInteligencia": 9,
+      "descripcion": "Otra versión de Rick con perfil militar."
+    },
+    {
+      "id": 19,
+      "nombre": "Rick Sanchez",
+      "especieId": "E-001",
+      "dimensionId": "B-212",
+      "estado": "Robot-sustituto",
+      "afiliacion": "Citadel",
+      "nivelInteligencia": 8,
+      "descripcion": "Sustituto robótico que actúa como Rick."
+    },
+    {
+      "id": 20,
+      "nombre": "Morty Smith",
+      "especieId": "E-001",
+      "dimensionId": "A-001",
+      "estado": "Vivo",
+      "afiliacion": "Citadel",
+      "nivelInteligencia": 5,
+      "descripcion": "Versión alternativa de Morty adscrita a la Ciudadela."
+    },
+    {
+      "id": 21,
+      "nombre": "Morty Smith",
+      "especieId": "E-001",
+      "dimensionId": "B-212",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 4,
+      "descripcion": "Morty alternativo superviviente."
+    },
+    {
+      "id": 22,
+      "nombre": "Summer Smith",
+      "especieId": "E-001",
+      "dimensionId": "C-500A",
+      "estado": "Desconocido",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 6,
+      "descripcion": "Versión de Summer en una dimensión deteriorada."
+    },
+    {
+      "id": 23,
+      "nombre": "Beth Smith",
+      "especieId": "E-001",
+      "dimensionId": "J19ζ7",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 7,
+      "descripcion": "Beth alternativa con experiencia veterinaria avanzada."
+    },
+    {
+      "id": 24,
+      "nombre": "Jerry Smith",
+      "especieId": "E-001",
+      "dimensionId": "J19ζ7",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 2,
+      "descripcion": "Jerry alternativo especialmente torpe."
+    },
+    {
+      "id": 25,
+      "nombre": "Gazorpazorpfield",
+      "especieId": "E-002",
+      "dimensionId": "K-121",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 4,
+      "descripcion": "Criatura grotesca surgida de condiciones extremas."
+    },
+    {
+      "id": 26,
+      "nombre": "Phoenixperson",
+      "especieId": "E-004",
+      "dimensionId": "L-303",
+      "estado": "Robot-sustituto",
+      "afiliacion": "Citadel",
+      "nivelInteligencia": 8,
+      "descripcion": "Versión reconstruida y tecnificada de Birdperson."
+    },
+    {
+      "id": 27,
+      "nombre": "Mr. Meeseeks",
+      "especieId": "E-003",
+      "dimensionId": "M-616",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 6,
+      "descripcion": "Otra manifestación de Meeseeks."
+    },
+    {
+      "id": 28,
+      "nombre": "Krombopulos Michael",
+      "especieId": "E-007",
+      "dimensionId": "N-202",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 6,
+      "descripcion": "Versión alternativa todavía activa."
+    },
+    {
+      "id": 29,
+      "nombre": "Zeep Xanflorp",
+      "especieId": "E-010",
+      "dimensionId": "P-451",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 10,
+      "descripcion": "Científico de otro microverso con tecnología avanzada."
+    },
+    {
+      "id": 30,
+      "nombre": "Rick Sanchez",
+      "especieId": "E-001",
+      "dimensionId": "P-451",
+      "estado": "Vivo",
+      "afiliacion": "Citadel",
+      "nivelInteligencia": 10,
+      "descripcion": "Rick alternativo de una dimensión tecnológicamente inestable."
     }
   ],
   "dimensiones": [
@@ -37,32 +307,116 @@
       "nombre": "Dimensión C-137",
       "estado": "activa",
       "nivelTecnologico": 10,
-      "descripcion": "Dimensión principal de Rick y Morty"
+      "descripcion": "Dimensión principal de Rick y Morty."
     },
     {
       "id": "C-500A",
       "nombre": "Dimensión Cronenberg",
       "estado": "cuarentena",
       "nivelTecnologico": 8,
-      "descripcion": "Dimensión alterada por un experimento fallido"
+      "descripcion": "Dimensión alterada por un experimento biológico fallido."
     },
     {
       "id": "J19ζ7",
       "nombre": "Dimensión J19ζ7",
       "estado": "activa",
       "nivelTecnologico": 7,
-      "descripcion": "Dimensión con desarrollo medio"
+      "descripcion": "Dimensión con desarrollo medio y estabilidad social relativa."
+    },
+    {
+      "id": "A-001",
+      "nombre": "Dimensión Rebelde",
+      "estado": "activa",
+      "nivelTecnologico": 9,
+      "descripcion": "Dimensión con fuerte presencia de movimientos rebeldes."
+    },
+    {
+      "id": "B-212",
+      "nombre": "Dimensión Felina",
+      "estado": "activa",
+      "nivelTecnologico": 6,
+      "descripcion": "Realidad con abundancia de especies antropomórficas."
+    },
+    {
+      "id": "D-404",
+      "nombre": "Dimensión Perdida",
+      "estado": "destruida",
+      "nivelTecnologico": 5,
+      "descripcion": "Dimensión severamente dañada por conflictos internos."
+    },
+    {
+      "id": "E-313",
+      "nombre": "Dimensión de Cazarrecompensas",
+      "estado": "activa",
+      "nivelTecnologico": 7,
+      "descripcion": "Realidad conocida por su mercado de asesinatos por contrato."
+    },
+    {
+      "id": "F-909",
+      "nombre": "Dimensión Vindicators",
+      "estado": "activa",
+      "nivelTecnologico": 8,
+      "descripcion": "Dimensión asociada a héroes y amenazas cósmicas."
+    },
+    {
+      "id": "G-777",
+      "nombre": "Dimensión Colectiva",
+      "estado": "activa",
+      "nivelTecnologico": 9,
+      "descripcion": "Realidad dominada por una mente compartida."
+    },
+    {
+      "id": "H-808",
+      "nombre": "Microverso Central",
+      "estado": "activa",
+      "nivelTecnologico": 10,
+      "descripcion": "Dimensión compacta con desarrollo científico extraordinario."
+    },
+    {
+      "id": "K-121",
+      "nombre": "Dimensión Salvaje",
+      "estado": "activa",
+      "nivelTecnologico": 4,
+      "descripcion": "Entorno hostil con escaso orden social."
+    },
+    {
+      "id": "L-303",
+      "nombre": "Dimensión Phoenix",
+      "estado": "cuarentena",
+      "nivelTecnologico": 8,
+      "descripcion": "Realidad sometida a vigilancia por experimentos militares."
+    },
+    {
+      "id": "M-616",
+      "nombre": "Dimensión de Bolsillo M-616",
+      "estado": "activa",
+      "nivelTecnologico": 6,
+      "descripcion": "Pequeña dimensión independiente con reglas extrañas."
+    },
+    {
+      "id": "N-202",
+      "nombre": "Dimensión Mercenaria",
+      "estado": "activa",
+      "nivelTecnologico": 7,
+      "descripcion": "Realidad marcada por economías criminales."
+    },
+    {
+      "id": "P-451",
+      "nombre": "Dimensión Ígnea",
+      "estado": "destruida",
+      "nivelTecnologico": 9,
+      "descripcion": "Dimensión colapsada tras una cadena de explosiones dimensionales."
     }
   ],
   "especies": [
     {
       "id": "E-001",
       "nombre": "Humano",
-      "origenId": "P-001",
+      "origenId": "PL-001",
       "origenTipo": "planeta",
       "tipo": "Humanoide",
       "esperanzaVidaMedia": 80,
-      "descripcion": "Especie inteligente extendida por múltiples dimensiones"
+      "descripcion": "Especie inteligente extendida por múltiples dimensiones."
     },
     {
       "id": "E-002",
@@ -71,16 +425,79 @@
       "origenTipo": "dimension",
       "tipo": "Amorfo",
       "esperanzaVidaMedia": 40,
-      "descripcion": "Mutación biológica derivada de un accidente"
+      "descripcion": "Mutación biológica derivada de un accidente experimental."
     },
     {
       "id": "E-003",
       "nombre": "Meeseeks",
-      "origenId": "P-002",
+      "origenId": "PL-002",
       "origenTipo": "planeta",
       "tipo": "Artificial",
       "esperanzaVidaMedia": 1,
-      "descripcion": "Entidades creadas para cumplir tareas"
+      "descripcion": "Entidades creadas para cumplir tareas concretas."
+    },
+    {
+      "id": "E-004",
+      "nombre": "Bird-Person",
+      "origenId": "PL-004",
+      "origenTipo": "planeta",
+      "tipo": "Humanoide",
+      "esperanzaVidaMedia": 120,
+      "descripcion": "Especie aviar inteligente con tradiciones guerreras."
+    },
+    {
+      "id": "E-005",
+      "nombre": "Squanch",
+      "origenId": "PL-005",
+      "origenTipo": "planeta",
+      "tipo": "Humanoide",
+      "esperanzaVidaMedia": 95,
+      "descripcion": "Especie felina con gran capacidad social y verbal."
+    },
+    {
+      "id": "E-006",
+      "nombre": "Lincler",
+      "origenId": "D-404",
+      "origenTipo": "dimension",
+      "tipo": "Parásito",
+      "esperanzaVidaMedia": 30,
+      "descripcion": "Especie híbrida fruto de decisiones científicas absurdas."
+    },
+    {
+      "id": "E-007",
+      "nombre": "Gromflomite",
+      "origenId": "PL-007",
+      "origenTipo": "planeta",
+      "tipo": "Robótico",
+      "esperanzaVidaMedia": 60,
+      "descripcion": "Especie insectoide muy organizada y agresiva."
+    },
+    {
+      "id": "E-008",
+      "nombre": "Noobian",
+      "origenId": "PL-008",
+      "origenTipo": "planeta",
+      "tipo": "Humanoide",
+      "esperanzaVidaMedia": 70,
+      "descripcion": "Especie menor conocida por su aparente irrelevancia."
+    },
+    {
+      "id": "E-009",
+      "nombre": "Unity-Drone",
+      "origenId": "G-777",
+      "origenTipo": "dimension",
+      "tipo": "Hivemind",
+      "esperanzaVidaMedia": 150,
+      "descripcion": "Organismos integrados en una única conciencia compartida."
+    },
+    {
+      "id": "E-010",
+      "nombre": "Microverse Scientist",
+      "origenId": "PL-010",
+      "origenTipo": "planeta",
+      "tipo": "Humanoide",
+      "esperanzaVidaMedia": 85,
+      "descripcion": "Especie inteligente destacada por su excelencia científica."
     }
   ],
   "inventos": [
@@ -90,7 +507,7 @@
       "inventorId": 1,
       "tipo": "Dispositivo de viaje",
       "nivelPeligrosidad": 10,
-      "descripcion": "Permite viajar entre dimensiones"
+      "descripcion": "Permite abrir portales entre dimensiones."
     },
     {
       "id": 2,
@@ -98,33 +515,273 @@
       "inventorId": 1,
       "tipo": "Objeto cotidiano absurdo",
       "nivelPeligrosidad": 6,
-      "descripcion": "Genera seres Meeseeks para realizar tareas"
+      "descripcion": "Genera entidades Meeseeks para realizar tareas."
+    },
+    {
+      "id": 3,
+      "nombre": "Cronómetro de Neutrinos",
+      "inventorId": 3,
+      "tipo": "Dispositivo de viaje",
+      "nivelPeligrosidad": 8,
+      "descripcion": "Artefacto experimental para medir y alterar eventos."
+    },
+    {
+      "id": 4,
+      "nombre": "Brazo de Plumbus",
+      "inventorId": 18,
+      "tipo": "Objeto cotidiano absurdo",
+      "nivelPeligrosidad": 3,
+      "descripcion": "Extensión biomecánica de uso incierto."
+    },
+    {
+      "id": 5,
+      "nombre": "Megasiembra",
+      "inventorId": 1,
+      "tipo": "Biotecnología",
+      "nivelPeligrosidad": 9,
+      "descripcion": "Semillas de altísimo valor energético y riesgo."
+    },
+    {
+      "id": 6,
+      "nombre": "Ray Gun",
+      "inventorId": 18,
+      "tipo": "Arma",
+      "nivelPeligrosidad": 8,
+      "descripcion": "Arma de energía de alta potencia."
+    },
+    {
+      "id": 7,
+      "nombre": "Casco de Dominio",
+      "inventorId": 5,
+      "tipo": "Biotecnología",
+      "nivelPeligrosidad": 7,
+      "descripcion": "Dispositivo diseñado para manipular decisiones."
+    },
+    {
+      "id": 8,
+      "nombre": "Batería Microverso",
+      "inventorId": 17,
+      "tipo": "Dispositivo de viaje",
+      "nivelPeligrosidad": 9,
+      "descripcion": "Fuente energética basada en universos en miniatura."
+    },
+    {
+      "id": 9,
+      "nombre": "Implante Phoenix",
+      "inventorId": 26,
+      "tipo": "Biotecnología",
+      "nivelPeligrosidad": 8,
+      "descripcion": "Sistema de reconstrucción y control avanzado."
+    },
+    {
+      "id": 10,
+      "nombre": "Rifle Gromflomite",
+      "inventorId": 14,
+      "tipo": "Arma",
+      "nivelPeligrosidad": 7,
+      "descripcion": "Arma usada por mercenarios interdimensionales."
+    },
+    {
+      "id": 11,
+      "nombre": "Compresor de Bolsillo",
+      "inventorId": 29,
+      "tipo": "Dispositivo de viaje",
+      "nivelPeligrosidad": 8,
+      "descripcion": "Tecnología capaz de plegar espacios pequeños."
+    },
+    {
+      "id": 12,
+      "nombre": "Sonda de Unity",
+      "inventorId": 16,
+      "tipo": "Biotecnología",
+      "nivelPeligrosidad": 7,
+      "descripcion": "Herramienta para sincronizar conciencias colectivas."
+    },
+    {
+      "id": 13,
+      "nombre": "Anulador Cronenberg",
+      "inventorId": 3,
+      "tipo": "Biotecnología",
+      "nivelPeligrosidad": 9,
+      "descripcion": "Prototipo para revertir mutaciones inestables."
+    },
+    {
+      "id": 14,
+      "nombre": "Dron de Caza",
+      "inventorId": 28,
+      "tipo": "Arma",
+      "nivelPeligrosidad": 6,
+      "descripcion": "Unidad automatizada para persecuciones letales."
+    },
+    {
+      "id": 15,
+      "nombre": "Simulador Cuántico",
+      "inventorId": 30,
+      "tipo": "Objeto cotidiano absurdo",
+      "nivelPeligrosidad": 5,
+      "descripcion": "Dispositivo doméstico con funciones excesivamente complejas."
     }
   ],
   "planetas": [
     {
-      "id": "P-001",
+      "id": "PL-001",
       "nombre": "Tierra C-137",
       "tipo": "Planeta",
       "dimension": "C-137",
       "poblacion": 8000000000,
-      "descripcion": "Planeta de origen humano en la dimensión C-137"
+      "descripcion": "Planeta de origen humano en la dimensión principal."
     },
     {
-      "id": "P-002",
+      "id": "PL-002",
       "nombre": "Planeta Meeseeks",
       "tipo": "Planeta",
       "dimension": "J19ζ7",
       "poblacion": 1000000,
-      "descripcion": "Lugar relacionado con la existencia de los Meeseeks"
+      "descripcion": "Lugar asociado a la tecnología de los Meeseeks."
     },
     {
-      "id": "P-003",
+      "id": "PL-003",
       "nombre": "Tierra Cronenberg",
       "tipo": "Planeta",
       "dimension": "C-500A",
       "poblacion": 1200000,
-      "descripcion": "Versión mutada de la Tierra"
+      "descripcion": "Versión mutada y degradada de la Tierra."
+    },
+    {
+      "id": "PL-004",
+      "nombre": "Bird World",
+      "tipo": "Planeta",
+      "dimension": "A-001",
+      "poblacion": 40000000,
+      "descripcion": "Planeta natal de la especie Bird-Person."
+    },
+    {
+      "id": "PL-005",
+      "nombre": "Squanch",
+      "tipo": "Planeta",
+      "dimension": "B-212",
+      "poblacion": 23000000,
+      "descripcion": "Mundo habitado por criaturas felinas inteligentes."
+    },
+    {
+      "id": "PL-006",
+      "nombre": "Citadela Orbital",
+      "tipo": "Estación espacial",
+      "dimension": "A-001",
+      "poblacion": 150000,
+      "descripcion": "Base política y administrativa de numerosas variantes de Rick."
+    },
+    {
+      "id": "PL-007",
+      "nombre": "Gromflom Prime",
+      "tipo": "Planeta",
+      "dimension": "E-313",
+      "poblacion": 500000000,
+      "descripcion": "Centro operativo de fuerzas insectoides militarizadas."
+    },
+    {
+      "id": "PL-008",
+      "nombre": "Vindicator Base",
+      "tipo": "Estación espacial",
+      "dimension": "F-909",
+      "poblacion": 5000,
+      "descripcion": "Base de operaciones de héroes interdimensionales."
+    },
+    {
+      "id": "PL-009",
+      "nombre": "Nexo Unity",
+      "tipo": "Planeta",
+      "dimension": "G-777",
+      "poblacion": 90000000,
+      "descripcion": "Mundo gobernado por una mente colectiva."
+    },
+    {
+      "id": "PL-010",
+      "nombre": "Microverse Prime",
+      "tipo": "Planeta",
+      "dimension": "H-808",
+      "poblacion": 35000000,
+      "descripcion": "Centro científico del microverso."
+    },
+    {
+      "id": "PL-011",
+      "nombre": "Sector Kappa",
+      "tipo": "Simulación virtual",
+      "dimension": "K-121",
+      "poblacion": 800000,
+      "descripcion": "Entorno parcialmente simulado para pruebas hostiles."
+    },
+    {
+      "id": "PL-012",
+      "nombre": "Phoenix Base",
+      "tipo": "Estación espacial",
+      "dimension": "L-303",
+      "poblacion": 12000,
+      "descripcion": "Instalación militar vinculada a proyectos de reconstrucción."
+    },
+    {
+      "id": "PL-013",
+      "nombre": "Pocket Habitat",
+      "tipo": "Dimensión de bolsillo",
+      "dimension": "M-616",
+      "poblacion": 300000,
+      "descripcion": "Pequeño ecosistema encerrado en una dimensión compacta."
+    },
+    {
+      "id": "PL-014",
+      "nombre": "Mercenary Hub",
+      "tipo": "Estación espacial",
+      "dimension": "N-202",
+      "poblacion": 60000,
+      "descripcion": "Mercado central de contratos y armamento."
+    },
+    {
+      "id": "PL-015",
+      "nombre": "Ash Planet",
+      "tipo": "Planeta",
+      "dimension": "P-451",
+      "poblacion": 400000,
+      "descripcion": "Mundo casi destruido por incendios dimensionales."
+    },
+    {
+      "id": "PL-016",
+      "nombre": "Gazorpazorp",
+      "tipo": "Planeta",
+      "dimension": "J19ζ7",
+      "poblacion": 65000000,
+      "descripcion": "Planeta con culturas violentas y segregadas."
+    },
+    {
+      "id": "PL-017",
+      "nombre": "Plumbus Market",
+      "tipo": "Estación espacial",
+      "dimension": "B-212",
+      "poblacion": 9000,
+      "descripcion": "Centro comercial especializado en tecnología absurda."
+    },
+    {
+      "id": "PL-018",
+      "nombre": "Butter Realm",
+      "tipo": "Dimensión de bolsillo",
+      "dimension": "C-137",
+      "poblacion": 50000,
+      "descripcion": "Pequeño reino habitado por seres de mantequilla."
+    },
+    {
+      "id": "PL-019",
+      "nombre": "Froopy Sector",
+      "tipo": "Dimensión de bolsillo",
+      "dimension": "C-500A",
+      "poblacion": 10000,
+      "descripcion": "Zona de bolsillo con fauna extraña y materiales blandos."
+    },
+    {
+      "id": "PL-020",
+      "nombre": "Simulation Nexus",
+      "tipo": "Simulación virtual",
+      "dimension": "H-808",
+      "poblacion": 2500000,
+      "descripcion": "Simulación de alta precisión usada para experimentos."
     }
   ],
   "eventos": []
