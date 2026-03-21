@@ -65,4 +65,3 @@ export class ServicioConsultas {
       i.nivelPeligrosidad.toString() === termino);
   }
 }
-
