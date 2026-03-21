@@ -14,7 +14,7 @@ export class Dimension implements IDimension, IValidarNivel {
   private static readonly IdRegex = /^[A-Z](?:[0-9\-\u0370-\u03FF]+)[0-9A-Z\u0370-\u03FF]$/u;
 
   /**
-   * 
+   * Crea una nueva instancia de una Dimensión
    * @param id - ID único
    * @param nombre - Nombre descriptivo
    * @param estado - Estado actual

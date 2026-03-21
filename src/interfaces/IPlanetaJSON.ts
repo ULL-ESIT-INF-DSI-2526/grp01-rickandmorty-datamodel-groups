@@ -1,6 +1,6 @@
 import { TipoLocalizaciones } from "../types/Localizaciones.js"
 
-/** Representa la estructura bñasica de un planeta o localización */
+/** Representa la estructura básica de un planeta o localización */
 export interface IPlanetaJSON {
   /** Identificador único alfanumérico */
   id: string;

@@ -3,16 +3,17 @@ import { TipoInvento } from "../types/TipoInventos.js";
 import { IInvento } from "../interfaces/IInvento.js";
 import { IValidarNivel } from "../interfaces/IValidarNivel.js";
 
+/** Clase que representa un invento del multiverso */
 export class Invento implements IInvento, IValidarNivel {
   
   /**
-   * 
-   * @param _id - identificador unico del invento
-   * @param _nombre - nombre del invento
+   * Crea una nueva instancia de Invento
+   * @param _id - Identificador único del invento
+   * @param _nombre - Nombre del invento
    * @param _inventor - Personaje que lo invento
-   * @param _tipo - tipo de artefacto
-   * @param _nivelPeligrosidad - nivel de peligrosidad del 1 al 10
-   * @param _descripcion - descripcion del invento y sus efectos
+   * @param _tipo - Tipo de artefacto
+   * @param _nivelPeligrosidad - Nivel de peligrosidad del 1 al 10
+   * @param _descripcion - Descripción del invento y sus efectos
    */
   constructor(
     private _id: number,
@@ -25,88 +26,88 @@ export class Invento implements IInvento, IValidarNivel {
     this.validarNivel(_nivelPeligrosidad);
   }
 
-  /** getter del atributo privado id */
+  /** Permite acceder al atributo privado _id */
   get id(): number {
     return this._id;
   }
 
   /**
-   * setter del atributo privado id
-   * @param id - number identificador nuevo
+   * Permite modificar el atributo privado _id
+   * @param id - Identificador nuevo
    */
   set id(id: number) {
     this._id = id;
   }
 
-  /** getter del atributo privado nombre */
+  /** Permite acceder al atributo privado _nombre */
   get nombre(): string {
     return this._nombre;
   }
 
   /**
-   * setter del atributo privado nombre
-   * @param nombre - string nombre nuevo
+   * Permite modificar el atributo privado _nombre
+   * @param nombre - Nombre nuevo
    */
   set nombre(nombre: string) {
     this._nombre = nombre;
   }
 
-  /** getter del atributo privado inventor */
+  /** Permite acceder al atributo privado _inventor */
   get inventor(): Personaje {
     return this._inventor;
   }
 
   /**
-   * setter del atributo privado inventor
+   * Permite modificar el atributo privado _inventor
    * @param inventor - Personaje nuevo
    */
   set inventor(inventor: Personaje) {
     this._inventor = inventor;
   }
   
-  /** getter del atributo privado tipo de invento */
+  /** Permite acceder al atributo privado _tipo */
   get tipo(): TipoInvento {
     return this._tipo
   }
 
   /**
-   * setter del atributo privado nombre
+   * Permite modificar el atributo privado _tipo
    * @param tipoInvento - TipoInvento nuevo
    */
   set tipo(tipoInvento: TipoInvento) {
     this._tipo = tipoInvento
   }
 
-  /** getter del atributo privado nivel de peligrosidad del invento */
+  /** Permite acceder al atributo privado _nivelPeligrosidad */
   get nivelPeligrosidad(): number {
     return this._nivelPeligrosidad;
   }
 
   /**
-   * setter del atributo privado nivel de peligrosidad del invento
-   * @param nivel - number nivel nuevo
+   * Permite modificar el atributo privado _nivelPeligrosidad
+   * @param nivel - Nivel de peligrosidad nuevo
    */
   set nivelPeligrosidad(nivel: number) {
     this.validarNivel(nivel);
     this._nivelPeligrosidad = nivel;
   }
 
-  /** getter del atributo privado descripcion del invento */
+  /** Permite acceder al atributo privado _description */
   get descripcion(): string {
     return this._descripcion;
   }
 
   /**
-   * setter del atributo privado descripcion del invento
-   * @param descripcion - string descripcion nueva
+   * Permite modificar el atributo privado _description
+   * @param descripcion - Descripción nueva
    */
   set descripcion(descripcion: string) {
     this._descripcion = descripcion;
   }
 
   /**
-   * validacion del nivel de peligrosidad, debe ser un numero entero entre 1 y 10
-   * @param nivel - nivel que comprobar integridad
+   * Validacion del nivel de peligrosidad, debe ser un número entero entre 1 y 10
+   * @param nivel - Nivel que comprobar integridad
    */
   validarNivel(nivel: number): void {
     if (!Number.isInteger(nivel) || nivel < 1 || nivel > 10) {

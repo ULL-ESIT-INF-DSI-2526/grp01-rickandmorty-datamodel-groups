@@ -5,7 +5,6 @@ import { IEsquema } from "../interfaces/IEsquema.js";
 /**
  * Clase base abstracta para la gestión de las entidades del multiverso
  * Implementa un CRUD genérico
- * 
  * @param T - Clase del modelo que extiende de IEntity, obliga a que tenga ID
  * @param K - Identificador de la colección del IEsquema
  * @param J - Interfaz que define la estructura plana en el JSON
