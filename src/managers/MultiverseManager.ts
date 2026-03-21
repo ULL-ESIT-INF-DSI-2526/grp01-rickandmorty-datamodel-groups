@@ -57,21 +57,24 @@ export class MultiverseManager {
   }
 
   /** Método inicial para cargar los datos del JSON usando los managers de cada instancia */
-  public async inicializar(): Promise<void> {
-    await DataManager.getInstance();
+public async inicializar(): Promise<void> {
+  await DataManager.getInstance();
 
-    await this._eventosMultiverso.cargar();
-    await this._dimensiones.cargar();
-    await this._especies.cargar();
-    await this._planetas.cargar(this._dimensiones);
-    await this._personajes.cargar(
-      this._especies.getAll(),
-      this._dimensiones.getAll(),
-    );
-    await this._inventos.cargar(this._personajes.getAll());
+  await this._eventosMultiverso.cargar();
+  await this._dimensiones.cargar();
+  await this._planetas.cargar(this._dimensiones);
+  await this._especies.cargar(
+    this._dimensiones.getAll(),
+    this._planetas.getAll(),
+  );
+  await this._personajes.cargar(
+    this._especies.getAll(),
+    this._dimensiones.getAll(),
+  );
+  await this._inventos.cargar(this._personajes.getAll());
 
-    console.log("Multiverso inicializado desde JSON");
-  }
+  console.log("Multiverso inicializado desde JSON");
+}
 
   /** Método de guardado del estado actual de todas las colecciones en el JSON */
   public async persistirMultiverso(): Promise<void> {

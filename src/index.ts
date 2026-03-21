@@ -1,12 +1,13 @@
+import { Menu } from "./ui/Menu.js";
+
 /**
- * 
- * @param a - d
- * @param b - ds
- * @returns s
+ * Punto de entrada principal de la aplicación.
  */
-export function suma(a:number,b:number):number{
-const resultado = a+b;
-return resultado
+async function main(): Promise<void> {
+  const menu = new Menu();
+  await menu.iniciar();
 }
 
-console.log(suma(1, 2));
+main().catch((error) => {
+  console.error("Error al iniciar la aplicación:", error);
+});
