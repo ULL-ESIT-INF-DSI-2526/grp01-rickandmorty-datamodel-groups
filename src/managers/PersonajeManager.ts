@@ -11,21 +11,19 @@ import { DataManager } from "../database/DataManager.js";
  */
 export class PersonajeManager extends GestionManager<Personaje, "personajes", IPersonajeJSON> {
   
-  /* Clave exacta del esquema para el contenedor json */
+  /* Clave exacta del esquema para el contenedor JSON */
   protected _coleccion = "personajes" as const;
 
   /**
-   * metodo que convierte de json a objetos, y en caso de referencias las busca por id y construye
-   * @param especies - lista de especies cargadas en memoria
-   * @param dimensiones - lista de dimensiones cargadas en memoria
+   * Método que convierte de JSON a objetos, y en caso de referencias las busca por id y construye
+   * @param especies - Lista de especies cargadas en memoria
+   * @param dimensiones - Lista de dimensiones cargadas en memoria
    */
   async cargar(especies: Especie[], dimensiones: Dimension[]): Promise<void> {
     const dataManager = await DataManager.getInstance();
     const datosAplanados = dataManager.leerBaseDatos(this._coleccion);
 
-    // conversion de json a instancia de personaje
     this._lista = datosAplanados.map(json => {
-      // buscar las referencias por su id
       const especieReferenciada = especies.find(e => String(e.id) === String(json.especieId));
       const dimensionReferenciada = dimensiones.find(d => String(d.id) === String(json.dimensionId));
 
@@ -47,7 +45,7 @@ export class PersonajeManager extends GestionManager<Personaje, "personajes", IP
   }
 
   /**
-   * metodo que aplana los atributos de instancia persona para guardar en JSON
+   * Método que aplana los atributos de instancia persona para guardar en JSON
    * extrae los id de las referencias
    */
   protected mapearAJSON(p: Personaje): IPersonajeJSON {

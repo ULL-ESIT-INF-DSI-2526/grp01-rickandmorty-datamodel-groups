@@ -5,9 +5,7 @@ import { IInventoJSON } from "./IInventoJSON.js";
 import { IPersonajeJSON } from "./IPersonajeJSON.js";
 import { IPlanetaJSON } from "./IPlanetaJSON.js";
 
-/**
- * interfaz que define el esquema que aceotara el json
- */
+/** Interfaz que define el esquema que aceptará el JSON */
 export interface IEsquema {
   personajes: IPersonajeJSON[];
   dimensiones: IDimension[];

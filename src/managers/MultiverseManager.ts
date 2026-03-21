@@ -23,9 +23,7 @@ export class MultiverseManager {
   private _especies: EspecieManager;
   private _inventos: InventoManager;
 
-  /**
-   * constructor privado del singleton que inicializa las instancias de los managers concretos
-   */
+  /** Constructor privado del singleton que inicializa las instancias de los managers concretos */
   private constructor() {
     this._personajes = new PersonajeManager();
     this._dimensiones = new DimensionManager();
@@ -50,9 +48,7 @@ export class MultiverseManager {
   /** Permite acceder al atributo privado _inventos */
   get inventos(): InventoManager { return this._inventos};
 
-  /**
-   * metodo para obtener instancia, y si no existe la crea
-   */
+  /** Método para obtener instancia, y si no existe la crea */
   public static getInstance(): MultiverseManager {
     if (!MultiverseManager._instance) {
       MultiverseManager._instance = new MultiverseManager();
@@ -60,9 +56,7 @@ export class MultiverseManager {
     return MultiverseManager._instance;
   }
 
-  /**
-   * metodo inicial para cargar los datos del json usando los managers de cada instancia
-   */
+  /** Método inicial para cargar los datos del JSON usando los managers de cada instancia */
   public async inicializar(): Promise<void> {
     await DataManager.getInstance();
 
@@ -79,9 +73,7 @@ export class MultiverseManager {
     console.log("Multiverso inicializado desde JSON");
   }
 
-  /**
-   * metodo de guardado del estado actual de todas las colecciones en el JSON
-   */
+  /** Método de guardado del estado actual de todas las colecciones en el JSON */
   public async persistirMultiverso(): Promise<void> {
     await this._eventosMultiverso.guardar();
     await this._dimensiones.guardar();
@@ -94,10 +86,10 @@ export class MultiverseManager {
   }
 
   /**
-   * metodo de busqueda de anomalias
+   * Método de búsqueda de anomalias
    * @returns Personaje[] con anomalias, es decir,
-   * que la dimension asociada a su id dimension origen no existe,
-   * o que la dimension asociada a su id dimension tiene un estado destruida
+   * que la dimensión asociada a su id, dimensión origen no existe,
+   * o que la dimensión asociada a su id dimensión tiene un estado destruida
    */
   public buscarAnomalias(): Personaje[] {
     const dimensiones = this._dimensiones.getAll();
@@ -112,20 +104,20 @@ export class MultiverseManager {
   }
 
   /**
-   * metodo de busqueda filtrada por estado de dimension
-   * @param estado - estado por el que filtrar la busqueda
-   * @returns array de dimensiones que coinciden en estado con el parametro
+   * Método de búsqueda filtrada por estado de dimensión
+   * @param estado - Estado por el que filtrar la búsqueda
+   * @returns Array de dimensiones que coinciden en estado con el párametro
    */
   public dimensionesPorEstado(estado: DimensionStatus): Dimension[] {
     return this._dimensiones.getAll().filter((d) => d.estado === estado);
   }
 
   /**
-   * metodo que registra en memoria un viaje interdimensional
-   * @param personajeId - id del personaje que ha viajado
-   * @param origenId - id de la dimension de la que viene
-   * @param destinoId - id de la dimension a la que va
-   * @param descripcion - motivo del viaje
+   * Método que registra en memoria un viaje interdimensional
+   * @param personajeId - ID del personaje que ha viajado
+   * @param origenId - ID de la dimensión de la que viene
+   * @param destinoId - ID de la dimensión a la que va
+   * @param descripcion - Motivo del viaje
    */
   public registrarViaje(
     personajeId: string,
@@ -150,10 +142,10 @@ export class MultiverseManager {
   }
 
   /**
-   * metodo para cambiar estado de la dimension en memoria
-   * @param id - id de la dimension
-   * @param estado - estado a actualizar
-   * @param descripcion - motivo de actualizar estado
+   * Método para cambiar estado de la dimensión en memoria
+   * @param id - ID de la dimensión
+   * @param estado - Estado a actualizar
+   * @param descripcion - Motivo de actualizar estado
    */
   public registrarSucesoDimension(
     id: string,
@@ -185,10 +177,10 @@ export class MultiverseManager {
   }
 
   /**
-   *
-   * @param inventoId - id del artefacto
-   * @param accion - desplegar o neutralizar artefacto
-   * @param descripcion - motivo o descripcion del artefacto
+   *Método que registra en memoria la acción de un artefacto
+   * @param inventoId - ID del artefacto
+   * @param accion - Desplegar o neutralizar artefacto
+   * @param descripcion - Motivo o descripción del artefacto
    */
   public registrarAccionArtefacto(
     inventoId: string,
@@ -215,7 +207,8 @@ export class MultiverseManager {
   }
 
   /** 
-   * metodo de informe, que calcula el promedio del nivel tecnológico de las dimensiones que no han sido destruidas
+   * Método de informe, que calcula el promedio del nivel tecnológico de las 
+   * dimensiones que no han sido destruidas
    */
   public informeNivelTecnologico(): number {
     const activas = this.dimensionesPorEstado("activa");
@@ -229,9 +222,9 @@ export class MultiverseManager {
   }
 
   /**
-   * metodo de informe, que devuelve el historial de viajes de un personaje
-   * @param personajeId - id del personaje que consultar historial
-   * @returns array de todos los eventos asociados a este personaje, es decir, los viajes
+   * Método de informe, que devuelve el historial de viajes de un personaje
+   * @param personajeId - ID del personaje que consultar historial
+   * @returns Array de todos los eventos asociados a este personaje, es decir, los viajes
    */
   public historialViajes(personajeId: string): IEvento[] {
     return this._eventosMultiverso
@@ -240,7 +233,7 @@ export class MultiverseManager {
   }
 
   /**
-   * metodo de informe que muestra las versiones alternativas de los personajes registrados
+   * Método de informe que muestra las versiones alternativas de los personajes registrados
    * es decir, personajes con mismo nombre pero distinto id
    * @returns
    */
@@ -261,7 +254,8 @@ export class MultiverseManager {
     );
   }
 
-  /** metodo informe de inventos con nivel de riesgo superior a 8
+  /** 
+   * Método informe de inventos con nivel de riesgo superior a 8
    * @returns IInformeInvento[] lista con datos del invento y su inventor
    */
   public informeInventosCriticos(): IInformeInvento[] {

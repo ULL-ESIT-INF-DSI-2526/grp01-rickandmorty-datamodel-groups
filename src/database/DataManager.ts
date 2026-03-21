@@ -3,21 +3,21 @@ import { JSONFile } from "lowdb/node";
 import { IEsquema } from "../interfaces/IEsquema.js";
 
 /**
- * clase DataManager, que se ocupa de manejar los datos de la base de datos, con patron singleton
+ * Clase DataManager, que se ocupa de manejar los datos de la base de datos, con patron singleton
  * para tener una sola instancia del gestor
  */
 export class DataManager {
-  /** instancia privada*/
+  /** Instancia privada */
   private static _instance: DataManager;
-  /** base de datos de tipo Low pero que solo acepta contrato IEsquema */
+  /** Base de datos de tipo Low pero que solo acepta contrato IEsquema */
   private _dataBase!: Low<IEsquema>;
 
-  /** constructor privado requerido por singleton */
+  /** Constructor privado requerido por singleton */
   private constructor() {}
 
   /**
-   * metodo para obtener la instancia de la base de datos, o si ya existe, la crea,
-   * siendo asincrona ya que debe esperar a que se lea del json
+   * Método para obtener la instancia de la base de datos, o si ya existe, la crea,
+   * siendo asíncrona ya que debe esperar a que se lea del JSON
    * @returns Promise<DataManager> - devuelve la promesa de que tras la lectura se entregara un DataManager
    */
   public static async getInstance(): Promise<DataManager> {
@@ -28,9 +28,7 @@ export class DataManager {
     return DataManager._instance;
   }
 
-  /**
-   * metodo privado que inicia la conexion con el database.json y la crea
-   */
+  /** Méetodo privado que inicia la conexion con el database.json y la crea */
   private async conectar() {
     const conector = new JSONFile<IEsquema>("./database.json");
 
@@ -51,23 +49,23 @@ export class DataManager {
   }
 
   /**
-   * lee un cajon especifico del JSON, segun el nombre que le pasemos
-   * usa K que está restringido a las llaves definidas en IEsquema(planetas, personajes...)
-   * permite saber qué tipo de array devuelve, ejemplo para personajes devuelve IPersonajeJSON[]
+   * Lee un cajón específico del JSON, según el nombre que le pasemos
+   * Usa K que está restringido a las llaves definidas en IEsquema (planetas, personajes...)
+   * Permite saber qué tipo de array devuelve, ejemplo: para personajes devuelve IPersonajeJSON[]
    * IEsquema[K] se asegura de hacer un array con el contenido correcto evitando por ej planetas en personajes
-   * * @param nombre - clave de la colección a leer
-   * @returns array de objetos almacenados en ese cajon del json
+   * * @param nombre - Clave de la colección a leer
+   * @returns Array de objetos almacenados en ese cajon del json
    */
   public leerBaseDatos<K extends keyof IEsquema>(nombre: K): IEsquema[K] {
     return this._dataBase.data[nombre];
   }
 
   /**
-   * actualiza una cajon en memoria y en el archivo fisico
-   * usa K que está restringido a las llaves definidas en IEsquema(planetas, personajes...)
+   * Actualiza un cajón en memoria y en el archivo físico
+   * Usa K que está restringido a las llaves definidas en IEsquema (planetas, personajes...)
    * IEsquema[K] se asegura de hacer un array con el contenido correcto evitando por ej planetas en personajes
-   * @param nombre - cajon a sobreescribir
-   * @param datos - nuevo array de datos que guardar
+   * @param nombre - Cajón a sobreescribir
+   * @param datos - Nuevo array de datos que guardar
    * @returns Promise<void>
    */
   public async guardarBaseDatos<K extends keyof IEsquema>(

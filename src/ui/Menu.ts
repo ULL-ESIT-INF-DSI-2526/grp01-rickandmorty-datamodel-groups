@@ -195,9 +195,7 @@ export class Menu {
   }
 
 
-  /**
-   * Menú principal de gestión de entidades
-   */
+  /** Menú principal de gestión de entidades */
   private async menuCRUD(): Promise<void> {
     const { entidad, operacion } = await prompts([
       {
@@ -245,9 +243,7 @@ export class Menu {
     }
   }
 
-  /**
-   * Lógica para crear y modificar pidiendo todos los atributos
-   */
+  /** Lógica para crear y modificar pidiendo todos los atributos */
   private async procesarFormulario(
     entidad: ManagerData,
     operacion: "anadir" | "actualizar",

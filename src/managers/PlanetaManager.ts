@@ -4,7 +4,7 @@ import { Planetas } from "../models/Planetas.js";
 import { DimensionManager } from "./DimensionManager.js";
 import { GestionManager } from "./GestionManager.js";
 
-/** Clase que representa un gestor específico para la colección de Planetass */
+/** Clase que representa un gestor específico para la colección de Planetas */
 export class PlanetaManager extends GestionManager<Planetas, "planetas", IPlanetaJSON> {
   /** Identificador de la colección en el almacenamiento JSON */
   protected _coleccion: "planetas" = "planetas" as const;

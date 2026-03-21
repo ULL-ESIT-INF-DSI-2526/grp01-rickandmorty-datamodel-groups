@@ -1,6 +1,4 @@
-/**
- * contrato que debe seguir un informe de inventos
- */
+/** Contrato que debe seguir un informe de inventos */
 export interface IInformeInvento {
   nombre: string;
   peligro: number;

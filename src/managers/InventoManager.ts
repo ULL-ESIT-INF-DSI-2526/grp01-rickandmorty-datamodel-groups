@@ -9,21 +9,19 @@ import { DataManager } from "../database/DataManager.js";
  * Maneja la relación entre un Invento y su Creador (Personaje)
  */
 export class InventoManager extends GestionManager<Invento, "inventos", IInventoJSON> {
-  
-  /* Clave exacta del esquema para el contenedor json */
+  /** Clave exacta del esquema para el contenedor json */
   protected _coleccion = "inventos" as const;
 
   /**
-   * metodo que convierte de json a objetos, y en caso de referencias las busca por id y construye
-   * @param personajes - lista de especies cargadas en memoria
+   * Método que convierte de JSON a objetos, y en caso de referencias las busca por id y construye
+   * @param personajes - Lista de especies cargadas en memoria
    */
   async cargar(personajes: Personaje[]): Promise<void> {
     const dataManager = await DataManager.getInstance();
     const datosPlanos = dataManager.leerBaseDatos(this._coleccion);
 
-    // conversion de json a instancia de personaje
+    /** Conversión de JSON a instancia de Personaje */
     this._lista = datosPlanos.map(json => {
-      // buscar las referencias por su id
       const inventorEncontrado = personajes.find(p => String(p.id) === String(json.inventorId));
 
       if (!inventorEncontrado) {
@@ -42,7 +40,7 @@ export class InventoManager extends GestionManager<Invento, "inventos", IInvento
   }
 
   /**
-   * metodo que aplana los atributos de instancia invento para guardar en JSON
+   * Método que aplana los atributos de instancia invento para guardar en JSON
    * extrae los id de las referencias
    */
   protected mapearAJSON(i: Invento): IInventoJSON {
