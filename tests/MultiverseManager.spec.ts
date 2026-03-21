@@ -1,21 +1,22 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
-import { MultiverseManager } from "../src/managers/MultiverseManager";
-import { Dimension } from "../src/models/Dimension";
-import { Personaje } from "../src/models/Personaje";
-import { Invento } from "../src/models/Invento";
-import { IEvento } from "../src/interfaces/IEvento";
-import { EstadoPersonajes } from "../src/types/EstadoPersonajes";
-import { Especie } from "../src/models/Especie";
-import { PersonajeManager } from "../src/managers/PersonajeManager";
-import { DimensionManager } from "../src/managers/DimensionManager";
-import { PlanetaManager } from "../src/managers/PlanetaManager";
-import { EspecieManager } from "../src/managers/EspecieManager";
-import { InventoManager } from "../src/managers/InventoManager";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { MultiverseManager } from "../src/managers/MultiverseManager.js";
+import { DimensionManager } from "../src/managers/DimensionManager.js";
+import { EspecieManager } from "../src/managers/EspecieManager.js";
+import { InventoManager } from "../src/managers/InventoManager.js";
+import { PersonajeManager } from "../src/managers/PersonajeManager.js";
+import { PlanetaManager } from "../src/managers/PlanetaManager.js";
+import { DataManager } from "../src/database/DataManager.js";
+import { Dimension } from "../src/models/Dimension.js";
+import { Especie } from "../src/models/Especie.js";
+import { Invento } from "../src/models/Invento.js";
+import { Personaje } from "../src/models/Personaje.js";
+import { Planetas } from "../src/models/Planetas.js";
+import { IEvento } from "../src/interfaces/IEvento.js";
+import { EstadoPersonajes } from "../src/types/EstadoPersonajes.js";
 
 describe("Pruebas de Integración: MultiverseManager", () => {
   let manager: MultiverseManager;
 
-  // datos de prueba
   const mockDimensiones = [
     {
       id: "DIM-1",
@@ -39,10 +40,8 @@ describe("Pruebas de Integración: MultiverseManager", () => {
 
   const mockPersonajes = [
     { id: "P1", nombre: "Rick Sanchez", dimensionOrigen: { id: "DIM-1" } },
-    // crear anomalia dimension destruida
     { id: "P2", nombre: "Rick Sanchez", dimensionOrigen: { id: "DIM-2" } },
     { id: "P3", nombre: "Morty Smith", dimensionOrigen: { id: "DIM-1" } },
-    // crear anomalia no existe dimension
     {
       id: "P4",
       nombre: "Personaje Perdido",
@@ -86,32 +85,32 @@ describe("Pruebas de Integración: MultiverseManager", () => {
     );
   });
 
-  describe('Getters', () => {
-    it('Debería retornar una instancia de PersonajeManager', () => {
+  describe("Getters", () => {
+    it("Debería retornar una instancia de PersonajeManager", () => {
       const personajes = manager.personajes;
       expect(personajes).toBeDefined();
       expect(personajes).toBeInstanceOf(PersonajeManager);
     });
 
-    it('Debería retornar una instancia de DimensionManager', () => {
+    it("Debería retornar una instancia de DimensionManager", () => {
       const dimensiones = manager.dimensiones;
       expect(dimensiones).toBeDefined();
       expect(dimensiones).toBeInstanceOf(DimensionManager);
     });
 
-    it('Debería retornar una instancia de PlanetaManager', () => {
+    it("Debería retornar una instancia de PlanetaManager", () => {
       const planetas = manager.planetas;
       expect(planetas).toBeDefined();
       expect(planetas).toBeInstanceOf(PlanetaManager);
     });
 
-    it('Debería retornar una instancia de EspecieManager', () => {
+    it("Debería retornar una instancia de EspecieManager", () => {
       const especies = manager.especies;
       expect(especies).toBeDefined();
       expect(especies).toBeInstanceOf(EspecieManager);
     });
 
-    it('Debería retornar una instancia de InventoManager', () => {
+    it("Debería retornar una instancia de InventoManager", () => {
       const inventos = manager.inventos;
       expect(inventos).toBeDefined();
       expect(inventos).toBeInstanceOf(InventoManager);
@@ -226,7 +225,15 @@ describe("Pruebas de Integración: MultiverseManager", () => {
 
   it("debería registrar la acción de un artefacto si el invento existe (con instancias reales)", () => {
     const dim = new Dimension("D-1", "Tierra C-137", "activa", 10, "Base");
-    const esp = new Especie("E1", "Humano", "Tierra", "Mamífero", 80, "Base");
+    const planeta = new Planetas(
+      "PL-1",
+      "Tierra",
+      "Planeta",
+      dim,
+      1000,
+      "Base",
+    );
+    const esp = new Especie("E1", "Humano", planeta, "Mamífero", 80, "Base");
 
     const inventor = new Personaje(
       1,
@@ -239,7 +246,7 @@ describe("Pruebas de Integración: MultiverseManager", () => {
       "Genio",
     );
 
-    const mockInvento = new Invento(1, "Pistola", inventor, "arma", 9, "desc");
+    const mockInvento = new Invento(1, "Pistola", inventor, "Arma", 9, "desc");
 
     vi.spyOn(manager["_inventos"], "getById").mockReturnValue(mockInvento);
 
@@ -262,7 +269,6 @@ describe("Pruebas de Integración: MultiverseManager", () => {
   });
 
   it("debería filtrar el historial de viajes", () => {
-    // viaje de prueba
     const mockViaje = {
       id: "V1",
       idPersonaje: "P1",
@@ -280,11 +286,19 @@ describe("Pruebas de Integración: MultiverseManager", () => {
   });
 
   it("debería inicializar y cargar todos los datos de los managers", async () => {
+    vi.spyOn(DataManager, "getInstance").mockResolvedValue({} as DataManager);
+
     const spyEventos = vi
       .spyOn(manager["_eventosMultiverso"], "cargar")
       .mockResolvedValue();
     const spyDimensiones = vi
       .spyOn(manager["_dimensiones"], "cargar")
+      .mockResolvedValue();
+    const spyPlanetas = vi
+      .spyOn(manager["_planetas"], "cargar")
+      .mockResolvedValue();
+    const spyEspecies = vi
+      .spyOn(manager["_especies"], "cargar")
       .mockResolvedValue();
     const spyPersonajes = vi
       .spyOn(manager["_personajes"], "cargar")
@@ -293,9 +307,25 @@ describe("Pruebas de Integración: MultiverseManager", () => {
       .spyOn(manager["_inventos"], "cargar")
       .mockResolvedValue();
 
+    vi.spyOn(manager["_dimensiones"], "getAll").mockReturnValue(
+      [] as Dimension[],
+    );
+    vi.spyOn(manager["_planetas"], "getAll").mockReturnValue(
+      [] as Planetas[],
+    );
+    vi.spyOn(manager["_especies"], "getAll").mockReturnValue(
+      [] as Especie[],
+    );
+    vi.spyOn(manager["_personajes"], "getAll").mockReturnValue(
+      [] as Personaje[],
+    );
+
     await manager.inicializar();
+
     expect(spyEventos).toHaveBeenCalled();
     expect(spyDimensiones).toHaveBeenCalled();
+    expect(spyPlanetas).toHaveBeenCalled();
+    expect(spyEspecies).toHaveBeenCalled();
     expect(spyPersonajes).toHaveBeenCalled();
     expect(spyInventos).toHaveBeenCalled();
   });
