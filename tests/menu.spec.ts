@@ -2,6 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import prompts from "prompts";
 import { MultiverseManager } from "../src/managers/MultiverseManager.js";
 import { Personaje } from "../src/models/Personaje.js";
+import { Planetas } from "../src/models/Planetas.js";
+import { Invento } from "../src/models/Invento.js";
 import { Menu } from "../src/ui/Menu.js";
 import { ServicioConsultas } from "../src/ui/ServicioConsultas.js";
 
@@ -31,6 +33,7 @@ describe("Menu Tests", () => {
   } as unknown as MultiverseManager;
 
   beforeEach(() => {
+    vi.mocked(prompts).mockReset();
     vi.clearAllMocks();
     vi.spyOn(MultiverseManager, "getInstance").mockReturnValue(mockManager);
     vi.spyOn(console, "log").mockImplementation(() => {});
@@ -47,18 +50,14 @@ describe("Menu Tests", () => {
   describe("Flujo básico del menú", () => {
     it("Debe ejecutar el flujo de salir guardando", async () => {
       vi.mocked(prompts).mockResolvedValue({ accion: "salir_guardar" });
-
       await menu.iniciar();
-
       expect(mockManager.inicializar).toHaveBeenCalled();
       expect(mockManager.persistirMultiverso).toHaveBeenCalled();
     });
 
     it("Debe ejecutar el flujo de salir sin guardar", async () => {
       vi.mocked(prompts).mockResolvedValue({ accion: "salir_sin_guardar" });
-
       await menu.iniciar();
-
       expect(mockManager.inicializar).toHaveBeenCalled();
       expect(console.log).toHaveBeenCalledWith("Cerrando sin guardar...");
     });
@@ -74,17 +73,30 @@ describe("Menu Tests", () => {
           orden: "asc",
         })
         .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
-
       vi.mocked(ServicioConsultas.buscarPersonajes).mockReturnValue([]);
 
       await menu.iniciar();
-
       expect(ServicioConsultas.buscarPersonajes).toHaveBeenCalledWith(
-        expect.any(Array),
-        "Rick",
-        "nombre",
-        "asc",
-      );
+        expect.any(Array), "Rick", "nombre", "asc",);
+      expect(console.table).toHaveBeenCalled();
+    });
+
+    it('Debe renderizar la tabla de consulta de personajes con datos reales', async () => {
+      const mockResultado = [{
+        nombre: 'Rick',
+        especie: { name: 'Humano' },
+        dimensionOrigen: { nombre: 'C-137' },
+        nivelInteligencia: 10
+      }];
+
+      vi.mocked(prompts)
+        .mockResolvedValueOnce({ accion: 'c_personaje' }) 
+        .mockResolvedValueOnce({ filtro: 'Rick', campo: 'nombre', orden: 'asc' })
+        .mockResolvedValueOnce({ accion: 'salir_sin_guardar' });
+      vi.mocked(ServicioConsultas.buscarPersonajes).mockReturnValue(mockResultado as unknown as Personaje[]);
+      
+      await menu.iniciar();
+      expect(ServicioConsultas.buscarPersonajes).toHaveBeenCalled();
       expect(console.table).toHaveBeenCalled();
     });
 
@@ -93,15 +105,23 @@ describe("Menu Tests", () => {
         .mockResolvedValueOnce({ accion: "c_localizacion" })
         .mockResolvedValueOnce({ filtro: "Earth" })
         .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
-
       vi.mocked(ServicioConsultas.buscarLocalizaciones).mockReturnValue([]);
 
       await menu.iniciar();
-
       expect(ServicioConsultas.buscarLocalizaciones).toHaveBeenCalledWith(
-        expect.any(Array),
-        "Earth",
-      );
+        expect.any(Array), "Earth",);
+      expect(console.table).toHaveBeenCalled();
+    });
+
+    it('Debe renderizar la tabla de consulta de localizaciones', async () => {
+      vi.mocked(prompts)
+        .mockResolvedValueOnce({ accion: 'c_localizacion' })
+        .mockResolvedValueOnce({ filtro: 'Earth' })
+        .mockResolvedValueOnce({ accion: 'salir_sin_guardar' });
+      vi.mocked(ServicioConsultas.buscarLocalizaciones).mockReturnValue([{
+        nombre: 'Tierra', tipo: 'Planeta', dimension: { nombre: 'C-137 '}}] as unknown as Planetas[]);
+      await menu.iniciar();
+      expect(ServicioConsultas.buscarLocalizaciones).toHaveBeenCalled();
       expect(console.table).toHaveBeenCalled();
     });
 
@@ -110,15 +130,24 @@ describe("Menu Tests", () => {
         .mockResolvedValueOnce({ accion: "c_inventos" })
         .mockResolvedValueOnce({ filtro: "Portal" })
         .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
-
       vi.mocked(ServicioConsultas.buscarInventos).mockReturnValue([]);
 
       await menu.iniciar();
-
       expect(ServicioConsultas.buscarInventos).toHaveBeenCalledWith(
-        expect.any(Array),
-        "Portal",
-      );
+        expect.any(Array), "Portal",);
+      expect(console.table).toHaveBeenCalled();
+    });
+
+    it('Debe renderizar la tabla de consulta de inventos', async () => {
+      vi.mocked(prompts)
+        .mockResolvedValueOnce({ accion: 'c_inventos' })
+        .mockResolvedValueOnce({ filtro: 'Portal' })
+        .mockResolvedValueOnce({ accion: 'salir_sin_guardar' });
+      vi.mocked(ServicioConsultas.buscarInventos).mockReturnValue([{
+        nombre: 'Pistola', inventor: { nombre: 'Rick' }, nivelPeligrosidad: 9 }] as unknown as Invento[]);
+
+      await menu.iniciar();
+      expect(ServicioConsultas.buscarInventos).toHaveBeenCalled();
       expect(console.table).toHaveBeenCalled();
     });
   });

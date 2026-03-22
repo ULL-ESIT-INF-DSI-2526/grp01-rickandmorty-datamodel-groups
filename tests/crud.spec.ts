@@ -3,7 +3,10 @@ import prompts from "prompts";
 import { MultiverseManager } from "../src/managers/MultiverseManager.js";
 import { Dimension } from "../src/models/Dimension.js";
 import { Especie } from "../src/models/Especie.js";
+import { Personaje } from "../src/models/Personaje.js";
+import { Planetas } from "../src/models/Planetas.js";
 import { Menu } from "../src/ui/Menu.js";
+import { Invento } from "../src/models/Invento.js";
 
 vi.mock("prompts", () => ({
   default: vi.fn(),
@@ -314,6 +317,87 @@ describe("Menu CRUD - Cobertura Total de Entidades", () => {
       expect(mockManager.inventos.add).toHaveBeenCalled();
       expect(mockManager.inventos.update).toHaveBeenCalled();
       expect(mockManager.inventos.delete).toHaveBeenCalledWith("5");
+    });
+  });
+
+  describe("Listado de entidades en CRUD", () => {
+    it("Debe listar personajes correctamente", async () => {
+      const mockPersonaje = {
+        id: "1",
+        nombre: "Rick",
+        especie: { name: "Humano" },
+        dimensionOrigen: { nombre: "C-137" },
+        estado: "Vivo",
+        afiliacion: "Independiente",
+        nivelInteligencia: 10,
+        descripcion: "Genio"
+      } as const;
+      vi.mocked(mockManager.personajes.getAll).mockReturnValue([mockPersonaje] as unknown as Personaje[]);
+      vi.mocked(prompts)
+        .mockResolvedValueOnce({ accion: "crud" })
+        .mockResolvedValueOnce({ entidad: "personajes", operacion: "listar" })
+        .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
+
+      await menu.iniciar();
+      expect(console.table).toHaveBeenCalled();
+      expect(mockManager.personajes.getAll).toHaveBeenCalled();
+    });
+
+    it("Debe listar dimensiones correctamente", async () => {
+      const mockDim = { id: "1", nombre: "C-137", estado: "Activa", nivelTecnologico: 10, descripcion: "Ok" } as const;
+      vi.mocked(mockManager.dimensiones.getAll).mockReturnValue([mockDim] as unknown as Dimension[]);
+      vi.mocked(prompts)
+        .mockResolvedValueOnce({ accion: "crud" })
+        .mockResolvedValueOnce({ entidad: "dimensiones", operacion: "listar" })
+        .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
+
+      await menu.iniciar();
+      expect(console.table).toHaveBeenCalled();
+    });
+
+    it("Debe listar especies correctamente", async () => {
+      const mockEspecie = { 
+        id: "1", name: "Humano", origin: { nombre: "Tierra" }, 
+        type: "Mamífero", averageLifeExpectancy: 80, description: "Orgánico" 
+      };
+      vi.mocked(mockManager.especies.getAll).mockReturnValue([mockEspecie] as unknown as Especie[]);
+      vi.mocked(prompts)
+        .mockResolvedValueOnce({ accion: "crud" })
+        .mockResolvedValueOnce({ entidad: "especies", operacion: "listar" })
+        .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
+
+      await menu.iniciar();
+      expect(console.table).toHaveBeenCalled();
+    });
+
+    it("Debe listar planetas correctamente", async () => {
+      const mockPlaneta = { 
+        id: "1", nombre: "Tierra", tipo: "Planeta", 
+        dimension: { nombre: "C-137" }, poblacion: 7000, descripcion: "Azul" 
+      };
+      vi.mocked(mockManager.planetas.getAll).mockReturnValue([mockPlaneta] as unknown as Planetas[]);
+      vi.mocked(prompts)
+        .mockResolvedValueOnce({ accion: "crud" })
+        .mockResolvedValueOnce({ entidad: "planetas", operacion: "listar" })
+        .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
+
+      await menu.iniciar();
+      expect(console.table).toHaveBeenCalled();
+    });
+
+    it("Debe listar inventos correctamente", async () => {
+      const mockInvento = { 
+        id: "1", nombre: "Portal Gun", inventor: { nombre: "Rick" }, 
+        tipo: "Herramienta", nivelPeligrosidad: 10, descripcion: "Verde" 
+      };
+      vi.mocked(mockManager.inventos.getAll).mockReturnValue([mockInvento] as unknown as Invento[]);
+      vi.mocked(prompts)
+        .mockResolvedValueOnce({ accion: "crud" })
+        .mockResolvedValueOnce({ entidad: "inventos", operacion: "listar" })
+        .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
+
+      await menu.iniciar();
+      expect(console.table).toHaveBeenCalled();
     });
   });
 });
