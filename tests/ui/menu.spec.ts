@@ -144,7 +144,11 @@ describe("Menu Tests", () => {
 
       vi.mocked(prompts)
         .mockResolvedValueOnce({ accion: "c_personaje" })
-        .mockResolvedValueOnce({ filtro: "Rick", campo: "nombre", orden: "asc" })
+        .mockResolvedValueOnce({
+          filtro: "Rick",
+          campo: "nombre",
+          orden: "asc",
+        })
         .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
 
       vi.mocked(ServicioConsultas.buscarPersonajes).mockReturnValue(
@@ -614,247 +618,267 @@ describe("Menu Tests", () => {
     });
   });
   describe("Cobertura de callbacks internos de prompts", () => {
-  it("debe cubrir los validate y type del formulario de especies", async () => {
-    vi.mocked(mockManager.dimensiones.getAll).mockReturnValue([
-      { nombre: "C-137" },
-    ] as never);
-    vi.mocked(mockManager.planetas.getAll).mockReturnValue([
-      { nombre: "Tierra" },
-    ] as never);
-    vi.mocked(mockManager.especies.add).mockImplementation(() => {});
+    it("debe cubrir los validate y type del formulario de especies", async () => {
+      vi.mocked(mockManager.dimensiones.getAll).mockReturnValue([
+        { nombre: "C-137" },
+      ] as never);
+      vi.mocked(mockManager.planetas.getAll).mockReturnValue([
+        { nombre: "Tierra" },
+      ] as never);
+      vi.mocked(mockManager.especies.add).mockImplementation(() => {});
 
-    vi.mocked(prompts).mockResolvedValueOnce({
-      id: "E-200",
-      name: "Specie Test",
-      originType: "dimension",
-      dimensionIdx: 0,
-      type: "Humanoide",
-      life: 20,
-      desc: "Descripción test",
+      vi.mocked(prompts).mockResolvedValueOnce({
+        id: "E-200",
+        name: "Specie Test",
+        originType: "dimension",
+        dimensionIdx: 0,
+        type: "Humanoide",
+        life: 20,
+        desc: "Descripción test",
+      });
+
+      await (
+        menu as unknown as {
+          procesarFormulario: (
+            entidad: "especies",
+            operacion: "anadir" | "actualizar",
+          ) => Promise<void>;
+        }
+      ).procesarFormulario("especies", "anadir");
+
+      const config = vi.mocked(prompts).mock.calls[0][0] as Array<{
+        name: string;
+        validate?: (value: string | number) => boolean | string;
+        type?: (
+          prev: string,
+          values?: { originType?: string },
+        ) => string | null;
+      }>;
+
+      const nameField = config.find((c) => c.name === "name");
+      const originTypeField = config.find((c) => c.name === "originType");
+      const dimensionIdxField = config.find((c) => c.name === "dimensionIdx");
+      const planetaIdxField = config.find((c) => c.name === "planetaIdx");
+      const typeField = config.find((c) => c.name === "type");
+      const lifeField = config.find((c) => c.name === "life");
+      const descField = config.find((c) => c.name === "desc");
+
+      expect(nameField?.validate?.("")).toBe("Obligatorio");
+      expect(nameField?.validate?.("Hola")).toBe(true);
+
+      expect(originTypeField).toBeDefined();
+
+      expect(dimensionIdxField?.type?.("dimension")).toBe("select");
+      expect(dimensionIdxField?.type?.("planeta")).toBeNull();
+
+      expect(planetaIdxField?.type?.("", { originType: "planeta" })).toBe(
+        "select",
+      );
+      expect(
+        planetaIdxField?.type?.("", { originType: "dimension" }),
+      ).toBeNull();
+
+      expect(typeField?.validate?.("")).toBe("Obligatorio");
+      expect(typeField?.validate?.("Alien")).toBe(true);
+
+      expect(lifeField?.validate?.(-1)).toBe("No negativa");
+      expect(lifeField?.validate?.(0)).toBe(true);
+
+      expect(descField?.validate?.("")).toBe("Obligatorio");
+      expect(descField?.validate?.("Descripción")).toBe(true);
     });
 
-    await (menu as unknown as {
-      procesarFormulario: (
-        entidad: "especies",
-        operacion: "anadir" | "actualizar",
-      ) => Promise<void>;
-    }).procesarFormulario("especies", "anadir");
+    it("debe cubrir el validate del formulario de inventos", async () => {
+      vi.mocked(mockManager.personajes.getAll).mockReturnValue([
+        { nombre: "Rick" },
+      ] as never);
+      vi.mocked(mockManager.inventos.add).mockImplementation(() => {});
 
-    const config = vi.mocked(prompts).mock.calls[0][0] as Array<{
-      name: string;
-      validate?: (value: string | number) => boolean | string;
-      type?: (
-        prev: string,
-        values?: { originType?: string },
-      ) => string | null;
-    }>;
+      vi.mocked(prompts).mockResolvedValueOnce({
+        id: 999,
+        nombre: "Invento Test",
+        pIdx: 0,
+        tipo: "Arma",
+        peligro: 8,
+        desc: "Descripción invento",
+      });
 
-    const nameField = config.find((c) => c.name === "name");
-    const originTypeField = config.find((c) => c.name === "originType");
-    const dimensionIdxField = config.find((c) => c.name === "dimensionIdx");
-    const planetaIdxField = config.find((c) => c.name === "planetaIdx");
-    const typeField = config.find((c) => c.name === "type");
-    const lifeField = config.find((c) => c.name === "life");
-    const descField = config.find((c) => c.name === "desc");
+      await (
+        menu as unknown as {
+          procesarFormulario: (
+            entidad: "inventos",
+            operacion: "anadir" | "actualizar",
+          ) => Promise<void>;
+        }
+      ).procesarFormulario("inventos", "anadir");
 
-    expect(nameField?.validate?.("")).toBe("Obligatorio");
-    expect(nameField?.validate?.("Hola")).toBe(true);
+      const config = vi.mocked(prompts).mock.calls[0][0] as Array<{
+        name: string;
+        validate?: (value: number) => boolean | string;
+      }>;
 
-    expect(originTypeField).toBeDefined();
+      const peligroField = config.find((c) => c.name === "peligro");
 
-    expect(dimensionIdxField?.type?.("dimension")).toBe("select");
-    expect(dimensionIdxField?.type?.("planeta")).toBeNull();
+      expect(peligroField?.validate?.(0)).toBe("Debe ser 1-10");
+      expect(peligroField?.validate?.(11)).toBe("Debe ser 1-10");
+      expect(peligroField?.validate?.(5)).toBe(true);
+    });
+    it("debe cubrir el validate del formulario de personajes", async () => {
+      vi.mocked(mockManager.especies.getAll).mockReturnValue([
+        { name: "Humano" },
+      ] as never);
+      vi.mocked(mockManager.dimensiones.getAll).mockReturnValue([
+        { nombre: "C-137" },
+      ] as never);
+      vi.mocked(mockManager.personajes.add).mockImplementation(() => {});
 
-    expect(planetaIdxField?.type?.("", { originType: "planeta" })).toBe(
-      "select",
+      vi.mocked(prompts).mockResolvedValueOnce({
+        id: 500,
+        nombre: "Personaje Test",
+        eIdx: 0,
+        dIdx: 0,
+        afiliacion: "Independiente",
+        iq: 8,
+        desc: "Descripción test",
+      });
+
+      await (
+        menu as unknown as {
+          procesarFormulario: (
+            entidad: "personajes",
+            operacion: "anadir" | "actualizar",
+          ) => Promise<void>;
+        }
+      ).procesarFormulario("personajes", "anadir");
+
+      const config = vi.mocked(prompts).mock.calls[0][0] as Array<{
+        name: string;
+        validate?: (value: number) => boolean | string;
+      }>;
+
+      const iqField = config.find((c) => c.name === "iq");
+
+      expect(iqField?.validate?.(0)).toBe("Debe ser 1-10");
+      expect(iqField?.validate?.(11)).toBe("Debe ser 1-10");
+      expect(iqField?.validate?.(5)).toBe(true);
+    });
+  });
+  it("Debe entrar en la rama artefacto de menuEventos", async () => {
+    vi.mocked(mockManager.inventos.getAll).mockReturnValue([
+      { id: 7, nombre: "Portal Gun" },
+    ] as unknown as Invento[]);
+
+    vi.mocked(prompts)
+      .mockResolvedValueOnce({ accion: "eventos" })
+      .mockResolvedValueOnce({ tipo: "artefacto" })
+      .mockResolvedValueOnce({
+        iIdx: 0,
+        accion: "despliegue",
+        desc: "Prueba artefacto",
+      })
+      .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
+
+    await menu.iniciar();
+
+    expect(mockManager.registrarAccionArtefacto).toHaveBeenCalledWith(
+      "7",
+      "despliegue",
+      "Prueba artefacto",
     );
-    expect(planetaIdxField?.type?.("", { originType: "dimension" })).toBeNull();
-
-    expect(typeField?.validate?.("")).toBe("Obligatorio");
-    expect(typeField?.validate?.("Alien")).toBe(true);
-
-    expect(lifeField?.validate?.(-1)).toBe("No negativa");
-    expect(lifeField?.validate?.(0)).toBe(true);
-
-    expect(descField?.validate?.("")).toBe("Obligatorio");
-    expect(descField?.validate?.("Descripción")).toBe(true);
   });
 
-  it("debe cubrir el validate del formulario de inventos", async () => {
+  it("Debe listar inventos en el CRUD", async () => {
+    vi.mocked(mockManager.inventos.getAll).mockReturnValue([
+      {
+        id: 1,
+        nombre: "Portal Gun",
+        inventor: { nombre: "Rick" },
+        tipo: "Arma",
+        nivelPeligrosidad: 10,
+        descripcion: "Base",
+      },
+    ] as unknown as Invento[]);
+
+    vi.mocked(prompts)
+      .mockResolvedValueOnce({ accion: "crud" })
+      .mockResolvedValueOnce({ entidad: "inventos", operacion: "listar" })
+      .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
+
+    await menu.iniciar();
+
+    expect(console.table).toHaveBeenCalled();
+  });
+
+  it("Debe entrar en procesarFormulario para inventos", async () => {
     vi.mocked(mockManager.personajes.getAll).mockReturnValue([
       { nombre: "Rick" },
     ] as never);
     vi.mocked(mockManager.inventos.add).mockImplementation(() => {});
 
     vi.mocked(prompts).mockResolvedValueOnce({
-      id: 999,
-      nombre: "Invento Test",
+      id: 99,
+      nombre: "Invento Branch",
       pIdx: 0,
       tipo: "Arma",
-      peligro: 8,
-      desc: "Descripción invento",
+      peligro: 9,
+      desc: "Desc",
     });
 
-    await (menu as unknown as {
-      procesarFormulario: (
-        entidad: "inventos",
-        operacion: "anadir" | "actualizar",
-      ) => Promise<void>;
-    }).procesarFormulario("inventos", "anadir");
+    await (
+      menu as unknown as {
+        procesarFormulario: (
+          entidad: "inventos",
+          operacion: "anadir" | "actualizar",
+        ) => Promise<void>;
+      }
+    ).procesarFormulario("inventos", "anadir");
 
-    const config = vi.mocked(prompts).mock.calls[0][0] as Array<{
-      name: string;
-      validate?: (value: number) => boolean | string;
-    }>;
-
-    const peligroField = config.find((c) => c.name === "peligro");
-
-    expect(peligroField?.validate?.(0)).toBe("Debe ser 1-10");
-    expect(peligroField?.validate?.(11)).toBe("Debe ser 1-10");
-    expect(peligroField?.validate?.(5)).toBe(true);
+    expect(mockManager.inventos.add).toHaveBeenCalled();
   });
-  it("debe cubrir el validate del formulario de personajes", async () => {
-  vi.mocked(mockManager.especies.getAll).mockReturnValue([
-    { name: "Humano" },
-  ] as never);
-  vi.mocked(mockManager.dimensiones.getAll).mockReturnValue([
-    { nombre: "C-137" },
-  ] as never);
-  vi.mocked(mockManager.personajes.add).mockImplementation(() => {});
+  it("Debe cubrir la rama falsa final de menuEventos", async () => {
+    vi.mocked(prompts).mockResolvedValueOnce({ tipo: "otro" });
 
-  vi.mocked(prompts).mockResolvedValueOnce({
-    id: 500,
-    nombre: "Personaje Test",
-    eIdx: 0,
-    dIdx: 0,
-    afiliacion: "Independiente",
-    iq: 8,
-    desc: "Descripción test",
+    await (
+      menu as unknown as {
+        menuEventos: () => Promise<void>;
+      }
+    ).menuEventos();
+
+    expect(mockManager.registrarViaje).not.toHaveBeenCalled();
+    expect(mockManager.registrarSucesoDimension).not.toHaveBeenCalled();
+    expect(mockManager.registrarAccionArtefacto).not.toHaveBeenCalled();
   });
 
-  await (menu as unknown as {
-    procesarFormulario: (
-      entidad: "personajes",
-      operacion: "anadir" | "actualizar",
-    ) => Promise<void>;
-  }).procesarFormulario("personajes", "anadir");
+  it("Debe cubrir la rama falsa final de listar en menuCRUD", async () => {
+    vi.mocked(prompts).mockResolvedValueOnce({
+      entidad: "otra",
+      operacion: "listar",
+    });
 
-  const config = vi.mocked(prompts).mock.calls[0][0] as Array<{
-    name: string;
-    validate?: (value: number) => boolean | string;
-  }>;
+    await (
+      menu as unknown as {
+        menuCRUD: () => Promise<void>;
+      }
+    ).menuCRUD();
 
-  const iqField = config.find((c) => c.name === "iq");
-
-  expect(iqField?.validate?.(0)).toBe("Debe ser 1-10");
-  expect(iqField?.validate?.(11)).toBe("Debe ser 1-10");
-  expect(iqField?.validate?.(5)).toBe(true);
-});
-});
-it("Debe entrar en la rama artefacto de menuEventos", async () => {
-  vi.mocked(mockManager.inventos.getAll).mockReturnValue([
-    { id: 7, nombre: "Portal Gun" },
-  ] as unknown as Invento[]);
-
-  vi.mocked(prompts)
-    .mockResolvedValueOnce({ accion: "eventos" })
-    .mockResolvedValueOnce({ tipo: "artefacto" })
-    .mockResolvedValueOnce({
-      iIdx: 0,
-      accion: "despliegue",
-      desc: "Prueba artefacto",
-    })
-    .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
-
-  await menu.iniciar();
-
-  expect(mockManager.registrarAccionArtefacto).toHaveBeenCalledWith(
-    "7",
-    "despliegue",
-    "Prueba artefacto",
-  );
-});
-
-it("Debe listar inventos en el CRUD", async () => {
-  vi.mocked(mockManager.inventos.getAll).mockReturnValue([
-    {
-      id: 1,
-      nombre: "Portal Gun",
-      inventor: { nombre: "Rick" },
-      tipo: "Arma",
-      nivelPeligrosidad: 10,
-      descripcion: "Base",
-    },
-  ] as unknown as Invento[]);
-
-  vi.mocked(prompts)
-    .mockResolvedValueOnce({ accion: "crud" })
-    .mockResolvedValueOnce({ entidad: "inventos", operacion: "listar" })
-    .mockResolvedValueOnce({ accion: "salir_sin_guardar" });
-
-  await menu.iniciar();
-
-  expect(console.table).toHaveBeenCalled();
-});
-
-it("Debe entrar en procesarFormulario para inventos", async () => {
-  vi.mocked(mockManager.personajes.getAll).mockReturnValue([
-    { nombre: "Rick" },
-  ] as never);
-  vi.mocked(mockManager.inventos.add).mockImplementation(() => {});
-
-  vi.mocked(prompts).mockResolvedValueOnce({
-    id: 99,
-    nombre: "Invento Branch",
-    pIdx: 0,
-    tipo: "Arma",
-    peligro: 9,
-    desc: "Desc",
+    expect(console.table).not.toHaveBeenCalled();
   });
 
-  await (menu as unknown as {
-    procesarFormulario: (
-      entidad: "inventos",
-      operacion: "anadir" | "actualizar",
-    ) => Promise<void>;
-  }).procesarFormulario("inventos", "anadir");
+  it("Debe cubrir la rama falsa final de procesarFormulario", async () => {
+    await (
+      menu as unknown as {
+        procesarFormulario: (
+          entidad:
+            | "personajes"
+            | "dimensiones"
+            | "planetas"
+            | "especies"
+            | "inventos",
+          operacion: "anadir" | "actualizar",
+        ) => Promise<void>;
+      }
+    ).procesarFormulario("otra" as never, "anadir");
 
-  expect(mockManager.inventos.add).toHaveBeenCalled();
+    expect(console.log).toHaveBeenCalledWith("✅ otra añadido con éxito.");
+  });
 });
-it("Debe cubrir la rama falsa final de menuEventos", async () => {
-  vi.mocked(prompts).mockResolvedValueOnce({ tipo: "otro" });
-
-  await (menu as unknown as {
-    menuEventos: () => Promise<void>;
-  }).menuEventos();
-
-  expect(mockManager.registrarViaje).not.toHaveBeenCalled();
-  expect(mockManager.registrarSucesoDimension).not.toHaveBeenCalled();
-  expect(mockManager.registrarAccionArtefacto).not.toHaveBeenCalled();
-});
-
-it("Debe cubrir la rama falsa final de listar en menuCRUD", async () => {
-  vi.mocked(prompts)
-    .mockResolvedValueOnce({ entidad: "otra", operacion: "listar" });
-
-  await (menu as unknown as {
-    menuCRUD: () => Promise<void>;
-  }).menuCRUD();
-
-  expect(console.table).not.toHaveBeenCalled();
-});
-
-it("Debe cubrir la rama falsa final de procesarFormulario", async () => {
-  await (menu as unknown as {
-    procesarFormulario: (
-      entidad: "personajes" | "dimensiones" | "planetas" | "especies" | "inventos",
-      operacion: "anadir" | "actualizar",
-    ) => Promise<void>;
-  }).procesarFormulario("otra" as never, "anadir");
-
-  expect(console.log).toHaveBeenCalledWith(
-    "✅ otra añadido con éxito.",
-  );
-});
-});
-
