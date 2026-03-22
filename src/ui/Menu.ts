@@ -34,7 +34,7 @@ export class Menu {
   async iniciar(): Promise<void> {
     await this.multiverseManager.inicializar();
     console.clear();
-    console.log("--- Sistema de Gestión del Multiverso ---");
+    console.log("--- 🛸 Sistema de Gestión del Multiverso 🛸 ---");
     await this.menuPrincipal();
   }
 
@@ -49,15 +49,21 @@ export class Menu {
       message: "Seleccione una opción:",
       choices: [
         {
-          title: "  Gestión de Datos (Añadir/Eliminar/Modificar)",
+          title: "  🛢 Gestión de Datos (Añadir/Eliminar/Modificar)",
           value: "crud",
         },
-        { title: "  Consultar Personajes", value: "c_personaje" },
-        { title: "  Consultar Localizaciones", value: "c_localizacion" },
-        { title: "  Consultar Inventos", value: "c_inventos" },
-        { title: "  Versiones Alternativas", value: "versiones" },
-        { title: "  Salir y Guardar", value: "salir_guardar" },
-        { title: "  Salir SIN Guardar", value: "salir_sin_guardar" },
+        { title: "  🎭 Consultar Personajes", value: "c_personaje" },
+        { title: "  📍 Consultar Localizaciones", value: "c_localizacion" },
+        { title: "  💡 Consultar Inventos", value: "c_inventos" },
+        { title: "  📑 Versiones Alternativas", value: "versiones" },
+        {
+          title: "  📅 Registrar Evento (Viaje/Suceso/Artefacto)",
+          value: "eventos",
+        },
+        { title: "  📈 Informes Avanzados", value: "informes" },
+        { title: "  ⚠️ Detectar Anomalías", value: "anomalias" },
+        { title: "  ❌ Salir y Guardar", value: "salir_guardar" },
+        { title: "  ✅ Salir SIN Guardar", value: "salir_sin_guardar" },
       ],
     });
 
@@ -87,9 +93,200 @@ export class Menu {
       case "versiones":
         await this.localizarVersiones();
         break;
+      case "eventos":
+        await this.menuEventos();
+        break;
+      case "informes":
+        await this.menuInformes();
+        break;
+      case "anomalias":
+        this.detectarAnomalias();
+        break;
     }
 
     await this.menuPrincipal();
+  }
+
+  private detectarAnomalias(): void {
+    const anomalias = this.multiverseManager.buscarAnomalias();
+    if (anomalias.length === 0) {
+      console.log("✅ No se detectan anomalías en el multiverso.");
+    } else {
+      console.warn(
+        "⚠️ ALERTA DE ANOMALÍA: Personajes en dimensiones críticas o inexistentes:",
+      );
+      console.table(
+        anomalias.map((p) => ({
+          Nombre: p.nombre,
+          DimOrigen: p.dimensionOrigen.nombre,
+          Problema: "Dimensión Destruida o Inexistente",
+        })),
+      );
+    }
+  }
+
+  private async menuInformes(): Promise<void> {
+    const { tipo } = await prompts({
+      type: "select",
+      name: "tipo",
+      message: "Seleccione Informe:",
+      choices: [
+        { title: "📊 Nivel Tecnológico Medio (Dims Activas)", value: "tec" },
+        { title: "👥 Ranking de Versiones Alternativas", value: "versiones" },
+        { title: "☣️ Inventos Críticos (>8 Peligro)", value: "inventos" },
+        { title: "📜 Historial de Viajes (Personaje)", value: "historial" },
+      ],
+    });
+
+    switch (tipo) {
+      case "tec": {
+        const promedio = this.multiverseManager.informeNivelTecnologico();
+        console.log(
+          `🦾 El nivel tecnológico medio de las dimensiones activas es: ${promedio.toFixed(2)}`,
+        );
+        break;
+      }
+
+      case "versiones": {
+        const ranking = this.multiverseManager.informeVersionesAlternativas();
+        console.table(
+          ranking.map(([nombre, total]) => ({
+            Personaje: nombre,
+            "🖨️ Total Versiones": total,
+          })),
+        );
+        break;
+      }
+
+      case "inventos": {
+        const criticos = this.multiverseManager.informeInventosCriticos();
+        console.table(`💥 ${criticos}`);
+        break;
+      }
+
+      case "historial": {
+        const personajes = this.multiverseManager.personajes.getAll();
+        const { pIdx } = await prompts({
+          type: "select",
+          name: "pIdx",
+          message: "Seleccione personaje:",
+          choices: personajes.map((p, i) => ({ title: p.nombre, value: i })),
+        });
+        const historia = this.multiverseManager.historialViajes(
+          personajes[pIdx].id.toString(),
+        );
+        if (historia.length === 0) {
+          console.log("No hay viajes registrados para este personaje.");
+        } else {
+          console.table(
+            historia.map((h) => ({
+              Fecha: h.fecha,
+              Motivo: h.descripcion,
+              ID_Destino: h.idDestino,
+            })),
+          );
+        }
+        break;
+      }
+    }
+  }
+
+  private async menuEventos(): Promise<void> {
+    const { tipo } = await prompts({
+      type: "select",
+      name: "tipo",
+      message: "¿Qué evento desea registrar?",
+      choices: [
+        { title: "🌌 Viaje Interdimensional", value: "viaje" },
+        { title: "💥 Suceso en Dimensión (Estado)", value: "dimension" },
+        { title: "🛠️ Acción con Artefacto", value: "artefacto" },
+        { title: "Volver", value: "volver" },
+      ],
+    });
+
+    if (tipo === "volver" || !tipo) return;
+
+    if (tipo === "viaje") {
+      const personajes = this.multiverseManager.personajes.getAll();
+      const dimensiones = this.multiverseManager.dimensiones.getAll();
+      const res = await prompts([
+        {
+          type: "select",
+          name: "pIdx",
+          message: "Personaje:",
+          choices: personajes.map((p, i) => ({ title: p.nombre, value: i })),
+        },
+        {
+          type: "select",
+          name: "oIdx",
+          message: "Origen:",
+          choices: dimensiones.map((d, i) => ({ title: d.nombre, value: i })),
+        },
+        {
+          type: "select",
+          name: "dIdx",
+          message: "Destino:",
+          choices: dimensiones.map((d, i) => ({ title: d.nombre, value: i })),
+        },
+        { type: "text", name: "motivo", message: "Motivo del viaje:" },
+      ]);
+      this.multiverseManager.registrarViaje(
+        personajes[res.pIdx].id.toString(),
+        dimensiones[res.oIdx].id,
+        dimensiones[res.dIdx].id,
+        res.motivo,
+      );
+    } else if (tipo === "dimension") {
+      const dimensiones = this.multiverseManager.dimensiones.getAll();
+      const res = await prompts([
+        {
+          type: "select",
+          name: "dIdx",
+          message: "Dimensión:",
+          choices: dimensiones.map((d, i) => ({ title: d.nombre, value: i })),
+        },
+        {
+          type: "select",
+          name: "estado",
+          message: "Nuevo estado:",
+          choices: [
+            { title: "Activa", value: "activa" },
+            { title: "Destruida", value: "destruida" },
+          ],
+        },
+        { type: "text", name: "motivo", message: "Descripción del suceso:" },
+      ]);
+      this.multiverseManager.registrarSucesoDimension(
+        dimensiones[res.dIdx].id,
+        res.estado,
+        res.motivo,
+      );
+    } else if (tipo === "artefacto") {
+      const inventos = this.multiverseManager.inventos.getAll();
+      const res = await prompts([
+        {
+          type: "select",
+          name: "iIdx",
+          message: "Invento:",
+          choices: inventos.map((inv, i) => ({ title: inv.nombre, value: i })),
+        },
+        {
+          type: "select",
+          name: "accion",
+          message: "Acción:",
+          choices: [
+            { title: "Desplegar", value: "despliegue" },
+            { title: "Neutralizar", value: "neutralizacion" },
+          ],
+        },
+        { type: "text", name: "desc", message: "Descripción:" },
+      ]);
+      this.multiverseManager.registrarAccionArtefacto(
+        inventos[res.iIdx].id.toString(),
+        res.accion,
+        res.desc,
+      );
+    }
   }
 
   /** Busca y muestra todas las versiones alternativas de un personaje */
@@ -414,8 +611,7 @@ export class Menu {
           type: "number",
           name: "iq",
           message: "IQ (1-10):",
-          validate: (v: number) =>
-            v >= 1 && v <= 10 ? true : "Debe ser 1-10",
+          validate: (v: number) => (v >= 1 && v <= 10 ? true : "Debe ser 1-10"),
         },
         { type: "text", name: "desc", message: "Descripción:" },
       ]);
@@ -495,14 +691,7 @@ export class Menu {
           ? dimensiones[e.dimensionIdx]
           : planetas[e.planetaIdx];
 
-      const objeto = new Especie(
-        e.id,
-        e.name,
-        origen,
-        e.type,
-        e.life,
-        e.desc,
-      );
+      const objeto = new Especie(e.id, e.name, origen, e.type, e.life, e.desc);
 
       if (operacion === "anadir") {
         this.multiverseManager.especies.add(objeto);
@@ -573,8 +762,7 @@ export class Menu {
           type: "number",
           name: "peligro",
           message: "Peligrosidad (1-10):",
-          validate: (v: number) =>
-            v >= 1 && v <= 10 ? true : "Debe ser 1-10",
+          validate: (v: number) => (v >= 1 && v <= 10 ? true : "Debe ser 1-10"),
         },
         { type: "text", name: "desc", message: "Descripción:" },
       ]);
