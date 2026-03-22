@@ -1,12 +1,11 @@
 {
   "$schema": "https://typedoc.org/schema.json",
   "entryPointStrategy": "expand",
-  "entryPoints": ["src"],
-  "out": "./docs",
+  "entryPoints": ["src"], 
+  "tsconfig": "./tsconfig.json",
+  "out": "docs",
   "name": "Rick & Morty: Multiverse Manager",
-  "includeVersion": true,
-  "exclude": ["**/node_modules/**", "**/tests/**"],
-  "hideGenerator": true,
-  "searchInComments": true,
-  "cleanOutputDir": true
+  "readme": "./README.md",
+  "exclude": ["**/node_modules/**", "**/tests/**", "src/index.ts"],
+  "includeVersion": true
 }
