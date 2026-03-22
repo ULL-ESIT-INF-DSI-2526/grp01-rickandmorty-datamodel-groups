@@ -38,10 +38,13 @@ export abstract class GestionManager<T extends IEntity, K extends keyof IEsquema
    * @param item - Instancia del objeto a añadir
    * @throws Error si el ID ya existe en la colección
    */
-  add(item: T): void {
-    if (this.getById(item.id)) throw new Error("ID ya existente");
-    this._lista.push(item);
+  add(item: T): boolean {
+  if (this.getById(item.id)) {
+    return false; 
   }
+  this._lista.push(item);
+  return true;
+}
 
   /**
    * Elimina un elemento de la colección

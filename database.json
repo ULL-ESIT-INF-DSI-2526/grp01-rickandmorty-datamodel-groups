@@ -784,5 +784,15 @@
       "descripcion": "Simulación de alta precisión usada para experimentos."
     }
   ],
-  "eventos": []
+  "eventos": [
+    {
+      "id": "Viaje-1774179882721",
+      "fecha": "Sun Mar 22 2026 11:44:42 GMT+0000 (hora estándar de Europa occidental)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "testing",
+      "idPersonaje": "1",
+      "idOrigen": "C-500A",
+      "idDestino": "J19ζ7"
+    }
+  ]
 }
