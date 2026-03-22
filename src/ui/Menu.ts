@@ -24,10 +24,12 @@ type ManagerData =
  * multiverso de Rick y Morty
  */
 export class Menu {
+  /** Instancia única del gestor del multiverso */
   private multiverseManager = MultiverseManager.getInstance();
 
   /**
-   * Inicializa los datos y lanza el menú principal
+   * Punto de entrada de la aplicación. Inicializa los datos y lanza
+   * el menú principal
    */
   async iniciar(): Promise<void> {
     await this.multiverseManager.inicializar();
@@ -60,8 +62,8 @@ export class Menu {
         },
         { title: "  📈 Informes Avanzados", value: "informes" },
         { title: "  ⚠️ Detectar Anomalías", value: "anomalias" },
-        { title: "  ✅ Salir y Guardar", value: "salir_guardar" },
-        { title: "  ❌ Salir SIN Guardar", value: "salir_sin_guardar" },
+        { title: "  ❌ Salir y Guardar", value: "salir_guardar" },
+        { title: "  ✅ Salir SIN Guardar", value: "salir_sin_guardar" },
       ],
     });
 
@@ -105,9 +107,6 @@ export class Menu {
     await this.menuPrincipal();
   }
 
-  /**
-   * Detecta anomalias del multiverso
-   */
   private detectarAnomalias(): void {
     const anomalias = this.multiverseManager.buscarAnomalias();
     if (anomalias.length === 0) {
@@ -126,10 +125,6 @@ export class Menu {
     }
   }
 
-  /**
-   * Sub menu de informes, que da opciones de consultar niv medio tecnologia, versiones 
-   * alternativas, inventos peligrosos e historial de viajes
-   */
   private async menuInformes(): Promise<void> {
     const { tipo } = await prompts({
       type: "select",
@@ -196,8 +191,6 @@ export class Menu {
     }
   }
 
-  /** Sub menu de eventos para consultar viajes sucesos y acciones de artefactos
-   */
   private async menuEventos(): Promise<void> {
     const { tipo } = await prompts({
       type: "select",
@@ -542,7 +535,6 @@ export class Menu {
   ): Promise<void> {
     let idPrevia: string | undefined;
 
-
     if (operacion === "actualizar") {
       const res = await prompts({
         type: "text",
@@ -552,12 +544,11 @@ export class Menu {
       idPrevia = res.id;
 
       if (!idPrevia || !this.multiverseManager[entidad].getById(idPrevia)) {
-        console.error("❌ El ID no existe en la base de datos.");
+        console.error("❌ El ID no existe.");
         return;
       }
     }
 
-    // --- FORMULARIOS SEGÚN ENTIDAD ---
     if (entidad === "dimensiones") {
       const d = await prompts([
         { type: "text", name: "id", message: "ID:", initial: idPrevia },
@@ -578,9 +569,7 @@ export class Menu {
       const objeto = new Dimension(d.id, d.nombre, d.estado, d.tec, d.tipo);
 
       if (operacion === "anadir") {
-        const exito = this.multiverseManager.dimensiones.add(objeto);
-        if (!exito)
-          return console.error("❌ Error: El ID de dimensión ya existe.");
+        this.multiverseManager.dimensiones.add(objeto);
       } else {
         this.multiverseManager.dimensiones.update(objeto);
       }
@@ -639,9 +628,7 @@ export class Menu {
       );
 
       if (operacion === "anadir") {
-        const exito = this.multiverseManager.personajes.add(objeto);
-        if (!exito)
-          return console.error("❌ Error: El ID de personaje ya existe.");
+        this.multiverseManager.personajes.add(objeto);
       } else {
         this.multiverseManager.personajes.update(objeto);
       }
@@ -651,7 +638,12 @@ export class Menu {
 
       const e = await prompts([
         { type: "text", name: "id", message: "ID:", initial: idPrevia },
-        { type: "text", name: "name", message: "Nombre:" },
+        {
+          type: "text",
+          name: "name",
+          message: "Nombre:",
+          validate: (v: string) => v.trim() !== "" || "Obligatorio",
+        },
         {
           type: "select",
           name: "originType",
@@ -674,21 +666,35 @@ export class Menu {
           message: "Seleccione un planeta:",
           choices: planetas.map((p, i) => ({ title: p.nombre, value: i })),
         },
-        { type: "text", name: "type", message: "Tipo:" },
-        { type: "number", name: "life", message: "Esperanza de Vida:" },
-        { type: "text", name: "desc", message: "Descripción:" },
+        {
+          type: "text",
+          name: "type",
+          message: "Tipo:",
+          validate: (v: string) => v.trim() !== "" || "Obligatorio",
+        },
+        {
+          type: "number",
+          name: "life",
+          message: "Esperanza de Vida:",
+          validate: (v: number) => v >= 0 || "No negativa",
+        },
+        {
+          type: "text",
+          name: "desc",
+          message: "Descripción:",
+          validate: (v: string) => v.trim() !== "" || "Obligatorio",
+        },
       ]);
 
       const origen =
         e.originType === "dimension"
           ? dimensiones[e.dimensionIdx]
           : planetas[e.planetaIdx];
+
       const objeto = new Especie(e.id, e.name, origen, e.type, e.life, e.desc);
 
       if (operacion === "anadir") {
-        const exito = this.multiverseManager.especies.add(objeto);
-        if (!exito)
-          return console.error("❌ Error: El ID de especie ya existe.");
+        this.multiverseManager.especies.add(objeto);
       } else {
         this.multiverseManager.especies.update(objeto);
       }
@@ -727,9 +733,7 @@ export class Menu {
       );
 
       if (operacion === "anadir") {
-        const exito = this.multiverseManager.planetas.add(objeto);
-        if (!exito)
-          return console.error("❌ Error: El ID de planeta ya existe.");
+        this.multiverseManager.planetas.add(objeto);
       } else {
         this.multiverseManager.planetas.update(objeto);
       }
@@ -754,7 +758,12 @@ export class Menu {
           })),
         },
         { type: "text", name: "tipo", message: "Tipo Invento:" },
-        { type: "number", name: "peligro", message: "Peligrosidad (1-10):" },
+        {
+          type: "number",
+          name: "peligro",
+          message: "Peligrosidad (1-10):",
+          validate: (v: number) => (v >= 1 && v <= 10 ? true : "Debe ser 1-10"),
+        },
         { type: "text", name: "desc", message: "Descripción:" },
       ]);
 
@@ -768,9 +777,7 @@ export class Menu {
       );
 
       if (operacion === "anadir") {
-        const exito = this.multiverseManager.inventos.add(objeto);
-        if (!exito)
-          return console.error("❌ Error: El ID de invento ya existe.");
+        this.multiverseManager.inventos.add(objeto);
       } else {
         this.multiverseManager.inventos.update(objeto);
       }
