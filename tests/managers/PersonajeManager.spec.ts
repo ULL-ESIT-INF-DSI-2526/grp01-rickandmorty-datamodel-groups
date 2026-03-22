@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { PersonajeManager } from '../src/managers/PersonajeManager.js';
-import { Personaje } from '../src/models/Personaje.js';
-import { Especie } from '../src/models/Especie.js';
-import { Dimension } from '../src/models/Dimension.js';
-import { DataManager } from '../src/database/DataManager.js';
-import { IPersonajeJSON } from '../src/interfaces/IPersonajeJSON.js';
-import { EstadoPersonajes } from '../src/types/EstadoPersonajes.js';
+import { PersonajeManager } from '../../src/managers/PersonajeManager.js';
+import { Personaje } from '../../src/models/Personaje.js';
+import { Especie } from '../../src/models/Especie.js';
+import { Dimension } from '../../src/models/Dimension.js';
+import { DataManager } from '../../src/database/DataManager.js';
+import { IPersonajeJSON } from '../../src/interfaces/IPersonajeJSON.js';
+import { EstadoPersonajes } from '../../src/types/EstadoPersonajes.js';
 
 /**
  * Subclase específica para test que expone métodos protegidos

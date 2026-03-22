@@ -1,17 +1,17 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import prompts from "prompts";
-import { MultiverseManager } from "../src/managers/MultiverseManager.js";
-import { Personaje } from "../src/models/Personaje.js";
-import { Planetas } from "../src/models/Planetas.js";
-import { Invento } from "../src/models/Invento.js";
-import { Menu } from "../src/ui/Menu.js";
-import { ServicioConsultas } from "../src/ui/ServicioConsultas.js";
+import { MultiverseManager } from "../../src/managers/MultiverseManager.js";
+import { Personaje } from "../../src/models/Personaje.js";
+import { Planetas } from "../../src/models/Planetas.js";
+import { Invento } from "../../src/models/Invento.js";
+import { Menu } from "../../src/ui/Menu.js";
+import { ServicioConsultas } from "../../src/ui/ServicioConsultas.js";
 
 vi.mock("prompts", () => ({
   default: vi.fn(),
 }));
 
-vi.mock("../src/ui/ServicioConsultas.js", () => ({
+vi.mock("../../src/ui/ServicioConsultas.js", () => ({
   ServicioConsultas: {
     buscarPersonajes: vi.fn(),
     buscarLocalizaciones: vi.fn(),

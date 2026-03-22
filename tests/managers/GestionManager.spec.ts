@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { GestionManager } from '../src/managers/GestionManager.js';
-import { DataManager } from '../src/database/DataManager.js';
-import { IEntity } from '../src/interfaces/IEntity.js';
+import { GestionManager } from '../../src/managers/GestionManager.js';
+import { DataManager } from '../../src/database/DataManager.js';
+import { IEntity } from '../../src/interfaces/IEntity.js';
 
-vi.mock('../src/database/DataManager.js');
+vi.mock('../../src/database/DataManager.js');
 
 interface IPruebaJSON { id: string; valor: string; }
 

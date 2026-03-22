@@ -1,12 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import prompts from "prompts";
-import { MultiverseManager } from "../src/managers/MultiverseManager.js";
-import { Dimension } from "../src/models/Dimension.js";
-import { Especie } from "../src/models/Especie.js";
-import { Personaje } from "../src/models/Personaje.js";
-import { Planetas } from "../src/models/Planetas.js";
-import { Menu } from "../src/ui/Menu.js";
-import { Invento } from "../src/models/Invento.js";
+import { MultiverseManager } from "../../src/managers/MultiverseManager.js";
+import { Dimension } from "../../src/models/Dimension.js";
+import { Especie } from "../../src/models/Especie.js";
+import { Personaje } from "../../src/models/Personaje.js";
+import { Planetas } from "../../src/models/Planetas.js";
+import { Menu } from "../../src/ui/Menu.js";
+import { Invento } from "../../src/models/Invento.js";
 
 vi.mock("prompts", () => ({
   default: vi.fn(),

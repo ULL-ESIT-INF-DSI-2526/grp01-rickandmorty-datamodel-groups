@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { ServicioConsultas } from "../src/ui/ServicioConsultas.js";
-import { Personaje } from "../src/models/Personaje.js";
-import { Planetas } from "../src/models/Planetas.js";
-import { Invento } from "../src/models/Invento.js";
+import { ServicioConsultas } from "../../src/ui/ServicioConsultas.js";
+import { Personaje } from "../../src/models/Personaje.js";
+import { Planetas } from "../../src/models/Planetas.js";
+import { Invento } from "../../src/models/Invento.js";
 
 describe("ServicioConsultas tests", () => {
   describe('buscarPersonajes', () => {

@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { Planetas } from '../src/models/Planetas.js'
-import { TipoLocalizaciones } from '../src/types/Localizaciones.js';
-import { Dimension } from '../src/models/Dimension.js';
+import { Planetas } from '../../src/models/Planetas.js'
+import { TipoLocalizaciones } from '../../src/types/Localizaciones.js';
+import { Dimension } from '../../src/models/Dimension.js';
 
 describe("Planetas Model tests", () => {
   let dimension1: Dimension;

@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { DimensionManager } from "../src/managers/DimensionManager.js";
-import { Dimension } from "../src/models/Dimension.js";
-import { DataManager } from "../src/database/DataManager.js";
-import { IDimension } from "../src/interfaces/IDimension.js";
+import { DimensionManager } from "../../src/managers/DimensionManager.js";
+import { Dimension } from "../../src/models/Dimension.js";
+import { DataManager } from "../../src/database/DataManager.js";
+import { IDimension } from "../../src/interfaces/IDimension.js";
 
 // Mock del DataManager
-vi.mock("../src/database/DataManager.js");
+vi.mock("../../src/database/DataManager.js");
 const mockedDM = vi.mocked(DataManager);
 
 describe("DimensionManager - Suite de Pruebas", () => {

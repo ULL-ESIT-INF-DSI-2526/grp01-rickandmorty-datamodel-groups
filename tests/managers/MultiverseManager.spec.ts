@@ -1,18 +1,18 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { MultiverseManager } from "../src/managers/MultiverseManager.js";
-import { DimensionManager } from "../src/managers/DimensionManager.js";
-import { EspecieManager } from "../src/managers/EspecieManager.js";
-import { InventoManager } from "../src/managers/InventoManager.js";
-import { PersonajeManager } from "../src/managers/PersonajeManager.js";
-import { PlanetaManager } from "../src/managers/PlanetaManager.js";
-import { DataManager } from "../src/database/DataManager.js";
-import { Dimension } from "../src/models/Dimension.js";
-import { Especie } from "../src/models/Especie.js";
-import { Invento } from "../src/models/Invento.js";
-import { Personaje } from "../src/models/Personaje.js";
-import { Planetas } from "../src/models/Planetas.js";
-import { IEvento } from "../src/interfaces/IEvento.js";
-import { EstadoPersonajes } from "../src/types/EstadoPersonajes.js";
+import { MultiverseManager } from "../../src/managers/MultiverseManager.js";
+import { DimensionManager } from "../../src/managers/DimensionManager.js";
+import { EspecieManager } from "../../src/managers/EspecieManager.js";
+import { InventoManager } from "../../src/managers/InventoManager.js";
+import { PersonajeManager } from "../../src/managers/PersonajeManager.js";
+import { PlanetaManager } from "../../src/managers/PlanetaManager.js";
+import { DataManager } from "../../src/database/DataManager.js";
+import { Dimension } from "../../src/models/Dimension.js";
+import { Especie } from "../../src/models/Especie.js";
+import { Invento } from "../../src/models/Invento.js";
+import { Personaje } from "../../src/models/Personaje.js";
+import { Planetas } from "../../src/models/Planetas.js";
+import { IEvento } from "../../src/interfaces/IEvento.js";
+import { EstadoPersonajes } from "../../src/types/EstadoPersonajes.js";
 
 describe("Pruebas de Integración: MultiverseManager", () => {
   let manager: MultiverseManager;

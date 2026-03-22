@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { Dimension } from "../src/models/Dimension.js";
-import { Especie } from "../src/models/Especie.js";
-import { Planetas } from "../src/models/Planetas.js";
+import { Dimension } from "../../src/models/Dimension.js";
+import { Especie } from "../../src/models/Especie.js";
+import { Planetas } from "../../src/models/Planetas.js";
 
 describe("Especie", function () {
   it("crea una especie válida con origen dimensión", function () {

@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { PlanetaManager } from "../src/managers/PlanetaManager.js";
-import { DimensionManager } from "../src/managers/DimensionManager.js";
-import { DataManager } from "../src/database/DataManager.js";
-import { Planetas } from "../src/models/Planetas.js";
-import { Dimension } from "../src/models/Dimension.js";
+import { PlanetaManager } from "../../src/managers/PlanetaManager.js";
+import { DimensionManager } from "../../src/managers/DimensionManager.js";
+import { DataManager } from "../../src/database/DataManager.js";
+import { Planetas } from "../../src/models/Planetas.js";
+import { Dimension } from "../../src/models/Dimension.js";
 
-vi.mock("../src/database/DataManager.js");
+vi.mock("../../src/database/DataManager.js");
 const mockedDM = vi.mocked(DataManager);
 
 describe("PlanetaManager", () => {

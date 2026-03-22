@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { DataManager } from "../src/database/DataManager.js";
+import { DataManager } from "../../src/database/DataManager.js";
 
 vi.mock("lowdb", () => {
   return {

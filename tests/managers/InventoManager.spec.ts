@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { InventoManager } from '../src/managers/InventoManager.js';
-import { Invento } from '../src/models/Invento.js';
-import { Personaje } from '../src/models/Personaje.js';
-import { DataManager } from '../src/database/DataManager.js';
-import { IInventoJSON } from '../src/interfaces/IInventoJSON.js';
-import { TipoInvento } from '../src/types/TipoInventos.js';
+import { InventoManager } from '../../src/managers/InventoManager.js';
+import { Invento } from '../../src/models/Invento.js';
+import { Personaje } from '../../src/models/Personaje.js';
+import { DataManager } from '../../src/database/DataManager.js';
+import { IInventoJSON } from '../../src/interfaces/IInventoJSON.js';
+import { TipoInvento } from '../../src/types/TipoInventos.js';
 
 /**
  * Subclase específica para test

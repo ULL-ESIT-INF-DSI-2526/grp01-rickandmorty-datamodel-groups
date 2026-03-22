@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { Personaje } from '../src/models/Personaje.js';
-import { Especie } from '../src/models/Especie.js';
-import { Dimension } from '../src/models/Dimension.js';
-import { EstadoPersonajes } from '../src/types/EstadoPersonajes.js';
+import { Personaje } from '../../src/models/Personaje.js';
+import { Especie } from '../../src/models/Especie.js';
+import { Dimension } from '../../src/models/Dimension.js';
+import { EstadoPersonajes } from '../../src/types/EstadoPersonajes.js';
 
 describe("Personaje Model tests", () => {
   let rick: Personaje;

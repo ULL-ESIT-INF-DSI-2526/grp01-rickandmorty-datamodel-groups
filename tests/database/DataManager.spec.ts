@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { DataManager } from "../src/database/DataManager.js";
+import { DataManager } from "../../src/database/DataManager.js";
 import { Low } from "lowdb";
-import { IEsquema } from "../src/interfaces/IEsquema.js";
+import { IEsquema } from "../../src/interfaces/IEsquema.js";
 
 /* Importamos datos reales para usarlos de base */
-import datosReales from "../database.json";
-import { IInventoJSON } from "../src/interfaces/IInventoJSON.js";
+import datosReales from "../../database.json";
+import { IInventoJSON } from "../../src/interfaces/IInventoJSON.js";
 
 describe("DataManager (Tests de Integración Completos)", () => {
   let manager: DataManager;

@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { DataManager } from "../src/database/DataManager.js";
-import { EspecieManager } from "../src/managers/EspecieManager.js";
-import { Dimension } from "../src/models/Dimension.js";
-import { Especie } from "../src/models/Especie.js";
-import { Planetas } from "../src/models/Planetas.js";
+import { DataManager } from "../../src/database/DataManager.js";
+import { EspecieManager } from "../../src/managers/EspecieManager.js";
+import { Dimension } from "../../src/models/Dimension.js";
+import { Especie } from "../../src/models/Especie.js";
+import { Planetas } from "../../src/models/Planetas.js";
 
 describe("EspecieManager", function () {
   let manager: EspecieManager;

@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { Invento } from "../src/models/Invento.js";
-import { Personaje } from "../src/models/Personaje.js";
-import { Dimension } from "../src/models/Dimension.js";
-import { Especie } from "../src/models/Especie.js";
-import { EstadoPersonajes } from "../src/types/EstadoPersonajes.js";
-import { TipoInvento } from "../src/types/TipoInventos.js";
+import { Invento } from "../../src/models/Invento.js";
+import { Personaje } from "../../src/models/Personaje.js";
+import { Dimension } from "../../src/models/Dimension.js";
+import { Especie } from "../../src/models/Especie.js";
+import { EstadoPersonajes } from "../../src/types/EstadoPersonajes.js";
+import { TipoInvento } from "../../src/types/TipoInventos.js";
 
 describe("Invento Model tests", () => {
   let dimensionBase: Dimension;

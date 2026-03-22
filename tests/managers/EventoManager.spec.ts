@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { EventoManager } from "../src/managers/EventoManager";
-import { DataManager } from "../src/database/DataManager";
-import { IEvento } from "../src/interfaces/IEvento";
+import { EventoManager } from "../../src/managers/EventoManager";
+import { DataManager } from "../../src/database/DataManager";
+import { IEvento } from "../../src/interfaces/IEvento";
 
 describe("EventoManager", () => {
   let manager: EventoManager;
