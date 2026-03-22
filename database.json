@@ -1043,6 +1043,15 @@
       "idPersonaje": "1",
       "idOrigen": "C-137",
       "idDestino": "C-500A"
+    },
+    {
+      "id": "Viaje-1774200899061",
+      "fecha": "Sun Mar 22 2026 17:34:59 GMT+0000 (hora estándar de Europa occidental)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Misión de reconocimiento",
+      "idPersonaje": "1",
+      "idOrigen": "C-137",
+      "idDestino": "C-500A"
     }
   ]
 }
