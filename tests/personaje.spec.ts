@@ -12,8 +12,8 @@ describe("Personaje Model tests", () => {
 
   beforeEach(() => {
     // Datos de apoyo necesarios para instanciar un Personaje
-    especieHumana = new Especie('E1', 'Humano', 'Tierra', 'Mamífero', 80, 'Especie base');
     dimensionC137 = new Dimension('C-137', 'Tierra C-137', 'activa', 5, 'Leyes físicas base');
+    especieHumana = new Especie('E1', 'Humano', dimensionC137, 'Mamífero', 80, 'Especie base');
 
     rick = new Personaje(
       1, 
@@ -51,23 +51,10 @@ describe("Personaje Model tests", () => {
     });
   });
 
-  
-
   describe('Setters', () => {
-    it('Debe permitir cambiar los valores básicos (id, nombre, descripción)', () => {
-      rick.id = 100;
-      rick.nombre = 'Rick Prime';
+    it('Debe permitir cambiar la descripción', () => {
       rick.descripcion = 'Antagonista';
-      
-      expect(rick.id).toBe(100);
-      expect(rick.nombre).toBe('Rick Prime');
       expect(rick.descripcion).toBe('Antagonista');
-    });
-
-    it('Debe permitir cambiar objetos complejos (especie, dimension)', () => {
-      const nuevaEspecie = new Especie('E2', 'Cyborg', 'Desconocido', 'Mecánico', 200, 'Mejorado');
-      rick.especie = nuevaEspecie;
-      expect(rick.especie.name).toBe('Cyborg');
     });
 
     it('Debe permitir cambiar estados y afiliaciones', () => {

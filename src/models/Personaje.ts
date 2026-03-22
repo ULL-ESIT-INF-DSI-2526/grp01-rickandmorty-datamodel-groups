@@ -38,38 +38,14 @@ export class Personaje implements IPersonaje, IValidarNivel {
   /** Permite acceder al atributo privado _id */
   get id(): number { return this._id; }
 
-  /**
-   * Permite modificar el atributo privado _id
-   * @param id - Identificador nuevo
-   */
-  set id(id: number) { this._id = id; }
-
   /** Permite acceder al atributo privado _nombre */
   get nombre(): string { return this._nombre; }
-  
-  /**
-   * Permite modificar el atributo privado _nombre
-   * @param nombre - Nombre nuevo
-   */
-  set nombre(nombre: string) { this._nombre = nombre; }
 
   /** Permite acceder al atributo privado _especie */
   get especie(): Especie { return this._especie; }
 
-  /**
-   * Permite modificar el atributo privado _especie
-   * @param especie - Instancia Especie nueva
-   */
-  set especie(especie: Especie) { this._especie = especie; }
-
   /** Permite acceder al atributo privado _dimensionOrigen */
   get dimensionOrigen(): Dimension { return this._dimensionOrigen; }
-
-  /**
-   * Permite modificar el atributo privado _dimensionOrigen
-   * @param dimension - Instancia Dimension nueva
-   */
-  set dimensionOrigen(dimension: Dimension) { this._dimensionOrigen = dimension; }
 
   /** Permite acceder al atributo privado _estado */
   get estado(): EstadoPersonajes { return this._estado; }

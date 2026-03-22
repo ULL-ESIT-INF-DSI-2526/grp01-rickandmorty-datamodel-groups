@@ -27,7 +27,7 @@ describe("Invento Model tests", () => {
       5,
       "Dimensión original",
     );
-    especieBase = new Especie("E1", "Humano", "Mamífero", "Omnívoro", 10, "Tierra");
+    especieBase = new Especie("E1", "Humano", dimensionBase, "Omnívoro", 10, "Tierra");
 
     inventorBase = new Personaje(
       1,
@@ -93,13 +93,6 @@ describe("Invento Model tests", () => {
   });
 
   describe("Getters y Setters", () => {
-    it("Debe permitir modificar el ID y el Nombre", () => {
-      inventoBase.id = 999;
-      inventoBase.nombre = "Caja de Meeseeks";
-      expect(inventoBase.id).toBe(999);
-      expect(inventoBase.nombre).toBe("Caja de Meeseeks");
-    });
-
     it("Debe permitir cambiar el inventor y el tipo", () => {
       const nuevoInventor = new Personaje(
         2,

@@ -58,15 +58,6 @@ describe("Dimension Model tests", () => {
   });
 
   describe("Getters y Setters", () => {
-    it("Debe permitir cambiar el ID si es válido", () => {
-      dimensionBase.id = 'K-202';
-      expect(dimensionBase.id).toBe('K-202');
-    });
-
-    it("Debe fallar al cambiar el ID si es inválido", () => {
-      expect(() => { dimensionBase.id = 'invalido'; }).toThrow(/Formato de ID inválido/);
-    });
-
     it("Debe permitir cambiar el estado si es válido", () => {
       dimensionBase.estado = 'destruida';
       expect(dimensionBase.estado).toBe('destruida');

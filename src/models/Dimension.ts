@@ -37,15 +37,6 @@ export class Dimension implements IDimension, IValidarNivel {
   /** Permite acceder al atributo privado ID */
   get id(): string { return this._id; }
 
-  /**
-   * Permite dar un nuevo valor al atributo privado ID
-   * @param nuevo - Nuevo identificador
-   */
-  set id(nuevo: string) {
-    this.validarID(nuevo);
-    this._id = nuevo;
-  }
-
   /** Permite acceder al atributo privado Estado */
   get estado(): DimensionStatus { return this._estado; }
 

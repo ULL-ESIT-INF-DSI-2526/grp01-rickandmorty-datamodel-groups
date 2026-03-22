@@ -31,25 +31,9 @@ export class Invento implements IInvento, IValidarNivel {
     return this._id;
   }
 
-  /**
-   * Permite modificar el atributo privado _id
-   * @param id - Identificador nuevo
-   */
-  set id(id: number) {
-    this._id = id;
-  }
-
   /** Permite acceder al atributo privado _nombre */
   get nombre(): string {
     return this._nombre;
-  }
-
-  /**
-   * Permite modificar el atributo privado _nombre
-   * @param nombre - Nombre nuevo
-   */
-  set nombre(nombre: string) {
-    this._nombre = nombre;
   }
 
   /** Permite acceder al atributo privado _inventor */
