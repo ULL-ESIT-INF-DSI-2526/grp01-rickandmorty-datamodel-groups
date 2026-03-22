@@ -1,6 +1,12 @@
 {
-  "entryPoints": [
-    "src/*.ts"
-  ],
-  "out": "./docs"
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPointStrategy": "expand",
+  "entryPoints": ["src"],
+  "out": "./docs",
+  "name": "Rick & Morty: Multiverse Manager",
+  "includeVersion": true,
+  "exclude": ["**/node_modules/**", "**/tests/**"],
+  "hideGenerator": true,
+  "searchInComments": true,
+  "cleanOutputDir": true
 }
