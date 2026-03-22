@@ -299,13 +299,23 @@
       "afiliacion": "Citadel",
       "nivelInteligencia": 10,
       "descripcion": "Rick alternativo de una dimensión tecnológicamente inestable."
+    },
+    {
+      "id": 567,
+      "nombre": "Rick Demo",
+      "especieId": "E-001",
+      "dimensionId": "C-137",
+      "estado": "Vivo",
+      "afiliacion": "Independiente",
+      "nivelInteligencia": 10,
+      "descripcion": "Personaje creado en demo"
     }
   ],
   "dimensiones": [
     {
       "id": "C-137",
       "nombre": "Dimensión C-137",
-      "estado": "activa",
+      "estado": "destruida",
       "nivelTecnologico": 10,
       "descripcion": "Dimensión principal de Rick y Morty."
     },
@@ -793,6 +803,246 @@
       "idPersonaje": "1",
       "idOrigen": "C-500A",
       "idDestino": "J19ζ7"
+    },
+    {
+      "id": "Viaje-1774196625603",
+      "fecha": "Sun Mar 22 2026 16:23:45 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Viaje de prueba automático",
+      "idPersonaje": "1",
+      "idOrigen": "C-137",
+      "idDestino": "C-500A"
+    },
+    {
+      "id": "Viaje-1774196953505",
+      "fecha": "Sun Mar 22 2026 16:29:13 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Viaje de prueba",
+      "idPersonaje": "1",
+      "idOrigen": "C-137",
+      "idDestino": "C-500A"
+    },
+    {
+      "id": "Viaje-1774197319335",
+      "fecha": "Sun Mar 22 2026 16:35:19 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Aventura estándar",
+      "idPersonaje": "1",
+      "idOrigen": "C-137",
+      "idDestino": "C-131"
+    },
+    {
+      "id": "Viaje-1774197319335",
+      "fecha": "Sun Mar 22 2026 16:35:19 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Regreso a casa",
+      "idPersonaje": "1",
+      "idOrigen": "C-131",
+      "idDestino": "C-137"
+    },
+    {
+      "id": "Dimension-1774197319337",
+      "fecha": "Sun Mar 22 2026 16:35:19 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "cambio estado de dimension",
+      "descripcion": "Cambio estado dimension a destruida: Invasión Cronenberg",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Dimension-1774197319337",
+      "fecha": "Sun Mar 22 2026 16:35:19 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "cambio estado de dimension",
+      "descripcion": "Cambio estado dimension a activa: Reinicio de realidad",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Artefacto-1774197319337",
+      "fecha": "Sun Mar 22 2026 16:35:19 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "despliegue artefacto",
+      "descripcion": "despliegue: Uso en combate",
+      "idArtefacto": "1",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Artefacto-1774197319337",
+      "fecha": "Sun Mar 22 2026 16:35:19 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "despliegue artefacto",
+      "descripcion": "neutralizacion: Batería agotada",
+      "idArtefacto": "1",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Viaje-1774197447774",
+      "fecha": "Sun Mar 22 2026 16:37:27 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Aventura estándar",
+      "idPersonaje": "1",
+      "idOrigen": "C-137",
+      "idDestino": "C-131"
+    },
+    {
+      "id": "Viaje-1774197447774",
+      "fecha": "Sun Mar 22 2026 16:37:27 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Regreso a casa",
+      "idPersonaje": "1",
+      "idOrigen": "C-131",
+      "idDestino": "C-137"
+    },
+    {
+      "id": "Dimension-1774197447776",
+      "fecha": "Sun Mar 22 2026 16:37:27 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "cambio estado de dimension",
+      "descripcion": "Cambio estado dimension a destruida: Invasión Cronenberg",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Dimension-1774197447776",
+      "fecha": "Sun Mar 22 2026 16:37:27 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "cambio estado de dimension",
+      "descripcion": "Cambio estado dimension a activa: Reinicio de realidad",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Artefacto-1774197447776",
+      "fecha": "Sun Mar 22 2026 16:37:27 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "despliegue artefacto",
+      "descripcion": "despliegue: Uso en combate",
+      "idArtefacto": "1",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Artefacto-1774197447776",
+      "fecha": "Sun Mar 22 2026 16:37:27 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "despliegue artefacto",
+      "descripcion": "neutralizacion: Batería agotada",
+      "idArtefacto": "1",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Viaje-1774197829687",
+      "fecha": "Sun Mar 22 2026 16:43:49 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Viaje de ida",
+      "idPersonaje": "1",
+      "idOrigen": "C-137",
+      "idDestino": "C-500A"
+    },
+    {
+      "id": "Viaje-1774197829687",
+      "fecha": "Sun Mar 22 2026 16:43:49 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Viaje de vuelta",
+      "idPersonaje": "1",
+      "idOrigen": "C-500A",
+      "idDestino": "C-137"
+    },
+    {
+      "id": "Dimension-1774197829688",
+      "fecha": "Sun Mar 22 2026 16:43:49 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "cambio estado de dimension",
+      "descripcion": "Cambio estado dimension a destruida: Colapso inicial",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Dimension-1774197829688",
+      "fecha": "Sun Mar 22 2026 16:43:49 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "cambio estado de dimension",
+      "descripcion": "Cambio estado dimension a activa: Restauración de demo",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Artefacto-1774197829688",
+      "fecha": "Sun Mar 22 2026 16:43:49 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "despliegue artefacto",
+      "descripcion": "despliegue: Prueba de campo",
+      "idArtefacto": "1",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Artefacto-1774197829688",
+      "fecha": "Sun Mar 22 2026 16:43:49 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "despliegue artefacto",
+      "descripcion": "neutralizacion: Apagado de seguridad",
+      "idArtefacto": "1",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Viaje-1774198017464",
+      "fecha": "Sun Mar 22 2026 16:46:57 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Aventura de demostración",
+      "idPersonaje": "1",
+      "idOrigen": "C-137",
+      "idDestino": "C-131"
+    },
+    {
+      "id": "Viaje-1774198017465",
+      "fecha": "Sun Mar 22 2026 16:46:57 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Retirada táctica",
+      "idPersonaje": "1",
+      "idOrigen": "C-131",
+      "idDestino": "C-137"
+    },
+    {
+      "id": "Artefacto-1774198017465",
+      "fecha": "Sun Mar 22 2026 16:46:57 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "despliegue artefacto",
+      "descripcion": "despliegue: Uso en zona de peligro",
+      "idArtefacto": "1",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Dimension-1774198017466",
+      "fecha": "Sun Mar 22 2026 16:46:57 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "cambio estado de dimension",
+      "descripcion": "Cambio estado dimension a destruida: Experimento fallido en demo",
+      "idOrigen": "C-137"
+    },
+    {
+      "id": "Viaje-1774198486696",
+      "fecha": "Sun Mar 22 2026 16:54:46 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Misión de reconocimiento",
+      "idPersonaje": "1",
+      "idOrigen": "C-137",
+      "idDestino": "C-500A"
+    },
+    {
+      "id": "Viaje-1774198793323",
+      "fecha": "Sun Mar 22 2026 16:59:53 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Misión de reconocimiento",
+      "idPersonaje": "1",
+      "idOrigen": "C-137",
+      "idDestino": "C-500A"
+    },
+    {
+      "id": "Viaje-1774198913200",
+      "fecha": "Sun Mar 22 2026 17:01:53 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Misión de reconocimiento",
+      "idPersonaje": "1",
+      "idOrigen": "C-137",
+      "idDestino": "C-500A"
+    },
+    {
+      "id": "Viaje-1774198984491",
+      "fecha": "Sun Mar 22 2026 17:03:04 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Misión de reconocimiento",
+      "idPersonaje": "1",
+      "idOrigen": "C-137",
+      "idDestino": "C-500A"
+    },
+    {
+      "id": "Viaje-1774199298560",
+      "fecha": "Sun Mar 22 2026 17:08:18 GMT+0000 (tiempo universal coordinado)",
+      "tipo": "viaje interdimensional",
+      "descripcion": "Misión de reconocimiento",
+      "idPersonaje": "1",
+      "idOrigen": "C-137",
+      "idDestino": "C-500A"
     }
   ]
 }
