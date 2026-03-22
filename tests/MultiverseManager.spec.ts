@@ -249,7 +249,7 @@ describe("Pruebas de Integración: MultiverseManager", () => {
       "Genio",
     );
 
-    const mockInvento = new Invento(1, "Pistola", inventor, "Arma", 9, "desc");
+    const mockInvento = new Invento(1, "Pistola", inventor, "arma", 9, "desc");
 
     vi.spyOn(manager["_inventos"], "getById").mockReturnValue(mockInvento);
 
