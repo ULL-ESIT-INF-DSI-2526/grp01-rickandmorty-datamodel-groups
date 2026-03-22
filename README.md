@@ -1,28 +1,30 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/U8NqX9JL)
-
-🟢 1. Preparación (Solo la primera vez)
-
-Para que tu ordenador sepa que las ramas de tus compañeros existen:
-
-git fetch --all
-git checkout [s-dev|g-dev|t-dev]  # Ejemplo: git checkout s-dev
-
-🟡 2. Trabajo Diario (Guardar tus avances)
-
-Haz esto cada vez que termines una tarea en tu carpeta:
-
-git add .
-git commit -m "Explicación de lo que has hecho"
-git push origin [s-dev|g-dev|t-dev] # Ejemplo: git push origin s-dev
-
-🔵 3. Sincronización (Traer lo que otros han hecho)
-
-Si Saray ha metido cambios en main y tú los necesitas:
-
-# 1. Ve a main y bájate lo nuevo
-git checkout main
-git pull origin main
-
-# 2. Vuelve a tu rama y absorbe esos cambios
-git checkout [s-dev|g-dev|t-dev]
-git merge main
+ _____ ______   ___  ___  ___   _________  ___  ___      ___ _______   ________  ________  _______          
+|\   _ \  _   \|\  \|\  \|\  \ |\___   ___\\  \|\  \    /  /|\  ___ \ |\   __  \|\   ____\|\  ___ \         
+\ \  \\\__\ \  \ \  \\\  \ \  \\|___ \  \_\ \  \ \  \  /  / | \   __/|\ \  \|\  \ \  \___|\ \   __/|        
+ \ \  \\|__| \  \ \  \\\  \ \  \    \ \  \ \ \  \ \  \/  / / \ \  \_|/_\ \   _  _\ \_____  \ \  \_|/__      
+  \ \  \    \ \  \ \  \\\  \ \  \____\ \  \ \ \  \ \    / /   \ \  \_|\ \ \  \\  \\|____|\  \ \  \_|\ \     
+   \ \__\    \ \__\ \_______\ \_______\ \__\ \ \__\ \__/ /     \ \_______\ \__\\ _\ ____\_\  \ \_______\    
+    \|__|     \|__|\|_______|\|_______|\|__|  \|__|\|__|/       \|_______|\|__|\|__|\_________\|_______|    
+                                                                                   \|_________|             
+                                                                                                            
+                                                                                                            
+                             ________  ________  _________  ________                                        
+                            |\   ___ \|\   __  \|\___   ___\\   __  \                                       
+                            \ \  \_|\ \ \  \|\  \|___ \  \_\ \  \|\  \                                      
+                             \ \  \ \\ \ \   __  \   \ \  \ \ \   __  \                                     
+                              \ \  \_\\ \ \  \ \  \   \ \  \ \ \  \ \  \                                    
+                               \ \_______\ \__\ \__\   \ \__\ \ \__\ \__\                                   
+                                \|_______|\|__|\|__|    \|__|  \|__|\|__|                                   
+                                                                                                            
+                                                                                                            
+                                                                                                            
+                 _____ ______   ________  ________   ________  ________  _______   ________                 
+                |\   _ \  _   \|\   __  \|\   ___  \|\   __  \|\   ____\|\  ___ \ |\   __  \                
+                \ \  \\\__\ \  \ \  \|\  \ \  \\ \  \ \  \|\  \ \  \___|\ \   __/|\ \  \|\  \               
+                 \ \  \\|__| \  \ \   __  \ \  \\ \  \ \   __  \ \  \  __\ \  \_|/_\ \   _  _\              
+                  \ \  \    \ \  \ \  \ \  \ \  \\ \  \ \  \ \  \ \  \|\  \ \  \_|\ \ \  \\  \|             
+                   \ \__\    \ \__\ \__\ \__\ \__\\ \__\ \__\ \__\ \_______\ \_______\ \__\\ _\             
+                    \|__|     \|__|\|__|\|__|\|__| \|__|\|__|\|__|\|_______|\|_______|\|__|\|__|            
+                                                                                                            
+                                                                                                            
+                                                                                                            
