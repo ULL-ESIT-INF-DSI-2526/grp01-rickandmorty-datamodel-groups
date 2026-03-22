@@ -3,7 +3,7 @@ import { DataManager } from "../src/database/DataManager.js";
 import { Low } from "lowdb";
 import { IEsquema } from "../src/interfaces/IEsquema.js";
 
-// 1. Importamos tus datos reales para usarlos de base
+/* Importamos datos reales para usarlos de base */
 import datosReales from "../database.json";
 import { IInventoJSON } from "../src/interfaces/IInventoJSON.js";
 
@@ -13,22 +13,16 @@ describe("DataManager (Tests de Integración Completos)", () => {
   beforeEach(async () => {
     vi.restoreAllMocks();
 
-    // BLOQUEO DE ESCRITURA: Evitamos que cualquier test toque el archivo físico
     const spyWrite = vi.spyOn(Low.prototype, 'write').mockResolvedValue(undefined);
-    
-    manager = await DataManager.getInstance();
-
-    // INYECCIÓN DE DATOS: Cargamos el estado inicial del JSON real en la memoria del Singleton
+    manager = await DataManager.getInstance()
     for (const coleccion in datosReales) {
       const clave = coleccion as keyof IEsquema;
-      // Usamos JSON.parse/stringify para clonar y no mutar el objeto importado
       await manager.guardarBaseDatos(clave, JSON.parse(JSON.stringify(datosReales[clave])));
     }
     
     spyWrite.mockClear();
   });
 
-  // --- GRUPO DE LECTURA ---
   describe("Lectura de colecciones reales", () => {
     it("debe leer personajes correctamente", () => {
       const personajes = manager.leerBaseDatos("personajes");
@@ -49,17 +43,15 @@ describe("DataManager (Tests de Integración Completos)", () => {
     });
   });
 
-  // --- GRUPO DE ESCRITURA ---
   describe("Escritura y persistencia en memoria", () => {
     
     it("debe permitir añadir un nuevo invento sin borrar el resto", async () => {
   const listaOriginal = manager.leerBaseDatos("inventos");
   const numAntes = listaOriginal.length;
   
-  // CORRECCIÓN: El ID ahora es un número (ej: 9999) para coincidir con la interfaz
   const nuevoInvento: IInventoJSON = { 
     ...listaOriginal[0], 
-    id: 9999, // <--- Antes era "INV-TEST-999" (string), ahora es number
+    id: 9999, 
     nombre: "Pistola de portales v2" 
   };
   
@@ -69,12 +61,10 @@ describe("DataManager (Tests de Integración Completos)", () => {
   expect(Low.prototype.write).toHaveBeenCalled();
 });
 
-    it("debe permitir vaciar una colección en memoria (ej. eventos) sin afectar a las demás", async () => {
-      // Vaciamos eventos
+    it("debe permitir vaciar una colección en memoria sin afectar a las demás", async () => {
       await manager.guardarBaseDatos("eventos", []);
       
       expect(manager.leerBaseDatos("eventos")).toHaveLength(0);
-      // Verificamos que los planetas (u otra cosa) siguen ahí intactos
       expect(manager.leerBaseDatos("planetas").length).toBeGreaterThan(0);
     });
 
@@ -96,4 +86,5 @@ describe("DataManager (Tests de Integración Completos)", () => {
     const otraInstancia = await DataManager.getInstance();
     expect(manager).toBe(otraInstancia);
   });
+  
 });

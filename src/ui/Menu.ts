@@ -61,7 +61,7 @@ export class Menu {
           value: "eventos",
         },
         { title: "  📈 Informes Avanzados", value: "informes" },
-        { title: "  ⚠️ Detectar Anomalías", value: "anomalias" },
+        { title: "  ⚠️  Detectar Anomalías", value: "anomalias" },
         { title: "  ❌ Salir y Guardar", value: "salir_guardar" },
         { title: "  ✅ Salir SIN Guardar", value: "salir_sin_guardar" },
       ],
