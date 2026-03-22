@@ -83,6 +83,9 @@ describe("Pruebas de Integración: MultiverseManager", () => {
     vi.spyOn(manager["_inventos"], "getAll").mockReturnValue(
       mockInventos as unknown as Invento[],
     );
+    vi.spyOn(manager["_planetas"], "getAll").mockReturnValue(
+      mockInventos as unknown as Planetas[],
+    );
   });
 
   describe("Getters", () => {
