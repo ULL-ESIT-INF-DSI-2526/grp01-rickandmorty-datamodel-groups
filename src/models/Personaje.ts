@@ -4,13 +4,14 @@ import { EstadoPersonajes } from "../types/EstadoPersonajes.js";
 import { IValidarNivel } from "../interfaces/IValidarNivel.js";
 import { Dimension } from "./Dimension.js";
 import { Especie } from "./Especie.js";
+import { IValidar } from "../interfaces/IValidar.js";
 
 /**
  * Clase Personaje que representa una instancia física de un Personaje
  * conteniendo validaciones de integridad de datos y referencias a
  * otras clases que representan otras estructuras de datos del universo
  */
-export class Personaje implements IPersonaje, IValidarNivel {
+export class Personaje implements IPersonaje, IValidarNivel, IValidar {
   /**
    * Crea una nueva instancia de Personaje
    * @param _id - ID unico del personaje
@@ -32,6 +33,7 @@ export class Personaje implements IPersonaje, IValidarNivel {
     private _nivelInteligencia: number,
     private _descripcion: string,
   ) {
+    this.validar();
     this.validarNivel(_nivelInteligencia);
   }
 
@@ -103,6 +105,19 @@ export class Personaje implements IPersonaje, IValidarNivel {
       throw new Error(
         `[Personaje Error]: el nivel de inteligencia debe estar entre 1 y 10, se recibió: ${nivel}`,
       );
+    }
+  }
+
+  /** Comprueba que los atributos pasados al constructor sean válidos */
+  validar(): void {
+    if (this._id === 0) {
+      throw new Error("El ID no puede ser 0");
+    }
+    if (this._nombre.trim() === "") {
+      throw new Error("El nombre no puede estar vacío");
+    }
+    if (this._descripcion.trim() === "") {
+      throw new Error("La descripción no puede estar vacía");
     }
   }
 }

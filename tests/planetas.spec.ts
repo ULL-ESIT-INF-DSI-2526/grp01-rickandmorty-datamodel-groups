@@ -22,6 +22,24 @@ describe("Planetas Model tests", () => {
       expect(planeta.poblacion).toBe(25000);
       expect(planeta.descripcion).toBe('70% océano');
     });
+
+    it("Debe dar error si el ID está vacío", () => {
+      expect(() => {
+        new Planetas('', 'Tierra C-137', tipo1, dimension1, 25000, '70% océano');
+      }).toThrow(`El ID no puede estar vacío`);
+    });
+
+    it("Debe dar error si el nombre está vacío", () => {
+      expect(() => {
+        new Planetas('P137', '', tipo1, dimension1, 25000, '70% océano');
+      }).toThrow(`El nombre no puede estar vacío`);
+    });
+
+    it("Debe dar error si la descripción está vacía", () => {
+      expect(() => {
+        new Planetas('P137', 'Tierra C-137', tipo1, dimension1, 25000, '');
+      }).toThrow(`La descripción no puede estar vacía`);
+    });
   });
 
   describe('Setters', () => {
@@ -34,6 +52,5 @@ describe("Planetas Model tests", () => {
       planeta.descripcion = '30% tierra';
       expect(planeta.descripcion).toBe('30% tierra');
     });
-
   });
 });

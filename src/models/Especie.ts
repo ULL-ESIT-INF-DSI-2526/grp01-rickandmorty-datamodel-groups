@@ -1,11 +1,12 @@
 import { SpecieData } from "../interfaces/IEspecie.js";
+import { IValidar } from "../interfaces/IValidar.js";
 import { Dimension } from "./Dimension.js";
 import { Planetas } from "./Planetas.js";
 
 /**
  * Clase de especie.
  */
-export class Especie implements SpecieData {
+export class Especie implements SpecieData, IValidar {
   /**
    * Crea una especie.
    * @param id - Identificador único
@@ -23,7 +24,7 @@ export class Especie implements SpecieData {
     private _averageLifeExpectancy: number,
     private _description: string,
   ) {
-    this.validate();
+    this.validar();
   }
 
   /** Permite acceder al atributo privado _id */
@@ -66,28 +67,23 @@ export class Especie implements SpecieData {
     this._description = description;
   }
 
-  /** Valida todos los atributos antes de crear la especie */
-  private validate(): void {
+  /** Comprueba que los atributos pasados al constructor sean válidos */
+  validar(): void {
     if (this._id.trim() === "") {
       throw new Error("El id no puede estar vacío");
     }
-
     if (this._name.trim() === "") {
       throw new Error("El nombre no puede estar vacío");
     }
-
     if (!this._origin) {
       throw new Error("El origen no puede estar vacío");
     }
-
     if (this._type.trim() === "") {
       throw new Error("El tipo no puede estar vacío");
     }
-
     if (this._averageLifeExpectancy < 0) {
       throw new Error("La esperanza de vida no puede ser negativa");
     }
-
     if (this._description.trim() === "") {
       throw new Error("La descripción no puede estar vacía");
     }

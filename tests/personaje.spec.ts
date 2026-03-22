@@ -84,4 +84,27 @@ describe("Personaje Model tests", () => {
       expect(() => { rick.nivelInteligencia = 5.5; }).toThrow(/debe estar entre 1 y 10/);
     });
   });
+
+  describe('Validaciones', () => {
+    it("Debe dar error si el ID es igual a 0", () => {
+      expect(() => {
+        new Personaje(0, 'Rick Sanchez', especieHumana, dimensionC137, EstadoPersonajes.Vivo, 
+        "Independiente", 10, 'Científico brillante');
+      }).toThrow(`El ID no puede ser 0`);
+    });
+
+    it("Debe dar error si el nombre está vacío", () => {
+      expect(() => {
+        new Personaje(1, '', especieHumana, dimensionC137, EstadoPersonajes.Vivo, 
+        "Independiente", 10, 'Científico brillante');
+      }).toThrow(`El nombre no puede estar vacío`);
+    });
+
+    it("Debe dar error si la descripción está vacía", () => {
+      expect(() => {
+        new Personaje(1, 'Rick Sanchez', especieHumana, dimensionC137, EstadoPersonajes.Vivo, 
+        "Independiente", 10, '');
+      }).toThrow(`La descripción no puede estar vacía`);
+    });
+  });
 });

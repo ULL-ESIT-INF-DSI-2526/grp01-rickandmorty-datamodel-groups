@@ -2,9 +2,10 @@ import { Personaje } from "./Personaje.js";
 import { TipoInvento } from "../types/TipoInventos.js";
 import { IInvento } from "../interfaces/IInvento.js";
 import { IValidarNivel } from "../interfaces/IValidarNivel.js";
+import { IValidar } from "../interfaces/IValidar.js";
 
 /** Clase que representa un invento del multiverso */
-export class Invento implements IInvento, IValidarNivel {
+export class Invento implements IInvento, IValidarNivel, IValidar {
   
   /**
    * Crea una nueva instancia de Invento
@@ -23,6 +24,7 @@ export class Invento implements IInvento, IValidarNivel {
     private _nivelPeligrosidad: number,
     private _descripcion: string,
   ) {
+    this.validar();
     this.validarNivel(_nivelPeligrosidad);
   }
 
@@ -98,6 +100,19 @@ export class Invento implements IInvento, IValidarNivel {
       throw new Error(
         `[Invento Error]: el nivel de peligrosidad debe estar entre 1 y 10, se recibió: ${nivel}`,
       );
+    }
+  }
+  
+  /** Comprueba que los atributos pasados al constructor sean válidos */
+  validar(): void {
+    if (this._id === 0) {
+      throw new Error("El ID no puede ser 0");
+    }
+    if (this._nombre.trim() === "") {
+      throw new Error("El nombre no puede estar vacío");
+    }
+    if (this._descripcion.trim() === "") {
+      throw new Error("La descripción no puede estar vacía");
     }
   }
 }

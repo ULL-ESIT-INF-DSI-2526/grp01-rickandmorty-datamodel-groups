@@ -1,9 +1,10 @@
 import { IPlanetas } from "../interfaces/IPlanetas.js";
+import { IValidar } from "../interfaces/IValidar.js";
 import { TipoLocalizaciones } from "../types/Localizaciones.js";
 import { Dimension } from "./Dimension.js";
 
 /** Representa una instancia física de un planeta o localización */
-export class Planetas implements IPlanetas {
+export class Planetas implements IPlanetas, IValidar {
   /**
    * @param id - ID único
    * @param nombre - Nombre 
@@ -19,7 +20,9 @@ export class Planetas implements IPlanetas {
     private readonly _dimension: Dimension,
     private _poblacion: number,
     private _descripcion: string
-  ) {}
+  ) {
+    this.validar();
+  }
 
   /** Permite acceder al atributo privado ID */
   get id(): string { return this._id; }
@@ -50,4 +53,17 @@ export class Planetas implements IPlanetas {
    * @param nuevasCaracteristicas - Nuevas características destacadas
    */
   set descripcion(nuevasCaracteristicas: string) { this._descripcion = nuevasCaracteristicas; }
+
+  /** Comprueba que los atributos pasados al constructor sean válidos */
+  validar(): void {
+    if (this._id.trim() === "") {
+      throw new Error("El ID no puede estar vacío");
+    }
+    if (this._nombre.trim() === "") {
+      throw new Error("El nombre no puede estar vacío");
+    }
+    if (this._descripcion.trim() === "") {
+      throw new Error("La descripción no puede estar vacía");
+    }
+  }
 }

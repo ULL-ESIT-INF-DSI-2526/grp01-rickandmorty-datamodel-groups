@@ -38,6 +38,18 @@ describe("Dimension Model tests", () => {
       });
     });
 
+    it("Debe lanzar error si el nombre está vacío", () => {
+      expect(() => {
+        new Dimension(validId, '', validEstado, 0, validDesc);
+      }).toThrow(`El nombre no puede estar vacío`)
+    });
+
+    it("Debe lanzar error si la descripción está vacía", () => {
+      expect(() => {
+        new Dimension(validId, validNombre, validEstado, 0, '');
+      }).toThrow(`La descripción no puede estar vacía`)
+    });
+
     it("Debe lanzar error si el nivel tecnológico es menor a 1", () => {
       expect(() => {
         new Dimension(validId, validNombre, validEstado, 0, validDesc);
