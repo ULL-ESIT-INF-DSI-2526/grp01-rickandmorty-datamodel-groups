@@ -64,6 +64,30 @@ describe('InventoManager', () => {
     expect(resultado[0].inventor).toBe(mockPersonaje);
   });
 
+  it('debería mostrar un aviso si el inventor del JSON no existe en el sistema', async () => {
+    const mockDatosJSON: IInventoJSON[] = [{
+      id: 102,
+      nombre: 'Invento Huérfano',
+      inventorId: 102,  // ID inexistente en el sistema
+      tipo: "gagdet" as TipoInvento,
+      nivelPeligrosidad: 1,
+      descripcion: 'No tiene dueño'
+    }];
+
+    const mockDMInstance = {
+      leerBaseDatos: vi.fn().mockReturnValue(mockDatosJSON),
+      guardarBaseDatos: vi.fn(),
+    } as unknown as DataManager;
+    DataManager.getInstance = vi.fn().mockResolvedValue(mockDMInstance);
+
+    const spyWarn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    await manager.cargar([mockPersonaje]);
+
+    expect(spyWarn).toHaveBeenCalledWith(
+      expect.stringContaining('Error: Referencias rotas para el invento')
+    );
+  })
+
   it('debería mapear correctamente un objeto Invento a su estructura JSON', () => {
     // Simulamos un objeto Invento
     const inventoReal = {
