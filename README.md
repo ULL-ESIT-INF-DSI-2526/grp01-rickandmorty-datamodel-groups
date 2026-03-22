@@ -32,13 +32,52 @@ _____ ______   ___  ___  ___   _________  ___  ___      ___ _______   ________  
 # 🌌 Multiverse Data Manager
 
 ## 📝 Descripción del Proyecto
+Se trata de una aplicación CLI (Interfaz de Línea de Comandos) desarrollada en TypeScript que está orientada a la gestión y consulta del multiverso de Rick y Morty. 
 
+El sistema permite hacer operaciones CRUD (crear, leer, actualizar y eliminar) sobre todas las entidades: personajes, dimensiones, planetas (localizaciones), especies e inventos.
+
+También incluye lógicas avanzadas como:
+- Búsqueda y filtrado dinámico por varios campos
+- Rastreo de versiones alternativas del mismo personaje
+- Registro de viajes y uso de artefactos
+- Detección, en tiempo real, de anomalías
 
 ## 🚀 Instalación y Ejecución
 
 ### Requisitos previos
+Para poder ejecutar el proyecto en su máquina local, deberá instalarse:
+- [Node.js](https://nodejs.org/) (versión 16 o superior).
+- Gestor de paquetes `npm` (se instala automáticamente junto con Node.js)
+- Git (opcional, sólo si se va a clonar el repositorio)
 
 ### Pasos
+1. **Clonar el repositorio:** (o descargar el código fuente):
+```bash
+git clone git@github.com:ULL-ESIT-INF-DSI-2526/grp01-rickandmorty-datamodel-groups.git
+cd grp01-rickandmorty-datamodel-groups/
+```
+
+2. **Instalar las dependencias:**
+El proyecto requiere librerías externas como Lowdb o Prompts, por lo que debe ejecutar:
+```bash
+npm install
+```
+
+3. **Ejecutar la aplicación:**
+Al ejecutar el sigueinte comando se compilará el código fuente y se iniciará el menú.
+```bash
+npm start
+```
+De esta forma queda en modo ***watch*** por lo que si realizas cambios en el código, este se recompilará y reiniciará automáticamente.
+
+### 🎬 Demostración del Sistema (`demo.ts`)
+Hemos añadido un script de prueba para poder comprobar el funcionamiento interno de la aplicación sin tener que navegar por los menús. Este archivo utiliza la base de datos real (`database.json`) para realizar operaciones CRUD, búsquedas complejas, y detección de anomalías de forma automatizada.
+
+Para ejecutar la demo, compila y lanza el archivo con:
+```bash
+npx ts-node src/demo.ts
+```
+(Nota: Si ya tienes el código compilado, puedes usar `node dist/demo.js`)
 
 ## 🏗️ Arquitectura
 
@@ -47,25 +86,24 @@ aplicar los conocimientos de estas últimas semanas de clase, facilitar el mante
 
 - ***Modelos (`/src/models`)***: Definiciones de clases que definen los objetos a incluir en el gestor del multiverso, cumplen los contratos que se definen en las interfaces de ***(`/src/types`)***
 
-- ***Gestión (`/src/managers`)***: Desarrollo de los gestores concretos para cada modelo mencionado previamente, que extienden la clase abstracta ***Gestionmanager.ts*** para que solo se implementen de forma específica los métodos necesarios.
+- ***Gestión (`/src/managers`)***: Desarrollo de los gestores concretos para cada modelo mencionado previamente, que extienden la clase abstracta ***GestionManager.ts*** para que sólo se implementen de forma específica los métodos necesarios.
 
-- Patrón ***Singleton***: se usa en (`/src/database/DataManager`) y en (`/src/managers/MultiverseManager`), para asegurar que solamente hay una instancia del manager que engloba las instancias de los managers concretos
- para centralizar el control de las colecciones.
+- Patrón ***Singleton***: Se usa en (`/src/database/DataManager`) y en (`/src/managers/MultiverseManager`), para asegurar que solamente hay una instancia del manager que engloba las instancias de los managers concretos para centralizar el control de las colecciones.
 
 
-3.  ***Persistencia (`/src/database`)***: Gestión usando **Lowdb**, guarda correctamente los datos de memoria en el archivo `database.json`.
+-  ***Persistencia (`/src/database`)***: Gestión usando **Lowdb**, guarda correctamente los datos de memoria en el archivo `database.json`.
 
-4.  ***Interfaz (`/src/ui`)***: Interfaz de línea de comandos que usa ***Promts*** para proporcionar menùs y submenús para todas las opciones del gestor.
+-  ***Interfaz (`/src/ui`)***: Interfaz de línea de comandos que usa ***Prompts*** para proporcionar menús y submenús para todas las opciones del gestor.
 
 ## 🧪 Testing y Calidad del Código
 
 Se han llevado a cabo los tests necesarios para probar cada aspecto del código desarrollado con la herramiena ***Vitest***.
 
-  * **Tests Unitarios**: comprobacins de la lógica de cada clase y modelo.
-  * **Tests de Integración**: pruebas de flujo completo entre los managers,memoria y el JSON.
+  * **Tests Unitarios**: Comprobaciones de la lógica de cada clase y modelo.
+  * **Tests de Integración**: Pruebas de flujo completo entre los managers, memoria y el JSON.
   * **Mocks**: Uso de `vi.mock` y `vi.spyOn` para aislar componentes y poder comprobar casos como la inicialización de bases de dato vacía o inválida
 
-También mediante la herramienta ***Coverage*** con el motor **v8**, se ha hecho un cubrimiento bastante completo del código desarrollado
+También mediante la herramienta ***Coverage*** con el motor **v8**, se ha hecho un cubrimiento bastante completo del código desarrollado.
 
 ```bash
 # Ejecutar tests
@@ -106,6 +144,7 @@ La documentación generada se encontrará en la carpeta `/docs`. Además en el r
 │   ├── managers/    # Lógica de gestión
 │   ├── models/      # Clases de objetos del multiverso
 │   ├── types/       # Enums y tipos personalizados
+│   ├── demo/        # Script de prueba
 │   ├── ui/          # Interfaz de usuario
 │   └── index.ts     # Programa principal
 ├── tests/           # Suite de pruebas
