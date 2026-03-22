@@ -16,7 +16,6 @@ class ManagerPrueba extends GestionManager<ModeloPrueba, 'dimensiones', IPruebaJ
   protected mapearAJSON(item: ModeloPrueba): IPruebaJSON {
     return { id: item.id, valor: item.valor };
   }
-  // Implementación mínima para el test
   public async cargar(): Promise<void> { }
 }
 

@@ -36,7 +36,6 @@ describe("PlanetaManager", () => {
 
 
 
-    /** Objeto que imita los métodos de DataManager */
     mockDMInstance = {
       leerBaseDatos: vi.fn().mockReturnValue([
         {

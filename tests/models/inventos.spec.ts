@@ -17,7 +17,6 @@ describe("Invento Model tests", () => {
     especieBase = new Especie("E1", "Humano", dimensionBase, "Omnívoro", 10, "Tierra");
     inventorBase = new Personaje(1, "Rick", especieBase, dimensionBase, EstadoPersonajes.Vivo, "Independiente", 10, "Genio");
     
-    // Instancia de referencia para los tests
     inventoBase = new Invento(100, "Pistola de Portales", inventorBase, "dispositivo de viaje", 10, "Desc");
   });
 
@@ -57,7 +56,7 @@ describe("Invento Model tests", () => {
     it("Debe validar el nivel de peligrosidad al usar el setter", () => {
       inventoBase.nivelPeligrosidad = 5;
       expect(() => { inventoBase.nivelPeligrosidad = 13; }).toThrow("[Invento Error]");
-      expect(inventoBase.nivelPeligrosidad).toBe(5); // Mantiene el último valor válido
+      expect(inventoBase.nivelPeligrosidad).toBe(5); 
     });
 
     it("Debe permitir modificar la descripción", () => {

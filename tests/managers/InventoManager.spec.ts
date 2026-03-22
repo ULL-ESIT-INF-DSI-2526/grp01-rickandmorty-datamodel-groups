@@ -16,7 +16,6 @@ class InventoManagerTest extends InventoManager {
   }
 }
 
-// Mock del DataManager
 vi.mock('../database/DataManager.js', () => ({
   DataManager: {
     getInstance: vi.fn(),
@@ -31,7 +30,6 @@ describe('InventoManager', () => {
     vi.clearAllMocks();
     manager = new InventoManagerTest();
     
-    // Creamos un mock de Personaje
     mockPersonaje = { 
       id: 1, 
       nombre: 'Rick' 
@@ -48,13 +46,11 @@ describe('InventoManager', () => {
       descripcion: 'Crea portales'
     }];
 
-    // objeto que simula la instancia de DataManager
     const mockDMInstance = {
       leerBaseDatos: vi.fn().mockReturnValue(mockDatosJSON),
       guardarBaseDatos: vi.fn(),
     } as unknown as DataManager;
 
-    // sobrescribimos la implementación directamente
     DataManager.getInstance = vi.fn().mockResolvedValue(mockDMInstance);
 
     await manager.cargar([mockPersonaje]);
@@ -68,7 +64,7 @@ describe('InventoManager', () => {
     const mockDatosJSON: IInventoJSON[] = [{
       id: 102,
       nombre: 'Invento Huérfano',
-      inventorId: 102,  // ID inexistente en el sistema
+      inventorId: 102,  
       tipo: "gagdet" as TipoInvento,
       nivelPeligrosidad: 1,
       descripcion: 'No tiene dueño'
@@ -89,7 +85,6 @@ describe('InventoManager', () => {
   })
 
   it('debería mapear correctamente un objeto Invento a su estructura JSON', () => {
-    // Simulamos un objeto Invento
     const inventoReal = {
       id: 50,
       nombre: 'Caja Meeseeks',
@@ -99,7 +94,6 @@ describe('InventoManager', () => {
       descripcion: 'Genera ayudantes'
     } as unknown as Invento;
 
-    // se llama al método a través de nuestra subclase de test
     const jsonProcesado = manager.exponerMapearAJSON(inventoReal);
 
     expect(jsonProcesado.id).toBe(50);

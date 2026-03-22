@@ -6,7 +6,6 @@ import { IEvento } from "../../src/interfaces/IEvento";
 describe("EventoManager", () => {
   let manager: EventoManager;
 
-  // Mock de un evento para reutilizar
   const mockEvento: IEvento = {
     id: "EV-1",
     fecha: "2026-03-20",
@@ -67,7 +66,7 @@ describe("EventoManager", () => {
     expect(mockGuardar).toHaveBeenCalledWith("eventos", [mockEvento]);
   });
 
-  it("debería filtrar eventos por id de personaje (getById)", () => {
+  it("debería filtrar eventos por id de personaje", () => {
     const evento2: IEvento = {
       ...mockEvento,
       id: "EV-2",

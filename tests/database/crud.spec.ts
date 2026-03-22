@@ -12,7 +12,7 @@ vi.mock("prompts", () => ({
   default: vi.fn(),
 }));
 
-describe("Menu CRUD - Cobertura Total de Entidades", () => {
+describe("Menu CRUD", () => {
   let menu: Menu;
 
   const mockManager = {

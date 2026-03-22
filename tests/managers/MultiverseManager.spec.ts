@@ -226,7 +226,7 @@ describe("Pruebas de Integración: MultiverseManager", () => {
     );
   });
 
-  it("debería registrar la acción de un artefacto si el invento existe (con instancias reales)", () => {
+  it("debería registrar la acción de un artefacto si el invento existe", () => {
     const dim = new Dimension("D-1", "Tierra C-137", "activa", 10, "Base");
     const planeta = new Planetas(
       "PL-1",

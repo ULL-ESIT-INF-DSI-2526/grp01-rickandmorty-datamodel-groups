@@ -4,7 +4,6 @@ import { Dimension } from "../../src/models/Dimension.js";
 import { DataManager } from "../../src/database/DataManager.js";
 import { IDimension } from "../../src/interfaces/IDimension.js";
 
-// Mock del DataManager
 vi.mock("../../src/database/DataManager.js");
 const mockedDM = vi.mocked(DataManager);
 
@@ -13,7 +12,6 @@ describe("DimensionManager - Suite de Pruebas", () => {
   let dimBase: Dimension;
   let jsonBase: IDimension;
 
-  // Definimos el mock de la instancia fuera para poder acceder a sus métodos
   const mockDMInstance = {
     leerBaseDatos: vi.fn(),
     guardarBaseDatos: vi.fn().mockResolvedValue(undefined),
@@ -22,7 +20,6 @@ describe("DimensionManager - Suite de Pruebas", () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    // Datos de prueba
     dimBase = new Dimension("C-137", "Earth", "activa", 5, "Dimensión de Rick");
     jsonBase = {
       id: "C-137",
@@ -32,7 +29,6 @@ describe("DimensionManager - Suite de Pruebas", () => {
       descripcion: "Dimensión de Rick",
     };
 
-    // Configuramos el comportamiento por defecto de los mocks
     mockDMInstance.leerBaseDatos.mockReturnValue([jsonBase]);
     mockedDM.getInstance.mockResolvedValue(
       mockDMInstance as unknown as DataManager,
@@ -55,8 +51,8 @@ describe("DimensionManager - Suite de Pruebas", () => {
 
   describe("Persistencia (Escritura)", () => {
     it("Debe llamar a guardarBaseDatos cuando se añade una dimensión", async () => {
-      manager.add(dimBase); // Solo lo añade a la lista interna
-      await manager.guardar(); // <--- Tienes que llamar a guardar explícitamente
+      manager.add(dimBase); 
+      await manager.guardar(); 
 
       expect(mockDMInstance.guardarBaseDatos).toHaveBeenCalledWith(
         "dimensiones",

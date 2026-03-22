@@ -11,7 +11,6 @@ describe("Personaje Model tests", () => {
   let dimensionC137: Dimension;
 
   beforeEach(() => {
-    // Datos de apoyo necesarios para instanciar un Personaje
     dimensionC137 = new Dimension('C-137', 'Tierra C-137', 'activa', 5, 'Leyes físicas base');
     especieHumana = new Especie('E1', 'Humano', dimensionC137, 'Mamífero', 80, 'Especie base');
 
