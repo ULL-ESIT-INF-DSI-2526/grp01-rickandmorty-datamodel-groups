@@ -28,7 +28,8 @@ _____ ______   ___  ___  ___   _________  ___  ___      ___ _______   ________  
                     \|__|     \|__|\|__|\|__|\|__| \|__|\|__|\|__|\|_______|\|_______|\|__|\|__|            
                                                                                                             
 ```
-
+[![Coveralls](https://github.com/ULL-ESIT-INF-DSI-2526/grp01-rickandmorty-datamodel-groups/actions/workflows/coverals.yml/badge.svg)](https://github.com/ULL-ESIT-INF-DSI-2526/grp01-rickandmorty-datamodel-groups/actions/workflows/coverals.yml)
+[![CI Tests](https://github.com/ULL-ESIT-INF-DSI-2526/grp01-rickandmorty-datamodel-groups/actions/workflows/ci.yml/badge.svg)](https://github.com/ULL-ESIT-INF-DSI-2526/grp01-rickandmorty-datamodel-groups/actions/workflows/ci.yml)
 # 🌌 Multiverse Data Manager
 
 ## 📝 Descripción del Proyecto
